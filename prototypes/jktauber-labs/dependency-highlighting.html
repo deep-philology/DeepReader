@@ -1,0 +1,668 @@
+{% extends "labs/base.html" %}
+
+{% block extra_style %}
+<style>
+    .container {
+        width: 800px;
+        margin: 50px auto;
+    }
+
+    .legend {
+        text-align: center;
+    }
+    .legend span {
+        font-family: "PT Sans Regular", "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+        font-size: 10pt;
+        padding: 8px 12px;
+        color: #FFF;
+        background: #CCC;
+    }
+    .text {
+        margin-top: 50px;
+        font-family: Skolar;
+        font-size: 20pt;
+        line-height: 30pt;
+        word-spacing: 6pt;
+        color: #333;
+    }
+    .text span:hover {
+        cursor: pointer;
+    }
+    .selected, .up1, .up2, .up3, .up4, .down1, .down2, .down3, .down4 {
+        padding: 2pt 6pt;
+        margin: -2pt -6pt;
+    }
+
+    .up1 {
+        background: hsl(0, 0%, 40%);
+        color: #FFF;
+    }
+    .up2 {
+        background: hsl(0, 0%, 60%);
+    }
+    .up3 {
+        background: hsl(0, 0%, 75%);
+    }
+    .up4 {
+        background: hsl(0, 0%, 90%);
+    }
+
+    .selected {
+        color: #FFF;
+    }
+
+    /* CL */
+
+    .selected.CL, body.CL .legend-CL {
+        background: hsl(0, 50%, 40%);
+    }
+    .down1.CL {
+        background: hsl(0, 50%, 60%);
+    }
+    .down2.CL {
+        background: hsl(0, 50%, 75%);
+    }
+    .down3.CL {
+        background: hsl(0, 50%, 85%);
+    }
+    .down4.CL {
+        background: hsl(0, 50%, 95%);
+    }
+
+    /* S */
+
+    .selected.S, body.S .legend-S {
+        background: hsl(30, 50%, 40%);
+    }
+    .down1.S {
+        background: hsl(30, 50%, 60%);
+    }
+    .down2.S {
+        background: hsl(30, 50%, 75%);
+    }
+    .down3.S {
+        background: hsl(30, 50%, 85%);
+    }
+    .down4.S {
+        background: hsl(30, 50%, 95%);
+    }
+
+    /* O */
+
+    .selected.O, body.O .legend-O {
+        background: hsl(60, 50%, 40%);
+    }
+    .down1.O {
+        background: hsl(60, 50%, 60%);
+    }
+    .down2.O {
+        background: hsl(60, 50%, 75%);
+    }
+    .down3.O {
+        background: hsl(60, 50%, 85%);
+    }
+    .down4.O {
+        background: hsl(60, 50%, 95%);
+    }
+
+    /* IO */
+
+    .selected.IO, body.IO .legend-IO {
+        background: hsl(90, 50%, 40%);
+    }
+    .down1.IO {
+        background: hsl(90, 50%, 60%);
+    }
+    .down2.IO {
+        background: hsl(90, 50%, 75%);
+    }
+    .down3.IO {
+        background: hsl(90, 50%, 85%);
+    }
+    .down4.IO {
+        background: hsl(90, 50%, 95%);
+    }
+
+    /* ADV */
+
+    .selected.ADV, body.ADV .legend-ADV {
+        background: hsl(120, 50%, 40%);
+    }
+    .down1.ADV {
+        background: hsl(120, 50%, 60%);
+    }
+    .down2.ADV {
+        background: hsl(120, 50%, 75%);
+    }
+    .down3.ADV {
+        background: hsl(120, 50%, 85%);
+    }
+    .down4.ADV {
+        background: hsl(120, 50%, 95%);
+    }
+
+    /* VC */
+
+    .selected.VC, body.VC .legend-VC {
+        background: hsl(150, 50%, 40%);
+    }
+    .down1.VC {
+        background: hsl(150, 50%, 60%);
+    }
+    .down2.VC {
+        background: hsl(150, 50%, 75%);
+    }
+    .down3.VC {
+        background: hsl(150, 50%, 85%);
+    }
+    .down4.VC {
+        background: hsl(150, 50%, 95%);
+    }
+
+    /* det */
+
+    .selected.det, body.det .legend-det {
+        background: hsl(180, 50%, 40%);
+    }
+    .down1.det {
+        background: hsl(180, 50%, 60%);
+    }
+    .down2.det {
+        background: hsl(180, 50%, 75%);
+    }
+    .down3.det {
+        background: hsl(180, 50%, 85%);
+    }
+    .down4.det {
+        background: hsl(180, 50%, 95%);
+    }
+
+    /* conj */
+
+    .selected.conj, body.conj .legend-conj {
+        background: hsl(200, 50%, 40%);
+    }
+    .down1.conj {
+        background: hsl(200, 50%, 60%);
+    }
+    .down2.conj {
+        background: hsl(200, 50%, 75%);
+    }
+    .down3.conj {
+        background: hsl(200, 50%, 85%);
+    }
+    .down4.conj {
+        background: hsl(200, 50%, 95%);
+    }
+
+    /* np */
+
+    .selected.np, body.np .legend-np {
+        background: hsl(220, 50%, 40%);
+    }
+    .down1.np {
+        background: hsl(220, 50%, 60%);
+    }
+    .down2.np {
+        background: hsl(220, 50%, 75%);
+    }
+    .down3.np {
+        background: hsl(220, 50%, 85%);
+    }
+    .down4.np {
+        background: hsl(220, 50%, 95%);
+    }
+
+    /* prep */
+
+    .selected.prep, body.prep .legend-prep {
+        background: hsl(240, 50%, 40%);
+    }
+    .down1.prep {
+        background: hsl(240, 50%, 60%);
+    }
+    .down2.prep {
+        background: hsl(240, 50%, 75%);
+    }
+    .down3.prep {
+        background: hsl(240, 50%, 85%);
+    }
+    .down4.prep {
+        background: hsl(240, 50%, 95%);
+    }
+
+    /* adjp */
+
+    .selected.adjp, body.adjp .legend-adjp {
+        background: hsl(260, 50%, 40%);
+    }
+    .down1.adjp {
+        background: hsl(260, 50%, 60%);
+    }
+    .down2.adjp {
+        background: hsl(260, 50%, 75%);
+    }
+    .down3.adjp {
+        background: hsl(260, 50%, 85%);
+    }
+    .down4.adjp {
+        background: hsl(260, 50%, 95%);
+    }
+
+    /* advp */
+
+    .selected.advp, body.advp .legend-advp {
+        background: hsl(280, 50%, 40%);
+    }
+    .down1.advp {
+        background: hsl(280, 50%, 60%);
+    }
+    .down2.advp {
+        background: hsl(280, 50%, 75%);
+    }
+    .down3.advp {
+        background: hsl(280, 50%, 85%);
+    }
+    .down4.advp {
+        background: hsl(280, 50%, 95%);
+    }
+
+    /* pp */
+
+    .selected.pp, body.pp .legend-pp {
+        background: hsl(300, 50%, 40%);
+    }
+    .down1.pp {
+        background: hsl(300, 50%, 60%);
+    }
+    .down2.pp {
+        background: hsl(300, 50%, 75%);
+    }
+    .down3.pp {
+        background: hsl(300, 50%, 85%);
+    }
+    .down4.pp {
+        background: hsl(300, 50%, 95%);
+    }
+
+    /* verb */
+
+    .selected.verb, body.verb .legend-verb {
+        background: hsl(320, 50%, 40%);
+    }
+    .down1.verb {
+        background: hsl(320, 50%, 60%);
+    }
+    .down2.verb {
+        background: hsl(320, 50%, 75%);
+    }
+    .down3.verb {
+        background: hsl(320, 50%, 85%);
+    }
+    .down4.verb {
+        background: hsl(320, 50%, 95%);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="instructions">
+    Click on a word to see the dependency relationships.
+</div>
+
+<div class="credits">
+    The dependency relationships here are experimentally derived from the GBI
+    Syntax Trees.
+<br>
+    Showing the dependency chain via fading colors is an idea I owe to
+    Nick Kallen, who implemented something similar using the Perseus
+    dependency analysis of the Illiad.
+<br>
+    My one innovation is color-coding based on relationship type.
+</div>
+
+
+<div class="legend">
+<p>
+<span class="legend-CL">CL</span>
+<span class="legend-S">S</span>
+<span class="legend-O">O</span>
+<span class="legend-IO">IO</span>
+<span class="legend-ADV">ADV</span>
+<span class="legend-VC">VC</span>
+<p>
+<span class="legend-det">det</span>
+<span class="legend-conj">conj</span>
+<span class="legend-np">np</span>
+<span class="legend-prep">prep</span>
+<span class="legend-adjp">adjp</span>
+<span class="legend-advp">advp</span>
+<span class="legend-pp">pp</span>
+<span class="legend-verb">verb</span>
+</div>
+
+<div class="text">
+    <span id="m84001001001" data-parent="m84001001002" data-rel="det">Ὁ</span>
+    <span id="m84001001002" data-rel="CL">πρεσβύτερος</span>
+    <span id="m84001001003" data-parent="m84001001004" data-rel="adjp">ἐκλεκτῇ</span>
+    <span id="m84001001004" data-parent="m84001001002" data-rel="IO">κυρίᾳ</span>
+    <span id="m84001001005" data-parent="m84001001004" data-rel="conj">καὶ</span>
+    <span id="m84001001006" data-parent="m84001001007" data-rel="det">τοῖς</span>
+    <span id="m84001001007" data-parent="m84001001004" data-rel="np">τέκνοις</span>
+    <span id="m84001001008" data-parent="m84001001007" data-rel="np">αὐτῆς,</span>
+    <span id="m84001001009" data-parent="m84001001011" data-rel="O">οὓς</span>
+    <span id="m84001001010" data-parent="m84001001011" data-rel="S">ἐγὼ</span>
+    <span id="m84001001011" data-parent="m84001001004" data-rel="CL">ἀγαπῶ</span>
+    <span id="m84001001012" data-parent="m84001001013" data-rel="prep">ἐν</span>
+    <span id="m84001001013" data-parent="m84001001011" data-rel="ADV">ἀληθείᾳ,</span>
+    <span id="m84001001014" data-parent="m84001001010" data-rel="conj">καὶ</span>
+    <span id="m84001001015" data-parent="m84001001022" data-rel="advp">οὐκ</span>
+    <span id="m84001001016" data-parent="m84001001022" data-rel="np">ἐγὼ</span>
+    <span id="m84001001017" data-parent="m84001001016" data-rel="adjp">μόνος</span>
+    <span id="m84001001018" data-parent="m84001001022" data-rel="conj">ἀλλὰ</span>
+    <span id="m84001001019" data-parent="m84001001022" data-rel="advp">καὶ</span>
+    <span id="m84001001020" data-parent="m84001001022" data-rel="adjp">πάντες</span>
+    <span id="m84001001021" data-parent="m84001001022" data-rel="det">οἱ</span>
+    <span id="m84001001022" data-parent="m84001001010" data-rel="np">ἐγνωκότες</span>
+    <span id="m84001001023" data-parent="m84001001024" data-rel="det">τὴν</span>
+    <span id="m84001001024" data-parent="m84001001022" data-rel="O">ἀλήθειαν,</span>
+    <span id="m84001002001" data-parent="m84001002003" data-rel="prep">διὰ</span>
+    <span id="m84001002002" data-parent="m84001002003" data-rel="det">τὴν</span>
+    <span id="m84001002003" data-parent="m84001001011" data-rel="ADV">ἀλήθειαν</span>
+    <span id="m84001002004" data-parent="m84001002005" data-rel="det">τὴν</span>
+    <span id="m84001002005" data-parent="m84001002003" data-rel="np">μένουσαν</span>
+    <span id="m84001002006" data-parent="m84001002007" data-rel="prep">ἐν</span>
+    <span id="m84001002007" data-parent="m84001002005" data-rel="ADV">ἡμῖν,</span>
+    <span id="m84001002008" data-parent="m84001001002" data-rel="conj">καὶ</span>
+    <span id="m84001002009" data-parent="m84001002010" data-rel="prep">μεθ’</span>
+    <span id="m84001002010" data-parent="m84001001002" data-rel="CL">ἡμῶν</span>
+    <span id="m84001002011" data-parent="m84001002010" data-rel="VC">ἔσται</span>
+    <span id="m84001002012" data-parent="m84001002014" data-rel="prep">εἰς</span>
+    <span id="m84001002013" data-parent="m84001002014" data-rel="det">τὸν</span>
+    <span id="m84001002014" data-parent="m84001002010" data-rel="ADV">αἰῶνα·</span>
+    <span id="m84001003001" data-parent="m84001003003" data-rel="VC">ἔσται</span>
+    <span id="m84001003002" data-parent="m84001003003" data-rel="prep">μεθ’</span>
+    <span id="m84001003003" data-rel="CL">ἡμῶν</span>
+    <span id="m84001003004" data-parent="m84001003003" data-rel="S">χάρις</span>
+    <span id="m84001003005" data-parent="m84001003004" data-rel="np">ἔλεος</span>
+    <span id="m84001003006" data-parent="m84001003004" data-rel="np">εἰρήνη</span>
+    <span id="m84001003007" data-parent="m84001003008" data-rel="prep">παρὰ</span>
+    <span id="m84001003008" data-parent="m84001003004" data-rel="pp">θεοῦ</span>
+    <span id="m84001003009" data-parent="m84001003008" data-rel="np">πατρός,</span>
+    <span id="m84001003010" data-parent="m84001003008" data-rel="conj">καὶ</span>
+    <span id="m84001003011" data-parent="m84001003012" data-rel="prep">παρὰ</span>
+    <span id="m84001003012" data-parent="m84001003008" data-rel="pp">Ἰησοῦ</span>
+    <span id="m84001003013" data-parent="m84001003012" data-rel="np">Χριστοῦ</span>
+    <span id="m84001003014" data-parent="m84001003015" data-rel="det">τοῦ</span>
+    <span id="m84001003015" data-parent="m84001003012" data-rel="np">υἱοῦ</span>
+    <span id="m84001003016" data-parent="m84001003017" data-rel="det">τοῦ</span>
+    <span id="m84001003017" data-parent="m84001003015" data-rel="np">πατρός,</span>
+    <span id="m84001003018" data-parent="m84001003019" data-rel="prep">ἐν</span>
+    <span id="m84001003019" data-parent="m84001003003" data-rel="ADV">ἀληθείᾳ</span>
+    <span id="m84001003020" data-parent="m84001003019" data-rel="conj">καὶ</span>
+    <span id="m84001003021" data-parent="m84001003019" data-rel="np">ἀγάπῃ.</span>
+    <span id="m84001004001" data-rel="CL">Ἐχάρην</span>
+    <span id="m84001004002" data-parent="m84001004001" data-rel="ADV">λίαν</span>
+    <span id="m84001004003" data-parent="m84001004004" data-rel="conj">ὅτι</span>
+    <span id="m84001004004" data-parent="m84001004001" data-rel="CL">εὕρηκα</span>
+    <span id="m84001004005" data-parent="m84001004007" data-rel="prep">ἐκ</span>
+    <span id="m84001004006" data-parent="m84001004007" data-rel="det">τῶν</span>
+    <span id="m84001004007" data-parent="m84001004009" data-rel="ADV">τέκνων</span>
+    <span id="m84001004008" data-parent="m84001004007" data-rel="np">σου</span>
+    <span id="m84001004009" data-parent="m84001004004" data-rel="O">περιπατοῦντας</span>
+    <span id="m84001004010" data-parent="m84001004011" data-rel="prep">ἐν</span>
+    <span id="m84001004011" data-parent="m84001004009" data-rel="ADV">ἀληθείᾳ,</span>
+    <span id="m84001004012" data-parent="m84001004014" data-rel="conj">καθὼς</span>
+    <span id="m84001004013" data-parent="m84001004014" data-rel="O">ἐντολὴν</span>
+    <span id="m84001004014" data-parent="m84001004009" data-rel="CL">ἐλάβομεν</span>
+    <span id="m84001004015" data-parent="m84001004017" data-rel="prep">παρὰ</span>
+    <span id="m84001004016" data-parent="m84001004017" data-rel="det">τοῦ</span>
+    <span id="m84001004017" data-parent="m84001004014" data-rel="ADV">πατρός.</span>
+    <span id="m84001005001" data-parent="m84001005003" data-rel="conj">καὶ</span>
+    <span id="m84001005002" data-parent="m84001005003" data-rel="ADV">νῦν</span>
+    <span id="m84001005003" data-rel="CL">ἐρωτῶ</span>
+    <span id="m84001005004" data-parent="m84001005003" data-rel="O">σε,</span>
+    <span id="m84001005005" data-parent="m84001005003" data-rel="CL">κυρία,</span>
+    <span id="m84001005006" data-parent="m84001005014" data-rel="advp">οὐχ</span>
+    <span id="m84001005007" data-parent="m84001005008" data-rel="conj">ὡς</span>
+    <span id="m84001005008" data-parent="m84001005014" data-rel="CL">ἐντολὴν</span>
+    <span id="m84001005009" data-parent="m84001005008" data-rel="adjp">καινὴν</span>
+    <span id="m84001005010" data-parent="m84001005003" data-rel="ADV">γράφων</span>
+    <span id="m84001005011" data-parent="m84001005010" data-rel="IO">σοι</span>
+    <span id="m84001005012" data-parent="m84001005014" data-rel="conj">ἀλλὰ</span>
+    <span id="m84001005013" data-parent="m84001005014" data-rel="O">ἣν</span>
+    <span id="m84001005014" data-parent="m84001005010" data-rel="ADV">εἴχομεν</span>
+    <span id="m84001005015" data-parent="m84001005016" data-rel="prep">ἀπ’</span>
+    <span id="m84001005016" data-parent="m84001005014" data-rel="ADV">ἀρχῆς,</span>
+    <span id="m84001005017" data-parent="m84001005018" data-rel="conj">ἵνα</span>
+    <span id="m84001005018" data-parent="m84001005003" data-rel="CL">ἀγαπῶμεν</span>
+    <span id="m84001005019" data-parent="m84001005018" data-rel="O">ἀλλήλους.</span>
+    <span id="m84001006001" data-parent="m84001006002" data-rel="conj">καὶ</span>
+    <span id="m84001006002" data-rel="CL">αὕτη</span>
+    <span id="m84001006003" data-parent="m84001006002" data-rel="VC">ἐστὶν</span>
+    <span id="m84001006004" data-parent="m84001006005" data-rel="det">ἡ</span>
+    <span id="m84001006005" data-parent="m84001006002" data-rel="S">ἀγάπη,</span>
+    <span id="m84001006006" data-parent="m84001006007" data-rel="conj">ἵνα</span>
+    <span id="m84001006007" data-parent="m84001006002" data-rel="CL">περιπατῶμεν</span>
+    <span id="m84001006008" data-parent="m84001006010" data-rel="prep">κατὰ</span>
+    <span id="m84001006009" data-parent="m84001006010" data-rel="det">τὰς</span>
+    <span id="m84001006010" data-parent="m84001006007" data-rel="ADV">ἐντολὰς</span>
+    <span id="m84001006011" data-parent="m84001006010" data-rel="np">αὐτοῦ·</span>
+    <span id="m84001006012" data-rel="CL">αὕτη</span>
+    <span id="m84001006013" data-parent="m84001006014" data-rel="det">ἡ</span>
+    <span id="m84001006014" data-parent="m84001006012" data-rel="S">ἐντολή</span>
+    <span id="m84001006015" data-parent="m84001006012" data-rel="VC">ἐστιν,</span>
+    <span id="m84001006016" data-parent="m84001006017" data-rel="conj">καθὼς</span>
+    <span id="m84001006017" data-parent="m84001006012" data-rel="CL">ἠκούσατε</span>
+    <span id="m84001006018" data-parent="m84001006019" data-rel="prep">ἀπ’</span>
+    <span id="m84001006019" data-parent="m84001006017" data-rel="ADV">ἀρχῆς,</span>
+    <span id="m84001006020" data-parent="m84001006023" data-rel="conj">ἵνα</span>
+    <span id="m84001006021" data-parent="m84001006022" data-rel="prep">ἐν</span>
+    <span id="m84001006022" data-parent="m84001006023" data-rel="ADV">αὐτῇ</span>
+    <span id="m84001006023" data-parent="m84001006012" data-rel="CL">περιπατῆτε.</span>
+    <span id="m84001007001" data-parent="m84001007004" data-rel="conj">ὅτι</span>
+    <span id="m84001007002" data-parent="m84001007003" data-rel="adjp">πολλοὶ</span>
+    <span id="m84001007003" data-parent="m84001007004" data-rel="S">πλάνοι</span>
+    <span id="m84001007004" data-rel="CL">ἐξῆλθον</span>
+    <span id="m84001007005" data-parent="m84001007007" data-rel="prep">εἰς</span>
+    <span id="m84001007006" data-parent="m84001007007" data-rel="det">τὸν</span>
+    <span id="m84001007007" data-parent="m84001007004" data-rel="ADV">κόσμον,</span>
+    <span id="m84001007008" data-parent="m84001007010" data-rel="det">οἱ</span>
+    <span id="m84001007009" data-parent="m84001007010" data-rel="ADV">μὴ</span>
+    <span id="m84001007010" data-parent="m84001007003" data-rel="np">ὁμολογοῦντες</span>
+    <span id="m84001007011" data-parent="m84001007013" data-rel="S">Ἰησοῦν</span>
+    <span id="m84001007012" data-parent="m84001007011" data-rel="np">Χριστὸν</span>
+    <span id="m84001007013" data-parent="m84001007010" data-rel="O">ἐρχόμενον</span>
+    <span id="m84001007014" data-parent="m84001007015" data-rel="prep">ἐν</span>
+    <span id="m84001007015" data-parent="m84001007013" data-rel="ADV">σαρκί·</span>
+    <span id="m84001007016" data-parent="m84001007019" data-rel="S">οὗτός</span>
+    <span id="m84001007017" data-parent="m84001007019" data-rel="VC">ἐστιν</span>
+    <span id="m84001007018" data-parent="m84001007019" data-rel="det">ὁ</span>
+    <span id="m84001007019" data-rel="CL">πλάνος</span>
+    <span id="m84001007020" data-parent="m84001007019" data-rel="conj">καὶ</span>
+    <span id="m84001007021" data-parent="m84001007022" data-rel="det">ὁ</span>
+    <span id="m84001007022" data-parent="m84001007019" data-rel="np">ἀντίχριστος.</span>
+    <span id="m84001008001" data-rel="CL">βλέπετε</span>
+    <span id="m84001008002" data-parent="m84001008001" data-rel="O">ἑαυτούς,</span>
+    <span id="m84001008003" data-parent="m84001008011" data-rel="conj">ἵνα</span>
+    <span id="m84001008004" data-parent="m84001008011" data-rel="advp">μὴ</span>
+    <span id="m84001008005" data-parent="m84001008011" data-rel="CL">ἀπολέσητε</span>
+    <span id="m84001008006" data-parent="m84001008007" data-rel="O">ἃ</span>
+    <span id="m84001008007" data-parent="m84001008005" data-rel="O">εἰργασάμεθα,</span>
+    <span id="m84001008008" data-parent="m84001008011" data-rel="conj">ἀλλὰ</span>
+    <span id="m84001008009" data-parent="m84001008011" data-rel="O">μισθὸν</span>
+    <span id="m84001008010" data-parent="m84001008009" data-rel="adjp">πλήρη</span>
+    <span id="m84001008011" data-parent="m84001008001" data-rel="CL">ἀπολάβητε.</span>
+    <span id="m84001009001" data-parent="m84001009003" data-rel="adjp">πᾶς</span>
+    <span id="m84001009002" data-parent="m84001009003" data-rel="det">ὁ</span>
+    <span id="m84001009003" data-parent="m84001009014" data-rel="S">προάγων</span>
+    <span id="m84001009004" data-parent="m84001009003" data-rel="conj">καὶ</span>
+    <span id="m84001009005" data-parent="m84001009006" data-rel="ADV">μὴ</span>
+    <span id="m84001009006" data-parent="m84001009003" data-rel="CL">μένων</span>
+    <span id="m84001009007" data-parent="m84001009009" data-rel="prep">ἐν</span>
+    <span id="m84001009008" data-parent="m84001009009" data-rel="det">τῇ</span>
+    <span id="m84001009009" data-parent="m84001009006" data-rel="ADV">διδαχῇ</span>
+    <span id="m84001009010" data-parent="m84001009011" data-rel="det">τοῦ</span>
+    <span id="m84001009011" data-parent="m84001009009" data-rel="np">Χριστοῦ</span>
+    <span id="m84001009012" data-parent="m84001009014" data-rel="O">θεὸν</span>
+    <span id="m84001009013" data-parent="m84001009014" data-rel="ADV">οὐκ</span>
+    <span id="m84001009014" data-rel="CL">ἔχει·</span>
+    <span id="m84001009015" data-parent="m84001009016" data-rel="det">ὁ</span>
+    <span id="m84001009016" data-parent="m84001009027" data-rel="CL">μένων</span>
+    <span id="m84001009017" data-parent="m84001009019" data-rel="prep">ἐν</span>
+    <span id="m84001009018" data-parent="m84001009019" data-rel="det">τῇ</span>
+    <span id="m84001009019" data-parent="m84001009016" data-rel="ADV">διδαχῇ,</span>
+    <span id="m84001009020" data-parent="m84001009027" data-rel="S">οὗτος</span>
+    <span id="m84001009021" data-parent="m84001009023" data-rel="conj">καὶ</span>
+    <span id="m84001009022" data-parent="m84001009023" data-rel="det">τὸν</span>
+    <span id="m84001009023" data-parent="m84001009027" data-rel="O">πατέρα</span>
+    <span id="m84001009024" data-parent="m84001009023" data-rel="conj">καὶ</span>
+    <span id="m84001009025" data-parent="m84001009026" data-rel="det">τὸν</span>
+    <span id="m84001009026" data-parent="m84001009023" data-rel="np">υἱὸν</span>
+    <span id="m84001009027" data-rel="CL">ἔχει.</span>
+    <span id="m84001010001" data-parent="m84001010003" data-rel="conj">εἴ</span>
+    <span id="m84001010002" data-parent="m84001010003" data-rel="S">τις</span>
+    <span id="m84001010003" data-parent="m84001010013" data-rel="CL">ἔρχεται</span>
+    <span id="m84001010004" data-parent="m84001010005" data-rel="prep">πρὸς</span>
+    <span id="m84001010005" data-parent="m84001010003" data-rel="ADV">ὑμᾶς</span>
+    <span id="m84001010006" data-parent="m84001010003" data-rel="conj">καὶ</span>
+    <span id="m84001010007" data-parent="m84001010009" data-rel="np">ταύτην</span>
+    <span id="m84001010008" data-parent="m84001010009" data-rel="det">τὴν</span>
+    <span id="m84001010009" data-parent="m84001010011" data-rel="O">διδαχὴν</span>
+    <span id="m84001010010" data-parent="m84001010011" data-rel="ADV">οὐ</span>
+    <span id="m84001010011" data-parent="m84001010003" data-rel="CL">φέρει,</span>
+    <span id="m84001010012" data-parent="m84001010013" data-rel="ADV">μὴ</span>
+    <span id="m84001010013" data-rel="CL">λαμβάνετε</span>
+    <span id="m84001010014" data-parent="m84001010013" data-rel="O">αὐτὸν</span>
+    <span id="m84001010015" data-parent="m84001010016" data-rel="prep">εἰς</span>
+    <span id="m84001010016" data-parent="m84001010013" data-rel="ADV">οἰκίαν</span>
+    <span id="m84001010017" data-parent="m84001010013" data-rel="conj">καὶ</span>
+    <span id="m84001010018" data-parent="m84001010021" data-rel="O">χαίρειν</span>
+    <span id="m84001010019" data-parent="m84001010021" data-rel="IO">αὐτῷ</span>
+    <span id="m84001010020" data-parent="m84001010021" data-rel="ADV">μὴ</span>
+    <span id="m84001010021" data-parent="m84001010013" data-rel="CL">λέγετε·</span>
+    <span id="m84001011001" data-parent="m84001011002" data-rel="det">ὁ</span>
+    <span id="m84001011002" data-parent="m84001011006" data-rel="S">λέγων</span>
+    <span id="m84001011003" data-parent="m84001011006" data-rel="conj">γὰρ</span>
+    <span id="m84001011004" data-parent="m84001011002" data-rel="IO">αὐτῷ</span>
+    <span id="m84001011005" data-parent="m84001011002" data-rel="O">χαίρειν</span>
+    <span id="m84001011006" data-rel="CL">κοινωνεῖ</span>
+    <span id="m84001011007" data-parent="m84001011008" data-rel="det">τοῖς</span>
+    <span id="m84001011008" data-parent="m84001011006" data-rel="ADV">ἔργοις</span>
+    <span id="m84001011009" data-parent="m84001011008" data-rel="np">αὐτοῦ</span>
+    <span id="m84001011010" data-parent="m84001011011" data-rel="det">τοῖς</span>
+    <span id="m84001011011" data-parent="m84001011008" data-rel="np">πονηροῖς.</span>
+    <span id="m84001012001" data-parent="m84001012004" data-rel="O">Πολλὰ</span>
+    <span id="m84001012002" data-parent="m84001012006" data-rel="ADV">ἔχων</span>
+    <span id="m84001012003" data-parent="m84001012004" data-rel="IO">ὑμῖν</span>
+    <span id="m84001012004" data-parent="m84001012002" data-rel="O">γράφειν</span>
+    <span id="m84001012005" data-parent="m84001012006" data-rel="ADV">οὐκ</span>
+    <span id="m84001012006" data-rel="CL">ἐβουλήθην</span>
+    <span id="m84001012007" data-parent="m84001012008" data-rel="prep">διὰ</span>
+    <span id="m84001012008" data-parent="m84001012006" data-rel="ADV">χάρτου</span>
+    <span id="m84001012009" data-parent="m84001012008" data-rel="conj">καὶ</span>
+    <span id="m84001012010" data-parent="m84001012008" data-rel="np">μέλανος,</span>
+    <span id="m84001012011" data-parent="m84001012006" data-rel="conj">ἀλλὰ</span>
+    <span id="m84001012012" data-parent="m84001012006" data-rel="CL">ἐλπίζω</span>
+    <span id="m84001012013" data-parent="m84001012012" data-rel="O">γενέσθαι</span>
+    <span id="m84001012014" data-parent="m84001012015" data-rel="prep">πρὸς</span>
+    <span id="m84001012015" data-parent="m84001012013" data-rel="ADV">ὑμᾶς</span>
+    <span id="m84001012016" data-parent="m84001012013" data-rel="conj">καὶ</span>
+    <span id="m84001012017" data-parent="m84001012020" data-rel="ADV">στόμα</span>
+    <span id="m84001012018" data-parent="m84001012019" data-rel="prep">πρὸς</span>
+    <span id="m84001012019" data-parent="m84001012020" data-rel="ADV">στόμα</span>
+    <span id="m84001012020" data-parent="m84001012013" data-rel="CL">λαλῆσαι,</span>
+    <span id="m84001012021" data-parent="m84001012025" data-rel="conj">ἵνα</span>
+    <span id="m84001012022" data-parent="m84001012023" data-rel="det">ἡ</span>
+    <span id="m84001012023" data-parent="m84001012025" data-rel="S">χαρὰ</span>
+    <span id="m84001012024" data-parent="m84001012023" data-rel="np">ὑμῶν</span>
+    <span id="m84001012025" data-parent="m84001012012" data-rel="CL">πεπληρωμένη</span>
+    <span id="m84001012026" data-parent="m84001012025" data-rel="verb">ᾖ.</span>
+    <span id="m84001013001" data-rel="CL">Ἀσπάζεταί</span>
+    <span id="m84001013002" data-parent="m84001013001" data-rel="O">σε</span>
+    <span id="m84001013003" data-parent="m84001013004" data-rel="det">τὰ</span>
+    <span id="m84001013004" data-parent="m84001013001" data-rel="S">τέκνα</span>
+    <span id="m84001013005" data-parent="m84001013006" data-rel="det">τῆς</span>
+    <span id="m84001013006" data-parent="m84001013004" data-rel="np">ἀδελφῆς</span>
+    <span id="m84001013007" data-parent="m84001013006" data-rel="np">σου</span>
+    <span id="m84001013008" data-parent="m84001013009" data-rel="det">τῆς</span>
+    <span id="m84001013009" data-parent="m84001013006" data-rel="np">ἐκλεκτῆς.</span>
+</div>
+{% endblock %}
+
+
+{% block extra_script %}
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+    function clearClasses() {
+        $(".selected").removeClass("selected");
+        $(".up1").removeClass("up1");
+        $(".up2").removeClass("up2");
+        $(".up3").removeClass("up3");
+        $(".up4").removeClass("up4");
+        $(".down1").removeClass("down1");
+        $(".down2").removeClass("down2");
+        $(".down3").removeClass("down3");
+        $(".down4").removeClass("down4");
+        $(".CL").removeClass("CL");
+        $(".S").removeClass("S");
+        $(".O").removeClass("O");
+        $(".IO").removeClass("IO");
+        $(".ADV").removeClass("ADV");
+        $(".VC").removeClass("VC");
+        $(".det").removeClass("det");
+        $(".conj").removeClass("conj");
+        $(".np").removeClass("np");
+        $(".prep").removeClass("prep");
+        $(".adjp").removeClass("adjp");
+        $(".advp").removeClass("advp");
+        $(".pp").removeClass("pp");
+        $(".verb").removeClass("verb");
+    }
+    $(function() {
+        $(".text span").click(
+            function() {
+                if ($(this).hasClass("selected")) {
+                    clearClasses();
+                } else {
+                    clearClasses();
+                    $("body").addClass($(this).data("rel"));
+                    $(this).addClass("selected " + $(this).data("rel"));
+                    if ($(this).data("parent")) {
+                        var parent = $("#" + $(this).data("parent"));
+                        parent.addClass("up1");
+                        if (parent.data("parent")) {
+                            var gparent = $("#" + parent.data("parent"));
+                            gparent.addClass("up2");
+                            if (gparent.data("parent")) {
+                                var ggparent = $("#" + gparent.data("parent"));
+                                ggparent.addClass("up3");
+                                if (ggparent.data("parent")) {
+                                    var gggparent = $("#" + ggparent.data("parent"));
+                                    gggparent.addClass("up4");
+                                }
+                            }
+                        }
+                    }
+                    var children = $("span[data-parent=" + $(this).attr("id") + "]");
+                    children.each(function() {
+                        var rel = $(this).data("rel");
+                        $("body").addClass(rel);
+                        $(this).addClass("down1 " + rel);
+                        var gchildren = $("span[data-parent=" + $(this).attr("id") + "]");
+                        gchildren.addClass("down2 " + rel);
+                        gchildren.each(function() {
+                            var ggchildren = $("span[data-parent=" + $(this).attr("id") + "]");
+                            ggchildren.addClass("down3 " + rel);
+                            ggchildren.each(function() {
+                                var gggchildren = $("span[data-parent=" + $(this).attr("id") + "]");
+                                gggchildren.addClass("down4 " + rel);
+                            });
+                        });
+                    });
+                }
+            }
+        );
+    });
+</script>
+{% endblock %}

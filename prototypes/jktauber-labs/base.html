@@ -1,0 +1,92 @@
+<head>
+<meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+<style>
+    @font-face {
+        font-family: 'Skolar';
+        src: url('/site_media/static/fonts/SkolarPEWeb-Regular.woff') format('woff');
+        font-style: normal;
+        font-weight: normal;
+        text-rendering: optimizeLegibility;
+    }
+
+    @font-face {
+        font-family: 'Skolar';
+        src: url('/site_media/static/fonts/SkolarPEWeb-Italic.woff') format('woff');
+        font-style: italic;
+        font-weight: normal;
+        text-rendering: optimizeLegibility;
+    }
+
+    @font-face {
+        font-family: 'Skolar';
+        src: url('/site_media/static/fonts/SkolarPEWeb-Bold.woff') format('woff');
+        font-style: normal;
+        font-weight: bold;
+        text-rendering: optimizeLegibility;
+    }
+
+    body {
+      font-feature-settings: "ccmp";
+    }
+
+    .instructions, .credits {
+        font-family: "PT Sans", "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        background: #EEE;
+    }
+    .instructions {
+        font-size: 14pt;
+    }
+    .credits {
+        font-size: 10pt;
+    }
+    p.nav {
+        font-family: Skolar;
+        margin-bottom: 1em;
+        font-size: 14pt;
+    }
+    p.nav a {
+        color: #C00;
+        text-decoration: none;
+        font-family: "PT Sans", "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+        font-size: 14pt;
+    }
+</style>
+{% block extra_style %}{% endblock %}
+</head>
+
+<body class="{% block body_class %}{% endblock %}">
+<div class="container">
+
+<p class="nav">
+    J. K. Tauber | <a href="/labs/">Labs</a>
+</p>
+
+{% block content %}{% endblock %}
+
+</div>
+{% block extra_script %}{% endblock %}
+<script type="text/javascript">
+    var _gauges = _gauges || [];
+    (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '52f5ec8392c6ac4a6700102f');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+    })();
+</script>
+<script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', 'UA-175899-11', 'jktauber.com');
+    ga('send', 'pageview');
+</script>
+</body>

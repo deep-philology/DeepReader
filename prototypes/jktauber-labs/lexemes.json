@@ -1,0 +1,462 @@
+[
+  {
+    "gloss": "I am, exist",
+    "lemma": "εἰμί",
+    "pos": "verb"
+  },
+  {
+    "gloss": "but, on the other hand, and",
+    "lemma": "δέ",
+    "pos": "conjunction"
+  },
+  {
+    "gloss": "a man, one of the human race",
+    "lemma": "ἄνθρωπος",
+    "pos": "noun"
+  },
+  {
+    "gloss": "from out, out from among, from",
+    "lemma": "ἐκ",
+    "pos": "preposition"
+  },
+  {
+    "gloss": "the",
+    "lemma": "ὁ",
+    "pos": "article"
+  },
+  {
+    "gloss": "a Pharisee",
+    "lemma": "Φαρισαῖος",
+    "pos": "noun"
+  },
+  {
+    "gloss": "Nicodemus",
+    "lemma": "Νικόδημος",
+    "pos": "noun"
+  },
+  {
+    "gloss": "name, character, reputation",
+    "lemma": "ὄνομα",
+    "pos": "noun"
+  },
+  {
+    "gloss": "he, she, it, they, them, same",
+    "lemma": "αὐτός",
+    "pos": "personal pronoun"
+  },
+  {
+    "gloss": "a ruler, prince, leader",
+    "lemma": "ἄρχων",
+    "pos": "noun"
+  },
+  {
+    "gloss": "Jewish",
+    "lemma": "Ἰουδαῖος",
+    "pos": "adjective"
+  },
+  {
+    "gloss": "this, he, she, it",
+    "lemma": "οὗτος",
+    "pos": "demonstrative"
+  },
+  {
+    "gloss": "I come, go",
+    "lemma": "ἔρχομαι",
+    "pos": "verb"
+  },
+  {
+    "gloss": "to, towards, with",
+    "lemma": "πρός",
+    "pos": "preposition"
+  },
+  {
+    "gloss": "the night, night-time",
+    "lemma": "νύξ",
+    "pos": "noun"
+  },
+  {
+    "gloss": "and, even, also, namely",
+    "lemma": "καί",
+    "pos": "conjunction"
+  },
+  {
+    "gloss": "I say, speak",
+    "lemma": "λέγω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "Rabbi, my master, teacher",
+    "lemma": "ῥαββί",
+    "pos": "noun"
+  },
+  {
+    "gloss": "I know, remember",
+    "lemma": "οἶδα",
+    "pos": "verb"
+  },
+  {
+    "gloss": "that, since, because",
+    "lemma": "ὅτι",
+    "pos": "conjunction"
+  },
+  {
+    "gloss": "from, away from",
+    "lemma": "ἀπό",
+    "pos": "preposition"
+  },
+  {
+    "gloss": "God, a god",
+    "lemma": "θεός",
+    "pos": "noun"
+  },
+  {
+    "gloss": "a teacher",
+    "lemma": "διδάσκαλος",
+    "pos": "noun"
+  },
+  {
+    "gloss": "no one, none, nothing",
+    "lemma": "οὐδείς",
+    "pos": "adjective"
+  },
+  {
+    "gloss": "for",
+    "lemma": "γάρ",
+    "pos": "conjunction"
+  },
+  {
+    "gloss": "I am powerful, am able",
+    "lemma": "δύναμαι",
+    "pos": "verb"
+  },
+  {
+    "gloss": "a sign, miracle, indication",
+    "lemma": "σημεῖον",
+    "pos": "noun"
+  },
+  {
+    "gloss": "I do, make",
+    "lemma": "ποιέω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "who, which, what, that",
+    "lemma": "ὅς",
+    "pos": "relative pronoun"
+  },
+  {
+    "gloss": "you",
+    "lemma": "σύ",
+    "pos": "personal pronoun"
+  },
+  {
+    "gloss": "if",
+    "lemma": "ἐάν",
+    "pos": "conjunction"
+  },
+  {
+    "gloss": "not, lest",
+    "lemma": "μή",
+    "pos": "adverb"
+  },
+  {
+    "gloss": "with, after",
+    "lemma": "μετά",
+    "pos": "preposition"
+  },
+  {
+    "gloss": "I answer, reply",
+    "lemma": "ἀποκρίνομαι",
+    "pos": "verb"
+  },
+  {
+    "gloss": "Jesus",
+    "lemma": "Ἰησοῦς",
+    "pos": "noun"
+  },
+  {
+    "gloss": "verily, truly, amen, so let it be",
+    "lemma": "ἀμήν",
+    "pos": "particle"
+  },
+  {
+    "gloss": "any one, some one",
+    "lemma": "τις",
+    "pos": "indefinite/interrogative pronoun"
+  },
+  {
+    "gloss": "I beget, bring forth, give birth to",
+    "lemma": "γεννάω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "from above, from the beginning, again",
+    "lemma": "ἄνωθεν",
+    "pos": "adverb"
+  },
+  {
+    "gloss": "no, not",
+    "lemma": "οὐ",
+    "pos": "adverb"
+  },
+  {
+    "gloss": "I see, look upon, experience",
+    "lemma": "ὁράω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "kingship, sovereignty, authority, rule, kingdom",
+    "lemma": "βασιλεία",
+    "pos": "noun"
+  },
+  {
+    "gloss": "how, in what manner",
+    "lemma": "πῶς",
+    "pos": "adverb"
+  },
+  {
+    "gloss": "an old man",
+    "lemma": "γέρων",
+    "pos": "noun"
+  },
+  {
+    "gloss": "not, lest",
+    "lemma": "μή",
+    "pos": "particle"
+  },
+  {
+    "gloss": "into, in, among, till, for",
+    "lemma": "εἰς",
+    "pos": "preposition"
+  },
+  {
+    "gloss": "belly, womb, the inner man",
+    "lemma": "κοιλία",
+    "pos": "noun"
+  },
+  {
+    "gloss": "a mother",
+    "lemma": "μήτηρ",
+    "pos": "noun"
+  },
+  {
+    "gloss": "second, in the second place, for the second time",
+    "lemma": "δεύτερος",
+    "pos": "adjective"
+  },
+  {
+    "gloss": "I go in, come in, enter",
+    "lemma": "εἰσέρχομαι",
+    "pos": "verb"
+  },
+  {
+    "gloss": "water",
+    "lemma": "ὕδωρ",
+    "pos": "noun"
+  },
+  {
+    "gloss": "wind, breath, spirit",
+    "lemma": "πνεῦμα",
+    "pos": "noun"
+  },
+  {
+    "gloss": "flesh, body",
+    "lemma": "σάρξ",
+    "pos": "noun"
+  },
+  {
+    "gloss": "I wonder, admire",
+    "lemma": "θαυμάζω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "I bind",
+    "lemma": "δέω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "where, whither",
+    "lemma": "ὅπου",
+    "pos": "conjunction"
+  },
+  {
+    "gloss": "I will, wish, desire",
+    "lemma": "θέλω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "I blow",
+    "lemma": "πνέω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "a sound, noise, voice",
+    "lemma": "φωνή",
+    "pos": "noun"
+  },
+  {
+    "gloss": "I hear, listen",
+    "lemma": "ἀκούω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "but, except",
+    "lemma": "ἀλλά",
+    "pos": "conjunction"
+  },
+  {
+    "gloss": "whence",
+    "lemma": "πόθεν",
+    "pos": "adverb"
+  },
+  {
+    "gloss": "where, whither",
+    "lemma": "ποῦ",
+    "pos": "adverb"
+  },
+  {
+    "gloss": "I go away, depart",
+    "lemma": "ὑπάγω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "thus, so, in this manner",
+    "lemma": "οὕτω(ς)",
+    "pos": "adverb"
+  },
+  {
+    "gloss": "all, the whole, every kind of",
+    "lemma": "πᾶς",
+    "pos": "adjective"
+  },
+  {
+    "gloss": "I come into being, am born",
+    "lemma": "γίνομαι",
+    "pos": "verb"
+  },
+  {
+    "gloss": "Israel",
+    "lemma": "Ἰσραήλ",
+    "pos": "noun"
+  },
+  {
+    "gloss": "I come to know, learn, realize",
+    "lemma": "γινώσκω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "I speak, say",
+    "lemma": "λαλέω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "I witness, testify",
+    "lemma": "μαρτυρέω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "witness, evidence, testimony",
+    "lemma": "μαρτυρία",
+    "pos": "noun"
+  },
+  {
+    "gloss": "I",
+    "lemma": "ἐγώ",
+    "pos": "personal pronoun"
+  },
+  {
+    "gloss": "I receive, take",
+    "lemma": "λαμβάνω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "if",
+    "lemma": "εἰ",
+    "pos": "conjunction"
+  },
+  {
+    "gloss": "earthly",
+    "lemma": "ἐπίγειος",
+    "pos": "adjective"
+  },
+  {
+    "gloss": "I believe, have faith in",
+    "lemma": "πιστεύω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "heavenly, celestial",
+    "lemma": "ἐπουράνιος",
+    "pos": "adjective"
+  },
+  {
+    "gloss": "I go up, mount, ascend",
+    "lemma": "ἀναβαίνω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "the sky, the heaven",
+    "lemma": "οὐρανός",
+    "pos": "noun"
+  },
+  {
+    "gloss": "I go down, come down",
+    "lemma": "καταβαίνω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "a son, descendent",
+    "lemma": "υἱός",
+    "pos": "noun"
+  },
+  {
+    "gloss": "just as, as",
+    "lemma": "καθώς",
+    "pos": "conjunction"
+  },
+  {
+    "gloss": "Moses",
+    "lemma": "Μωϋσῆς",
+    "pos": "noun"
+  },
+  {
+    "gloss": "I lift up, exalt",
+    "lemma": "ὑψόω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "a serpent",
+    "lemma": "ὄφις",
+    "pos": "noun"
+  },
+  {
+    "gloss": "in, on, among",
+    "lemma": "ἐν",
+    "pos": "preposition"
+  },
+  {
+    "gloss": "deserted, desolate, a desert",
+    "lemma": "ἔρημος",
+    "pos": "adjective"
+  },
+  {
+    "gloss": "in order that, so that",
+    "lemma": "ἵνα",
+    "pos": "conjunction"
+  },
+  {
+    "gloss": "I have, hold, possess",
+    "lemma": "ἔχω",
+    "pos": "verb"
+  },
+  {
+    "gloss": "life",
+    "lemma": "ζωή",
+    "pos": "noun"
+  },
+  {
+    "gloss": "eternal, unending",
+    "lemma": "αἰώνιος",
+    "pos": "adjective"
+  }
+]

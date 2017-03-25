@@ -1,0 +1,1336 @@
+{% extends "labs/base.html" %}
+
+{% block extra_style %}
+<style>
+    .container {
+        width: 800px;
+        margin: 50px auto;
+    }
+    .text {
+        margin-top: 50px;
+        font-family: Skolar;
+        font-size: 20pt;
+        line-height: 1.6;
+        word-spacing: 6pt;
+        color: #333;
+    }
+    .legend {
+        font-family: "PT Sans";
+    }
+    .node {
+        display: inline;
+    }
+
+    .node-verb {
+        cursor: pointer;
+        font-family: Skolar;
+        font-weight: bold;
+    }
+
+    .verb-CL
+    {
+        color: #CCC;
+        cursor: pointer;
+    }
+    .verb-S
+    {
+        color: #C00;
+        cursor: pointer;
+    }
+    .verb-O
+    {
+        color: #0C0;
+        cursor: pointer;
+    }
+    .verb-IO
+    {
+        color: #00C;
+        cursor: pointer;
+    }
+    .verb-ADV
+    {
+        color: #0CC;
+        cursor: pointer;
+    }
+    .verb-P
+    {
+        color: #C0C;
+        cursor: pointer;
+    }
+    .verb-VC
+    {
+        color: #CC0;
+        cursor: pointer;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="instructions">
+    Hover over a <b>verb</b> to highlight all the phrases in the
+    clause.
+</div>
+
+<div class="credits">
+    Syntactic analysis from Global Bible Initiative.
+</div>
+
+<div class="legend">
+Legend<br/>
+<span class="verb-CL">CL</span>
+<span class="verb-S">S</span>
+<span class="verb-O">O</span>
+<span class="verb-IO">IO</span>
+<span class="verb-ADV">ADV</span>
+<span class="verb-P">P</span>
+<span class="verb-VC">VC</span>
+</div>
+
+<div class="text">
+
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-det"> Ὁ </div>
+<div class="node node-adjp">
+<div class="node node-adj"> πρεσβύτερος </div>
+</div>
+</div>
+</div>
+<div class="node node-IO">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-adjp">
+<div class="node node-adj"> ἐκλεκτῇ </div>
+</div>
+<div class="node node-np">
+<div class="node node-noun"> κυρίᾳ </div>
+</div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-np">
+<div class="node node-det"> τοῖς </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> τέκνοις </div>
+</div>
+<div class="node node-np">
+<div class="node node-pron"> αὐτῆς, </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-pron"> οὓς </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἀγαπῶ </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἐν </div>
+<div class="node node-np">
+<div class="node node-noun"> ἀληθείᾳ, </div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-pron"> ἐγὼ </div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-np">
+<div class="node node-advp">
+<div class="node node-adv"> οὐκ </div>
+</div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-pron"> ἐγὼ </div>
+</div>
+<div class="node node-adjp">
+<div class="node node-adj"> μόνος </div>
+</div>
+</div>
+<div class="node node-conj"> ἀλλὰ </div>
+<div class="node node-np">
+<div class="node node-advp">
+<div class="node node-adv"> καὶ </div>
+</div>
+<div class="node node-np">
+<div class="node node-adjp">
+<div class="node node-adj"> πάντες </div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> οἱ </div>
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἐγνωκότες </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-det"> τὴν </div>
+<div class="node node-np">
+<div class="node node-noun"> ἀλήθειαν, </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> διὰ </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-det"> τὴν </div>
+<div class="node node-np">
+<div class="node node-noun"> ἀλήθειαν </div>
+</div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> τὴν </div>
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> μένουσαν </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἐν </div>
+<div class="node node-np">
+<div class="node node-pron"> ἡμῖν, </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-CL">
+<div class="node node-P">
+<div class="node node-pp">
+<div class="node node-prep"> μεθ’ </div>
+<div class="node node-np">
+<div class="node node-pron"> ἡμῶν </div>
+</div>
+</div>
+</div>
+<div class="node node-VC">
+<div class="node node-vp">
+<div class="node node-verb"> ἔσται </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> εἰς </div>
+<div class="node node-np">
+<div class="node node-det"> τὸν </div>
+<div class="node node-np">
+<div class="node node-noun"> αἰῶνα· </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-VC">
+<div class="node node-vp">
+<div class="node node-verb"> ἔσται </div>
+</div>
+</div>
+<div class="node node-P">
+<div class="node node-pp">
+<div class="node node-prep"> μεθ’ </div>
+<div class="node node-np">
+<div class="node node-pron"> ἡμῶν </div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> χάρις </div>
+</div>
+<div class="node node-np">
+<div class="node node-noun"> ἔλεος </div>
+</div>
+<div class="node node-np">
+<div class="node node-noun"> εἰρήνη </div>
+</div>
+</div>
+<div class="node node-pp">
+<div class="node node-pp">
+<div class="node node-prep"> παρὰ </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> θεοῦ </div>
+</div>
+<div class="node node-np">
+<div class="node node-noun"> πατρός, </div>
+</div>
+</div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-pp">
+<div class="node node-prep"> παρὰ </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> Ἰησοῦ </div>
+</div>
+<div class="node node-np">
+<div class="node node-noun"> Χριστοῦ </div>
+</div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> τοῦ </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> υἱοῦ </div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> τοῦ </div>
+<div class="node node-np">
+<div class="node node-noun"> πατρός, </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἐν </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> ἀληθείᾳ </div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-np">
+<div class="node node-noun"> ἀγάπῃ. </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> Ἐχάρην </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-advp">
+<div class="node node-adv"> λίαν </div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-conj"> ὅτι </div>
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> εὕρηκα </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἐκ </div>
+<div class="node node-np">
+<div class="node node-det"> τῶν </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> τέκνων </div>
+</div>
+<div class="node node-np">
+<div class="node node-pron"> σου </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> περιπατοῦντας </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἐν </div>
+<div class="node node-np">
+<div class="node node-noun"> ἀληθείᾳ, </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-conj"> καθὼς </div>
+<div class="node node-CL">
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-noun"> ἐντολὴν </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἐλάβομεν </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> παρὰ </div>
+<div class="node node-np">
+<div class="node node-det"> τοῦ </div>
+<div class="node node-np">
+<div class="node node-noun"> πατρός. </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-conj"> καὶ </div>
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-np">
+<div class="node node-noun"> κυρία, </div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-ADV">
+<div class="node node-advp">
+<div class="node node-adv"> νῦν </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἐρωτῶ </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-pron"> σε, </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> γράφων </div>
+</div>
+</div>
+<div class="node node-IO">
+<div class="node node-np">
+<div class="node node-pron"> σοι </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-CL">
+<div class="node node-advp">
+<div class="node node-adv"> οὐχ </div>
+</div>
+<div class="node node-CL">
+<div class="node node-conj"> ὡς </div>
+<div class="node node-CL">
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> ἐντολὴν </div>
+</div>
+<div class="node node-adjp">
+<div class="node node-adj"> καινὴν </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-conj"> ἀλλὰ </div>
+<div class="node node-CL">
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-pron"> ἣν </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> εἴχομεν </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἀπ’ </div>
+<div class="node node-np">
+<div class="node node-noun"> ἀρχῆς, </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-conj"> ἵνα </div>
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἀγαπῶμεν </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-pron"> ἀλλήλους. </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-conj"> καὶ </div>
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-P">
+<div class="node node-np">
+<div class="node node-pron"> αὕτη </div>
+</div>
+</div>
+<div class="node node-VC">
+<div class="node node-vp">
+<div class="node node-verb"> ἐστὶν </div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-det"> ἡ </div>
+<div class="node node-np">
+<div class="node node-noun"> ἀγάπη, </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-conj">
+<div class="node node-adv"> ἵνα </div>
+</div>
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> περιπατῶμεν </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> κατὰ </div>
+<div class="node node-np">
+<div class="node node-det"> τὰς </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> ἐντολὰς </div>
+</div>
+<div class="node node-np">
+<div class="node node-pron"> αὐτοῦ· </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-P">
+<div class="node node-np">
+<div class="node node-pron"> αὕτη </div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-det"> ἡ </div>
+<div class="node node-np">
+<div class="node node-noun"> ἐντολή </div>
+</div>
+</div>
+</div>
+<div class="node node-VC">
+<div class="node node-vp">
+<div class="node node-verb"> ἐστιν, </div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-conj"> καθὼς </div>
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἠκούσατε </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἀπ’ </div>
+<div class="node node-np">
+<div class="node node-noun"> ἀρχῆς, </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-conj">
+<div class="node node-adv"> ἵνα </div>
+</div>
+<div class="node node-CL">
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἐν </div>
+<div class="node node-np">
+<div class="node node-pron"> αὐτῇ </div>
+</div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> περιπατῆτε. </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-conj"> ὅτι </div>
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἐξῆλθον </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> εἰς </div>
+<div class="node node-np">
+<div class="node node-det"> τὸν </div>
+<div class="node node-np">
+<div class="node node-noun"> κόσμον, </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-adjp">
+<div class="node node-adj"> πολλοὶ </div>
+</div>
+<div class="node node-np">
+<div class="node node-adjp">
+<div class="node node-adj"> πλάνοι </div>
+</div>
+</div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> οἱ </div>
+<div class="node node-CL">
+<div class="node node-ADV">
+<div class="node node-advp">
+<div class="node node-adv"> μὴ </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ὁμολογοῦντες </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-CL">
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> Ἰησοῦν </div>
+</div>
+<div class="node node-np">
+<div class="node node-noun"> Χριστὸν </div>
+</div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἐρχόμενον </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἐν </div>
+<div class="node node-np">
+<div class="node node-noun"> σαρκί· </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-pron"> οὗτός </div>
+</div>
+</div>
+<div class="node node-VC">
+<div class="node node-vp">
+<div class="node node-verb"> ἐστιν </div>
+</div>
+</div>
+<div class="node node-P">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-det"> ὁ </div>
+<div class="node node-adjp">
+<div class="node node-adj"> πλάνος </div>
+</div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-np">
+<div class="node node-det"> ὁ </div>
+<div class="node node-np">
+<div class="node node-noun"> ἀντίχριστος. </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> βλέπετε </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-pron"> ἑαυτούς, </div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-conj"> ἵνα </div>
+<div class="node node-CL">
+<div class="node node-advp">
+<div class="node node-adv"> μὴ </div>
+</div>
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἀπολέσητε </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-CL">
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-pron"> ἃ </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> εἰργασάμεθα, </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-conj"> ἀλλὰ </div>
+<div class="node node-CL">
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> μισθὸν </div>
+</div>
+<div class="node node-adjp">
+<div class="node node-adj"> πλήρη </div>
+</div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἀπολάβητε. </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-adjp">
+<div class="node node-adj"> πᾶς </div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> ὁ </div>
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> προάγων </div>
+</div>
+</div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-CL">
+<div class="node node-ADV">
+<div class="node node-advp">
+<div class="node node-adv"> μὴ </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> μένων </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἐν </div>
+<div class="node node-np">
+<div class="node node-det"> τῇ </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> διδαχῇ </div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> τοῦ </div>
+<div class="node node-np">
+<div class="node node-noun"> Χριστοῦ </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-noun"> θεὸν </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-advp">
+<div class="node node-adv"> οὐκ </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἔχει· </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-np">
+<div class="node node-det"> ὁ </div>
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> μένων </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> ἐν </div>
+<div class="node node-np">
+<div class="node node-det"> τῇ </div>
+<div class="node node-np">
+<div class="node node-noun"> διδαχῇ, </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-pron"> οὗτος </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-conj"> καὶ </div>
+<div class="node node-np">
+<div class="node node-det"> τὸν </div>
+<div class="node node-np">
+<div class="node node-noun"> πατέρα </div>
+</div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-np">
+<div class="node node-det"> τὸν </div>
+<div class="node node-np">
+<div class="node node-noun"> υἱὸν </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἔχει. </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-conj"> εἴ </div>
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-pron"> τις </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἔρχεται </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> πρὸς </div>
+<div class="node node-np">
+<div class="node node-pron"> ὑμᾶς </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-CL">
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-pron"> ταύτην </div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> τὴν </div>
+<div class="node node-np">
+<div class="node node-noun"> διδαχὴν </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-advp">
+<div class="node node-adv"> οὐ </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> φέρει, </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-ADV">
+<div class="node node-advp">
+<div class="node node-adv"> μὴ </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> λαμβάνετε </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-pron"> αὐτὸν </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> εἰς </div>
+<div class="node node-np">
+<div class="node node-noun"> οἰκίαν </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-CL">
+<div class="node node-O">
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> χαίρειν </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-IO">
+<div class="node node-np">
+<div class="node node-pron"> αὐτῷ </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-advp">
+<div class="node node-adv"> μὴ </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> λέγετε· </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-conj"> γὰρ </div>
+<div class="node node-CL">
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-det"> ὁ </div>
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> λέγων </div>
+</div>
+</div>
+<div class="node node-IO">
+<div class="node node-np">
+<div class="node node-pron"> αὐτῷ </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> χαίρειν </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> κοινωνεῖ </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-np">
+<div class="node node-det"> τοῖς </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> ἔργοις </div>
+</div>
+<div class="node node-np">
+<div class="node node-pron"> αὐτοῦ </div>
+</div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> τοῖς </div>
+<div class="node node-adjp">
+<div class="node node-adj"> πονηροῖς. </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-ADV">
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἔχων </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-CL">
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-adjp">
+<div class="node node-adj"> Πολλὰ </div>
+</div>
+</div>
+</div>
+<div class="node node-IO">
+<div class="node node-np">
+<div class="node node-pron"> ὑμῖν </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> γράφειν </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-advp">
+<div class="node node-adv"> οὐκ </div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἐβουλήθην </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> διὰ </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> χάρτου </div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-np">
+<div class="node node-noun"> μέλανος, </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-conj"> ἀλλὰ </div>
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> ἐλπίζω </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-CL">
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> γενέσθαι </div>
+</div>
+</div>
+<div class="node node-ADV">
+<div class="node node-pp">
+<div class="node node-prep"> πρὸς </div>
+<div class="node node-np">
+<div class="node node-pron"> ὑμᾶς </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-conj"> καὶ </div>
+<div class="node node-CL">
+<div class="node node-ADV">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> στόμα </div>
+</div>
+<div class="node node-pp">
+<div class="node node-prep"> πρὸς </div>
+<div class="node node-np">
+<div class="node node-noun"> στόμα </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> λαλῆσαι, </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-CL">
+<div class="node node-conj"> ἵνα </div>
+<div class="node node-CL">
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-det"> ἡ </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> χαρὰ </div>
+</div>
+<div class="node node-np">
+<div class="node node-pron"> ὑμῶν </div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-vp">
+<div class="node node-verb"> πεπληρωμένη </div>
+</div>
+<div class="node node-verb"> ᾖ. </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-CL">
+<div class="node node-V">
+<div class="node node-vp">
+<div class="node node-verb"> Ἀσπάζεταί </div>
+</div>
+</div>
+<div class="node node-O">
+<div class="node node-np">
+<div class="node node-pron"> σε </div>
+</div>
+</div>
+<div class="node node-S">
+<div class="node node-np">
+<div class="node node-det"> τὰ </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> τέκνα </div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> τῆς </div>
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-np">
+<div class="node node-noun"> ἀδελφῆς </div>
+</div>
+<div class="node node-np">
+<div class="node node-pron"> σου </div>
+</div>
+</div>
+<div class="node node-np">
+<div class="node node-det"> τῆς </div>
+<div class="node node-adjp">
+<div class="node node-adj"> ἐκλεκτῆς. </div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+</div>
+{% endblock %}
+
+{% block extra_script %}
+<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script>
+    $(function() {
+        $(".node-verb").hover(
+            function() {
+                var closestCL = $(this).closest(".node-CL");
+                closestCL.addClass("selected")
+                closestCL.children(".node-S").addClass("verb-S");
+                closestCL.children(".node-O").addClass("verb-O");
+                closestCL.children(".node-IO").addClass("verb-IO");
+                closestCL.children(".node-ADV").addClass("verb-ADV");
+                closestCL.children(".node-P").addClass("verb-P");
+                closestCL.children(".node-VC").addClass("verb-VC");
+            },
+            function() {
+                var closestCL = $(this).closest(".node-CL");
+                closestCL.removeClass("selected")
+                closestCL.children(".node-S").removeClass("verb-S");
+                closestCL.children(".node-O").removeClass("verb-O");
+                closestCL.children(".node-IO").removeClass("verb-IO");
+                closestCL.children(".node-ADV").removeClass("verb-ADV");
+                closestCL.children(".node-P").removeClass("verb-P");
+                closestCL.children(".node-VC").removeClass("verb-VC");
+            }
+        );
+    });
+</script>
+{% endblock %}
