@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
+from pysblgnt import morphgnt_rows
 
-def generate(book_title, input_filename, output_filename, chapter_count):
+
+def generate(book_title, book_num, output_filename, chapter_count):
 
     with open(output_filename, "w") as output:
 
@@ -162,8 +164,7 @@ def generate(book_title, input_filename, output_filename, chapter_count):
         last_verse = 0
         last_chapter = 0
 
-        for line in open(input_filename):
-            bcv, pos, parse, text, norm, form, lemma = line.strip().split()
+        for row in morphgnt_rows(book_num):
             pos = {
                 "RA": "article",
                 "A-": "adjective",
@@ -178,8 +179,8 @@ def generate(book_title, input_filename, output_filename, chapter_count):
                 "RI": "interoggative/indefinite pronoun",
                 "X-": "particle",
                 "I-": "interjection",
-            }[pos]
-            person, tense, voice, mood, case, number, gender, degree = parse
+            }[row["ccat-pos"]]
+            person, tense, voice, mood, case, number, gender, degree = row["ccat-parse"]
             parse = []
             if pos == "verb":
                 if mood == "P":
@@ -283,8 +284,8 @@ def generate(book_title, input_filename, output_filename, chapter_count):
                     "-": "",
                 }[degree])
             parse = " ".join(parse)
-            chapter = int(bcv[2:4])
-            verse = int(bcv[4:])
+            chapter = int(row["bcv"][2:4])
+            verse = int(row["bcv"][4:])
             cv = f"{chapter}-{verse}"
             if chapter != last_chapter:
                 if last_chapter:
@@ -299,6 +300,7 @@ def generate(book_title, input_filename, output_filename, chapter_count):
                 print(f"""<a href="#verse-{cv}" class="verse_num" data-verse="{cv}">{verse}</a>""", file=output)
                 last_verse = verse
                 print(f"""<span class="verse" id="verse-{cv}">""", file=output)
+            text, form, lemma = row["text"], row["norm"], row["lemma"]
             print(f"""<a href="#" class="word" data-form="{form}" data-pos="{pos}" data-parse="{parse}" data-lemma="{lemma}">{text}</a>""", file=output)
 
         print("""
@@ -371,30 +373,30 @@ def generate(book_title, input_filename, output_filename, chapter_count):
     assert chapter == chapter_count, chapter
 
 
-# generate("Matthew", "../../../../morphgnt/sblgnt/61-Mt-morphgnt.txt", "matthew.html", 28)
-# generate("Mark", "../../../../morphgnt/sblgnt/62-Mk-morphgnt.txt", "mark.html", 16)
-# generate("Luke", "../../../../morphgnt/sblgnt/63-Lk-morphgnt.txt", "luke.html", 24)
-generate("John", "../../../../morphgnt/sblgnt/64-Jn-morphgnt.txt", "john.html", 21)
-# generate("Acts", "../../../../morphgnt/sblgnt/65-Ac-morphgnt.txt", "acts.html", 28)
-# generate("Romans", "../../../../morphgnt/sblgnt/66-Ro-morphgnt.txt", "romans.html", 16)
-# generate("1 Corinthians", "../../../../morphgnt/sblgnt/67-1Co-morphgnt.txt", "1corinthians.html", 16)
-# generate("2 Corinthians", "../../../../morphgnt/sblgnt/68-2Co-morphgnt.txt", "2corinthians.html", 13)
-# generate("Galatians", "../../../../morphgnt/sblgnt/69-Ga-morphgnt.txt", "galatians.html", 6)
-# generate("Ephesians", "../../../../morphgnt/sblgnt/70-Eph-morphgnt.txt", "ephesians.html", 6)
-# generate("Philippians", "../../../../morphgnt/sblgnt/71-Php-morphgnt.txt", "philippians.html", 4)
-# generate("Colossians", "../../../../morphgnt/sblgnt/72-Col-morphgnt.txt", "colossians.html", 4)
-# generate("1 Thessalonians", "../../../../morphgnt/sblgnt/73-1Th-morphgnt.txt", "1thessalonians.html", 5)
-# generate("2 Thessalonians", "../../../../morphgnt/sblgnt/74-2Th-morphgnt.txt", "2thessalonians.html", 3)
-# generate("1 Timothy", "../../../../morphgnt/sblgnt/75-1Ti-morphgnt.txt", "1timothy.html", 6)
-# generate("2 Timothy", "../../../../morphgnt/sblgnt/76-2Ti-morphgnt.txt", "2timothy.html", 4)
-# generate("Titus", "../../../../morphgnt/sblgnt/77-Tit-morphgnt.txt", "titus.html", 3)
-# generate("Philemon", "../../../../morphgnt/sblgnt/78-Phm-morphgnt.txt", "philemon.html", 1)
-# generate("Hebrews", "../../../../morphgnt/sblgnt/79-Heb-morphgnt.txt", "hebrews.html", 13)
-# generate("James", "../../../../morphgnt/sblgnt/80-Jas-morphgnt.txt", "james.html", 5)
-# generate("1 Peter", "../../../../morphgnt/sblgnt/81-1Pe-morphgnt.txt", "1peter.html", 5)
-# generate("2 Peter", "../../../../morphgnt/sblgnt/82-2Pe-morphgnt.txt", "2peter.html", 3)
-# generate("1 John", "../../../../morphgnt/sblgnt/83-1Jn-morphgnt.txt", "1john.html", 5)
-# generate("2 John", "../../../../morphgnt/sblgnt/84-2Jn-morphgnt.txt", "2john.html", 1)
-# generate("3 John", "../../../../morphgnt/sblgnt/85-3Jn-morphgnt.txt", "3john.html", 1)
-# generate("Jude", "../../../../morphgnt/sblgnt/86-Jud-morphgnt.txt", "jude.html", 1)
-# generate("Revelation", "../../../../morphgnt/sblgnt/87-Re-morphgnt.txt", "revelation.html", 22)
+generate("Matthew", 1, "matthew.html", 28)
+generate("Mark", 2, "mark.html", 16)
+generate("Luke", 3, "luke.html", 24)
+generate("John", 4, "john.html", 21)
+generate("Acts", 5, "acts.html", 28)
+generate("Romans", 6, "romans.html", 16)
+generate("1 Corinthians", 7, "1corinthians.html", 16)
+generate("2 Corinthians", 8, "2corinthians.html", 13)
+generate("Galatians", 9, "galatians.html", 6)
+generate("Ephesians", 10, "ephesians.html", 6)
+generate("Philippians", 11, "philippians.html", 4)
+generate("Colossians", 12, "colossians.html", 4)
+generate("1 Thessalonians", 13, "1thessalonians.html", 5)
+generate("2 Thessalonians", 14, "2thessalonians.html", 3)
+generate("1 Timothy", 15, "1timothy.html", 6)
+generate("2 Timothy", 16, "2timothy.html", 4)
+generate("Titus", 17, "titus.html", 3)
+generate("Philemon", 18, "philemon.html", 1)
+generate("Hebrews", 19, "hebrews.html", 13)
+generate("James", 20, "james.html", 5)
+generate("1 Peter", 21, "1peter.html", 5)
+generate("2 Peter", 22, "2peter.html", 3)
+generate("1 John", 23, "1john.html", 5)
+generate("2 John", 24, "2john.html", 1)
+generate("3 John", 25, "3john.html", 1)
+generate("Jude", 26, "jude.html", 1)
+generate("Revelation", 27, "revelation.html", 22)
