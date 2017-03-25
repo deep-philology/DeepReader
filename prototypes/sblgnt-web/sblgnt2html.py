@@ -2,16 +2,16 @@
 
 
 def generate(book_title, input_filename, output_filename, chapter_count):
-    
+
     output = file(output_filename, "w")
-    
+
     print >> output, """
     <!doctype html>
     <html>
         <head>
             <title>{book_title}</title>
     """.format(book_title=book_title)
-    
+
     print >> output, """
             <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
             <style>
@@ -86,7 +86,7 @@ def generate(book_title, input_filename, output_filename, chapter_count):
                 .verse_num:hover {
                     color: #000;
                 }
-                
+
                 .verse:target {
                     background: #FF6;
                 }
@@ -140,7 +140,7 @@ def generate(book_title, input_filename, output_filename, chapter_count):
             </style>
         </head>
     """
-    
+
     print >> output, """
         <body>
             <div id="chapter-nav" class="header">
@@ -326,7 +326,7 @@ def generate(book_title, input_filename, output_filename, chapter_count):
                     function update() {
                         var window_start = $(window).scrollTop();
                         var window_end = window_start + $(window).height();
-                        
+
                         for (var i=0; i<positions.length; i++) {
                             if (window_start < positions[i].end && window_end > positions[i].start) {
                                 if (!positions[i].selected) {
@@ -370,25 +370,12 @@ def generate(book_title, input_filename, output_filename, chapter_count):
                     )
                 });
             </script>
-            <script type="text/javascript">
-                var _gauges = _gauges || [];
-                (function() {
-                    var t   = document.createElement('script');
-                    t.type  = 'text/javascript';
-                    t.async = true;
-                    t.id    = 'gauges-tracker';
-                    t.setAttribute('data-site-id', '4f27e326613f5d3dd1000008');
-                    t.src = '//secure.gaug.es/track.js';
-                    var s = document.getElementsByTagName('script')[0];
-                    s.parentNode.insertBefore(t, s);
-                })();
-            </script>
         </body>
     </html>
     """
-    
+
     output.close()
-    
+
     assert chapter == chapter_count, chapter
 
 
