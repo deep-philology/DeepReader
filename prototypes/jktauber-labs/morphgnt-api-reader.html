@@ -1,110 +1,128 @@
-{% extends "labs/base.html" %}
+<html>
+  <head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=PT+Sans" rel="stylesheet">
+    <style>
+      @font-face {
+        font-family: "Skolar";
+        src: url("http://jktauber.com/site_media/static/fonts/SkolarPEWeb-Regular.woff") format("woff");
+        font-style: normal;
+        font-weight: normal;
+        text-rendering: optimizeLegibility;
+      }
+      @font-face {
+        font-family: "Skolar";
+        src: url("http://jktauber.com/site_media/static/fonts/SkolarPEWeb-Italic.woff") format("woff");
+        font-style: italic;
+        font-weight: normal;
+        text-rendering: optimizeLegibility;
+      }
+      @font-face {
+        font-family: "Skolar";
+        src: url("http://jktauber.com/site_media/static/fonts/SkolarPEWeb-Bold.woff") format("woff");
+        font-style: normal;
+        font-weight: bold;
+        text-rendering: optimizeLegibility;
+      }
 
-{% block extra_style %}
-<style>
-    .container {
-        width: 800px;
-        margin: 50px auto;
-    }
+      body {
+        font-feature-settings: "ccmp";
+      }
 
-    .legend {
-        text-align: center;
-    }
-    .legend span {
-        font-family: "PT Sans", "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-        font-size: 10pt;
-        padding: 8px 12px;
-        color: #FFF;
-        background: #CCC;
-    }
-    .text {
-        margin-top: 50px;
-        font-family: SKolar;
-        font-size: 20pt;
-        line-height: 30pt;
-        word-spacing: 6pt;
-        color: #333;
-    }
-    .book-link, .paragraph-link {
-        cursor: pointer;
-    }
-    .navigation {
-        margin: 20px 0;
-        font-size: 14pt;
-        font-family: "PT Sans", "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
-    }
-    .prev {
-        float: left;
-    }
-    .next {
-        float: right;
-    }
-</style>
-{% endblock %}
+      .container {
+          width: 800px;
+          margin: 50px auto;
+      }
 
-{% block content %}
-<div class="instructions">Click a book name then use prev/next to page through paragraphs.</div>
+      .legend {
+          text-align: center;
+      }
+      .legend span {
+          font-family: "PT Sans", "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+          font-size: 10pt;
+          padding: 8px 12px;
+          color: #FFF;
+          background: #CCC;
+      }
+      .text {
+          margin-top: 50px;
+          font-family: "Skolar";
+          font-size: 20pt;
+          line-height: 30pt;
+          word-spacing: 6pt;
+          color: #333;
+      }
+      .book-link, .paragraph-link {
+          cursor: pointer;
+      }
+      .navigation {
+          margin: 20px 0;
+          font-size: 14pt;
+          font-family: "PT Sans", "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
+      }
+      .prev {
+          float: left;
+      }
+      .next {
+          float: right;
+      }
+    </style>
+  </head>
 
-<div class="credits">This uses the MorphGNT API to dynamically retrieve paragraphs.</div>
-
-
-<div class="text">
-    <div id="load"></div>
-</div>
-{% endblock %}
-
-
-{% block extra_script %}
-<script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.2/mustache.min.js"></script>
-<script id="template_root" type="x-tmpl-mustache">
-{% verbatim %}
-    <ul>
-    {{#books}}
-        <li><a class="book-link" data-link="{{@id}}">{{name}}</a></li>
-    {{/books}}
-    </ul>
-{% endverbatim %}
-</script>
-<script id="template_paragraph" type="x-tmpl-mustache">
-{% verbatim %}
-    <div class="navigation">
-        <a href="/labs/morphgnt-api-reader.html">Back to book list</a>
+  <body>
+    <div class="container">
+      <div class="text">
+        <div id="load"></div>
+      </div>
     </div>
-    {{#words}}
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.2/mustache.min.js"></script>
+    <script id="template_root" type="x-tmpl-mustache">
+      <ul>
+        {{#books}}
+          <li><a class="book-link" data-link="{{@id}}">{{name}}</a></li>
+        {{/books}}
+      </ul>
+    </script>
+    <script id="template_paragraph" type="x-tmpl-mustache">
+      <div class="navigation">
+        <a href="./morphgnt-api-reader.html">Back to book list</a>
+      </div>
+      {{#words}}
         {{text}}
-    {{/words}}
-    <div class="navigation">
+      {{/words}}
+      <div class="navigation">
         {{#prev}}<a class="paragraph-link prev" data-link="{{prev}}">prev</a>{{/prev}}
         {{#next}}<a class="paragraph-link next" data-link="{{next}}">next</a>{{/next}}
-    </div>
-{% endverbatim %}
-</script>
-<script>
-    $(function() {
+      </div>
+    </script>
+    <script>
+      $(function() {
         var template_root = $("#template_root").html();
         var template_paragraph = $("#template_paragraph").html();
 
         function load_paragraph(paragraph_link) {
-            $.getJSON(paragraph_link, function(view) {
-                $("#load").html(Mustache.to_html(template_paragraph, view));
-                $(".paragraph-link").on("click", function() {
-                    paragraph_link = "http://api.morphgnt.org" + $(this).data("link");
-                    load_paragraph(paragraph_link);
-                });
+          $.getJSON(paragraph_link, function(view) {
+            $("#load").html(Mustache.to_html(template_paragraph, view));
+            $(".paragraph-link").on("click", function() {
+              paragraph_link = "http://api.morphgnt.org" + $(this).data("link");
+              load_paragraph(paragraph_link);
             });
+          });
         }
 
         $.getJSON("http://api.morphgnt.org/v0/root.json", function(view) {
-            $("#load").html(Mustache.to_html(template_root, view));
-            $(".book-link").on("click", function() {
-                var book_link = "http://api.morphgnt.org" + $(this).data("link");
-                $.getJSON(book_link, function(view) {
-                    paragraph_link = "http://api.morphgnt.org" + view.first_paragraph;
-                    load_paragraph(paragraph_link);
-                });
+          $("#load").html(Mustache.to_html(template_root, view));
+          $(".book-link").on("click", function() {
+            var book_link = "http://api.morphgnt.org" + $(this).data("link");
+            $.getJSON(book_link, function(view) {
+              paragraph_link = "http://api.morphgnt.org" + view.first_paragraph;
+              load_paragraph(paragraph_link);
             });
+          });
         });
-    });
-</script>
-{% endblock %}
+      });
+    </script>
+  </body>
+</html>

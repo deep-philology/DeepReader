@@ -28,6 +28,10 @@
         text-rendering: optimizeLegibility;
       }
 
+      body {
+        font-feature-settings: "ccmp";
+      }
+
       .instructions, .credits {
           font-family: "PT Sans", "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
           padding: 10px 20px;
@@ -139,14 +143,11 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.2/mustache.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ==" crossorigin="anonymous"></script>
     <script id="template_paragraph" type="x-tmpl-mustache">
-        {% verbatim %}
         {{#words}}
             <i data-word_id="{{word_id}}" data-rel="{{rel}}" data-head="{{head}}" data-lexeme_id="{{lexeme_id}}" data-form_id="{{form_id}}">{{text}}</i>
         {{/words}}
-        {% endverbatim %}
     </script>
     <script id="template_word" type="x-tmpl-mustache">
-      {% verbatim %}
       <div class="alert alert-dismissible" role="alert">
           <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <h2>{{form.form}}</h2>
@@ -161,7 +162,6 @@
             <div class="child" data-child_word_id="{{word_id}}">{{form.form}} ({{rel}})</div>
           {{/word.childObjects}}
       </div>
-      {% endverbatim %}
     </script>
     <script type="text/javascript">
       var fetchData = function (url) {
