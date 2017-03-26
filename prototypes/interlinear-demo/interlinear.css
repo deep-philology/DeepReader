@@ -1,0 +1,29 @@
+div.unit {
+  float: left;
+  margin-bottom: 1em;
+  color: black;
+}
+p.gk {
+  font-size: 16pt;
+  margin: 0em;
+  padding: 0em 0.5em;
+}
+p.en {
+  font-size: 10pt;
+  font-family: sans-serif;
+  color: gray;
+  margin: 0em;
+  padding: 0em 1em;
+}
+
+body.hover div.unit, body.toggle div.unit {
+  cursor: hand;
+  color: #333;
+}
+body.hover div.unit:hover, body.toggle div.unit:hover {
+  color: #000;
+}
+
+body.hover p.en, body.toggle p.en, body.frequency p.en {
+  color: white;
+}
