@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 import os
 
 from pysblgnt import morphgnt_rows
