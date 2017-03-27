@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 
+import os
+import shutil
+
 from pysblgnt import morphgnt_rows
 
 
@@ -191,32 +194,39 @@ def generate(book_title, book_num, output_filename, chapter_count):
         """, file=output)
 
     assert chapter == chapter_count, chapter
+    print(f"wrote {output_filename}")
 
 
-generate("Matthew", 1, "matthew.html", 28)
-generate("Mark", 2, "mark.html", 16)
-generate("Luke", 3, "luke.html", 24)
-generate("John", 4, "john.html", 21)
-generate("Acts", 5, "acts.html", 28)
-generate("Romans", 6, "romans.html", 16)
-generate("1 Corinthians", 7, "1corinthians.html", 16)
-generate("2 Corinthians", 8, "2corinthians.html", 13)
-generate("Galatians", 9, "galatians.html", 6)
-generate("Ephesians", 10, "ephesians.html", 6)
-generate("Philippians", 11, "philippians.html", 4)
-generate("Colossians", 12, "colossians.html", 4)
-generate("1 Thessalonians", 13, "1thessalonians.html", 5)
-generate("2 Thessalonians", 14, "2thessalonians.html", 3)
-generate("1 Timothy", 15, "1timothy.html", 6)
-generate("2 Timothy", 16, "2timothy.html", 4)
-generate("Titus", 17, "titus.html", 3)
-generate("Philemon", 18, "philemon.html", 1)
-generate("Hebrews", 19, "hebrews.html", 13)
-generate("James", 20, "james.html", 5)
-generate("1 Peter", 21, "1peter.html", 5)
-generate("2 Peter", 22, "2peter.html", 3)
-generate("1 John", 23, "1john.html", 5)
-generate("2 John", 24, "2john.html", 1)
-generate("3 John", 25, "3john.html", 1)
-generate("Jude", 26, "jude.html", 1)
-generate("Revelation", 27, "revelation.html", 22)
+if not os.path.exists("output"):
+    os.makedirs("output")
+    print("created directory")
+
+generate("Matthew", 1, "output/matthew.html", 28)
+generate("Mark", 2, "output/mark.html", 16)
+generate("Luke", 3, "output/luke.html", 24)
+generate("John", 4, "output/john.html", 21)
+generate("Acts", 5, "output/acts.html", 28)
+generate("Romans", 6, "output/romans.html", 16)
+generate("1 Corinthians", 7, "output/1corinthians.html", 16)
+generate("2 Corinthians", 8, "output/2corinthians.html", 13)
+generate("Galatians", 9, "output/galatians.html", 6)
+generate("Ephesians", 10, "output/ephesians.html", 6)
+generate("Philippians", 11, "output/philippians.html", 4)
+generate("Colossians", 12, "output/colossians.html", 4)
+generate("1 Thessalonians", 13, "output/1thessalonians.html", 5)
+generate("2 Thessalonians", 14, "output/2thessalonians.html", 3)
+generate("1 Timothy", 15, "output/1timothy.html", 6)
+generate("2 Timothy", 16, "output/2timothy.html", 4)
+generate("Titus", 17, "output/titus.html", 3)
+generate("Philemon", 18, "output/philemon.html", 1)
+generate("Hebrews", 19, "output/hebrews.html", 13)
+generate("James", 20, "output/james.html", 5)
+generate("1 Peter", 21, "output/1peter.html", 5)
+generate("2 Peter", 22, "output/2peter.html", 3)
+generate("1 John", 23, "output/1john.html", 5)
+generate("2 John", 24, "output/2john.html", 1)
+generate("3 John", 25, "output/3john.html", 1)
+generate("Jude", 26, "output/jude.html", 1)
+generate("Revelation", 27, "output/revelation.html", 22)
+
+shutil.copy("index.html", "output/index.html")
