@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import os
+import shutil
 
 from pysblgnt import morphgnt_rows
 
@@ -86,3 +87,7 @@ if not os.path.exists("output"):
 
 
 generate("2 John", 24, "output/2john.html")
+
+shutil.copy("skolar.css", "output/skolar.css")
+shutil.copy("reader.css", "output/reader.css")
+shutil.copy("reader.js", "output/reader.js")
