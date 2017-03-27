@@ -7,23 +7,21 @@
     <link rel="stylesheet" href="skolar.css">
     <style>
       .container {
-          margin: 50px auto;
+          margin-top: 50px;
       }
       .toggles {
         font-family: "PT Sans", "Arial Unicode", "Lucida Sans Unicode", Arial, sans-serif;
       }
-      .toggles a {
+      .toggle {
         display: block;
         margin: 5px 0px;
         background: #EEE;
         padding: 3px 10px 3px 6px;
         border-radius: 3px;
+        color: black;
+        cursor: pointer;
       }
-      .toggle, .toggle:hover {
-          text-decoration: none;
-          color: black;
-      }
-      .toggle span {
+      .toggle > span {
           color: #CCC;
       }
       .text {
@@ -100,23 +98,23 @@
       <div class="row">
         <div class="col-md-2">
           <div class="toggles">
-            <a href="#" class="toggle" data-target="show-verses"><span class="show-verses">&#x25CF;</span>&nbsp;show verse numbers</a>
+            <span class="toggle" data-target="show-verses"><span class="show-verses">&#x25CF;</span>&nbsp;show verse numbers</span>
             <hr>
-            <a href="#" class="toggle" data-target="larger-text"><span class="larger-text">&#x25CF;</span>&nbsp;larger text</a>
-            <a href="#" class="toggle" data-target="extra-line-height"><span class="extra-line-height">&#x25CF;</span>&nbsp;extra line height</a>
-            <a href="#" class="toggle" data-target="extra-word-spacing"><span class="extra-word-spacing">&#x25CF;</span>&nbsp;extra word spacing</a>
+            <span class="toggle" data-target="larger-text"><span class="larger-text">&#x25CF;</span>&nbsp;larger text</span>
+            <span class="toggle" data-target="extra-line-height"><span class="extra-line-height">&#x25CF;</span>&nbsp;extra line height</span>
+            <span class="toggle" data-target="extra-word-spacing"><span class="extra-word-spacing">&#x25CF;</span>&nbsp;extra word spacing</span>
             <hr>
-            <a href="#" class="toggle" data-target="case-N"><span class="case-N">&#x25CF;</span>&nbsp;nominative</a>
-            <a href="#" class="toggle" data-target="case-G"><span class="case-G">&#x25CF;</span>&nbsp;genitive</a>
-            <a href="#" class="toggle" data-target="case-D"><span class="case-D">&#x25CF;</span>&nbsp;dative</a>
-            <a href="#" class="toggle" data-target="case-A"><span class="case-A">&#x25CF;</span>&nbsp;accusative</a>
+            <span class="toggle" data-target="case-N"><span class="case-N">&#x25CF;</span>&nbsp;nominative</span>
+            <span class="toggle" data-target="case-G"><span class="case-G">&#x25CF;</span>&nbsp;genitive</span>
+            <span class="toggle" data-target="case-D"><span class="case-D">&#x25CF;</span>&nbsp;dative</span>
+            <span class="toggle" data-target="case-A"><span class="case-A">&#x25CF;</span>&nbsp;accusative</span>
             <hr>
-            <a href="#" class="toggle" data-target="ind"><span class="pos-V- mood-I">&#x25CF;</span>&nbsp;indicative</a>
-            <a href="#" class="toggle" data-target="part"><span class="pos-V- mood-P">&#x25CF;</span>&nbsp;participle</a>
-            <a href="#" class="toggle" data-target="inf"><span class="pos-V- mood-N">&#x25CF;</span>&nbsp;infinitive</a>
+            <span class="toggle" data-target="ind"><span class="pos-V- mood-I">&#x25CF;</span>&nbsp;indicative</span>
+            <span class="toggle" data-target="part"><span class="pos-V- mood-P">&#x25CF;</span>&nbsp;participle</span>
+            <span class="toggle" data-target="inf"><span class="pos-V- mood-N">&#x25CF;</span>&nbsp;infinitive</span>
             <hr>
-            <a href="#" class="toggle" data-target="pos-D"><span class="pos-D-">&#x25CF;</span>&nbsp;adverb</a>
-            <a href="#" class="toggle" data-target="pos-C"><span class="pos-C-">&#x25CF;</span>&nbsp;conjunction</a>
+            <span class="toggle" data-target="pos-D"><span class="pos-D-">&#x25CF;</span>&nbsp;adverb</span>
+            <span class="toggle" data-target="pos-C"><span class="pos-C-">&#x25CF;</span>&nbsp;conjunction</span>
           </div>
         </div>
         <div class="col-md-10">
@@ -373,19 +371,10 @@
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
       $(function() {
-        $(".toggle").click(
-          function() {
-            var target = $(this).data("target");
-            if ($(this).hasClass("selected")) {
-              $("body").removeClass(target);
-              $(this).removeClass("selected");
-            } else {
-              $("body").addClass(target);
-              $(this).addClass("selected");
-            }
-            return false;
-          }
-        );
+        $(".toggle").on("click", function() {
+          $("body").toggleClass($(this).data("target"));
+          return false;
+        });
       });
     </script>
   </body>
