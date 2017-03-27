@@ -9,55 +9,55 @@
       <h1>John 3:16</h1>
       <p>
         show
-        <a href="#" onclick="filter(50000);">all</a>;
+        <span class="freq-toggle" data-limit="50000">all</span>;
         words occurring
-        <a href="#" onclick="filter(1000);">less than 1000</a>,
-        <a href="#" onclick="filter(100);">less than 100</a>
+        <span class="freq-toggle" data-limit="1000">less than 1000</span>,
+        <span class="freq-toggle" data-limit="100">less than 100</span>
         times.
       </p>
-      <div id="text">
-        <div class="unit"><p class="gk">οὕτως</p><p class="en" frequency="208">such</p></div>
-        <div class="unit"><p class="gk">γὰρ</p><p class="en" frequency="1041">for</p></div>
-        <div class="unit"><p class="gk">ἠγάπησεν</p><p class="en" frequency="143">loved</p></div>
-        <div class="unit"><p class="gk">ὁ</p><p class="en" frequency="19802">(the)</p></div>
-        <div class="unit"><p class="gk">θεὸς</p><p class="en" frequency="1316">God</p></div>
-        <div class="unit"><p class="gk">τὸν</p><p class="en" frequency="19802">the</p></div>
-        <div class="unit"><p class="gk">κόσμον</p><p class="en" frequency="186">world</p></div>
-        <div class="unit"><p class="gk">ὥστε</p><p class="en" frequency="83">that</p></div>
-        <div class="unit"><p class="gk">τὸν</p><p class="en" frequency="19802">the</p></div>
-        <div class="unit"><p class="gk">υἱὸν</p><p class="en" frequency="377">son</p></div>
-        <div class="unit"><p class="gk">τὸν</p><p class="en" frequency="19802">the</p></div>
-        <div class="unit"><p class="gk">μονογενῆ</p><p class="en" frequency="9">only-begotten</p></div>
-        <div class="unit"><p class="gk">ἔδωκεν</p><p class="en" frequency="415">he gave</p></div>
-        <div class="unit"><p class="gk">ἵνα</p><p class="en" frequency="663">so that</p></div>
-        <div class="unit"><p class="gk">πᾶς</p><p class="en" frequency="1243">all</p></div>
-        <div class="unit"><p class="gk">ὁ</p><p class="en" frequency="19802">the</p></div>
-        <div class="unit"><p class="gk">πιστεύων</p><p class="en" frequency="241">believing</p></div>
-        <div class="unit"><p class="gk">εἰς</p><p class="en" frequency="1767">in</p></div>
-        <div class="unit"><p class="gk">αὐτὸν</p><p class="en" frequency="5100">him</p></div>
-        <div class="unit"><p class="gk">μὴ</p><p class="en" frequency="1042">not</p></div>
-        <div class="unit"><p class="gk">ἀπόληται</p><p class="en" frequency="90">will die</p></div>
-        <div class="unit"><p class="gk">ἀλλ</p><p class="en" frequency="638">but</p></div>
-        <div class="unit"><p class="gk">ἔχῃ</p><p class="en" frequency="708">will have</p></div>
-        <div class="unit"><p class="gk">ζωὴν</p><p class="en" frequency="135">life</p></div>
-        <div class="unit"><p class="gk">αἰώνιον</p><p class="en" frequency="71">eternal</p></div>
-      </div>
+      <div class="unit"><p class="gk">οὕτως</p><p class="en" data-freq="208">such</p></div>
+      <div class="unit"><p class="gk">γὰρ</p><p class="en" data-freq="1041">for</p></div>
+      <div class="unit"><p class="gk">ἠγάπησεν</p><p class="en" data-freq="143">loved</p></div>
+      <div class="unit"><p class="gk">ὁ</p><p class="en" data-freq="19802">(the)</p></div>
+      <div class="unit"><p class="gk">θεὸς</p><p class="en" data-freq="1316">God</p></div>
+      <div class="unit"><p class="gk">τὸν</p><p class="en" data-freq="19802">the</p></div>
+      <div class="unit"><p class="gk">κόσμον</p><p class="en" data-freq="186">world</p></div>
+      <div class="unit"><p class="gk">ὥστε</p><p class="en" data-freq="83">that</p></div>
+      <div class="unit"><p class="gk">τὸν</p><p class="en" data-freq="19802">the</p></div>
+      <div class="unit"><p class="gk">υἱὸν</p><p class="en" data-freq="377">son</p></div>
+      <div class="unit"><p class="gk">τὸν</p><p class="en" data-freq="19802">the</p></div>
+      <div class="unit"><p class="gk">μονογενῆ</p><p class="en" data-freq="9">only-begotten</p></div>
+      <div class="unit"><p class="gk">ἔδωκεν</p><p class="en" data-freq="415">he gave</p></div>
+      <div class="unit"><p class="gk">ἵνα</p><p class="en" data-freq="663">so that</p></div>
+      <div class="unit"><p class="gk">πᾶς</p><p class="en" data-freq="1243">all</p></div>
+      <div class="unit"><p class="gk">ὁ</p><p class="en" data-freq="19802">the</p></div>
+      <div class="unit"><p class="gk">πιστεύων</p><p class="en" data-freq="241">believing</p></div>
+      <div class="unit"><p class="gk">εἰς</p><p class="en" data-freq="1767">in</p></div>
+      <div class="unit"><p class="gk">αὐτὸν</p><p class="en" data-freq="5100">him</p></div>
+      <div class="unit"><p class="gk">μὴ</p><p class="en" data-freq="1042">not</p></div>
+      <div class="unit"><p class="gk">ἀπόληται</p><p class="en" data-freq="90">will die</p></div>
+      <div class="unit"><p class="gk">ἀλλ</p><p class="en" data-freq="638">but</p></div>
+      <div class="unit"><p class="gk">ἔχῃ</p><p class="en" data-freq="708">will have</p></div>
+      <div class="unit"><p class="gk">ζωὴν</p><p class="en" data-freq="135">life</p></div>
+      <div class="unit"><p class="gk">αἰώνιον</p><p class="en" data-freq="71">eternal</p></div>
     </div>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
-    function filter(limit) {
-      var text_element = document.getElementById("text");
-      var words = text_element.getElementsByTagName("div");
-      for (var i=0; i < words.length; i++) {
-        var word = words[i];
-        var p_element = word.getElementsByTagName("p")[1];
-        var frequency = parseInt(p_element.getAttribute("frequency"));
-        if (frequency > limit) {
-          p_element.style.color = "white";
-        } else {
-          p_element.style.color = "gray";
-        }
-      }
-    }
+      $(function() {
+        $(".freq-toggle").on("click", function() {
+          var limit = parseInt($(this).data("limit"));
+          $("p.en").each(function() {
+            var freq = parseInt($(this).data("freq"));
+            if (freq < limit) {
+              console.log(limit, freq, true);
+              $(this).addClass("show");
+            } else {
+              console.log(limit, freq, false);
+              $(this).removeClass("show");
+            }
+          });
+        });
+      });
     </script>
   </body>
 </html>

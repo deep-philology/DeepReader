@@ -7,32 +7,29 @@
   <body class="toggle">
     <div class="container">
       <h1>John 3:16</h1>
-      <div class="unit" onclick="toggle('en01');"><p class="gk">οὕτως</p><p class="en" id="en01">such</p></div>
-      <div class="unit" onclick="toggle('en02');"><p class="gk">γὰρ</p><p class="en" id="en02">for</p></div>
-      <div class="unit" onclick="toggle('en03');"><p class="gk">ἠγάπησεν</p><p class="en" id="en03">loved</p></div>
-      <div class="unit" onclick="toggle('en04');"><p class="gk">ὁ θεὸς</p><p class="en" id="en04">God</p></div>
-      <div class="unit" onclick="toggle('en05');"><p class="gk">τὸν κόσμον</p><p class="en" id="en05">the world</p></div>
-      <div class="unit" onclick="toggle('en06');"><p class="gk">ὥστε</p><p class="en" id="en06">that</p></div>
-      <div class="unit" onclick="toggle('en07');"><p class="gk">τὸν υἱὸν τὸν μονογενῆ</p><p class="en" id="en07">the only-begotten son</p></div>
-      <div class="unit" onclick="toggle('en08');"><p class="gk">ἔδωκεν</p><p class="en" id="en08">he gave</p></div>
-      <div class="unit" onclick="toggle('en09');"><p class="gk">ἵνα</p><p class="en" id="en09">so that</p></div>
-      <div class="unit" onclick="toggle('en10');"><p class="gk">πᾶς ὁ πιστεύων</p><p class="en" id="en10">all those who believe</p></div>
-      <div class="unit" onclick="toggle('en11');"><p class="gk">εἰς αὐτὸν</p><p class="en" id="en11">in him</p></div>
-      <div class="unit" onclick="toggle('en12');"><p class="gk">μὴ ἀπόληται</p><p class="en" id="en12">will not die</p></div>
-      <div class="unit" onclick="toggle('en13');"><p class="gk">ἀλλ</p><p class="en" id="en13">but</p></div>
-      <div class="unit" onclick="toggle('en14');"><p class="gk">ἔχῃ</p><p class="en" id="en14">will have</p></div>
-      <div class="unit" onclick="toggle('en15');"><p class="gk">ζωὴν αἰώνιον</p><p class="en" id="en15">eternal life</p></div>
+      <div class="unit"><p class="gk">οὕτως</p><p class="en">such</p></div>
+      <div class="unit"><p class="gk">γὰρ</p><p class="en">for</p></div>
+      <div class="unit"><p class="gk">ἠγάπησεν</p><p class="en">loved</p></div>
+      <div class="unit"><p class="gk">ὁ θεὸς</p><p class="en">God</p></div>
+      <div class="unit"><p class="gk">τὸν κόσμον</p><p class="en">the world</p></div>
+      <div class="unit"><p class="gk">ὥστε</p><p class="en">that</p></div>
+      <div class="unit"><p class="gk">τὸν υἱὸν τὸν μονογενῆ</p><p class="en">the only-begotten son</p></div>
+      <div class="unit"><p class="gk">ἔδωκεν</p><p class="en">he gave</p></div>
+      <div class="unit"><p class="gk">ἵνα</p><p class="en">so that</p></div>
+      <div class="unit"><p class="gk">πᾶς ὁ πιστεύων</p><p class="en">all those who believe</p></div>
+      <div class="unit"><p class="gk">εἰς αὐτὸν</p><p class="en">in him</p></div>
+      <div class="unit"><p class="gk">μὴ ἀπόληται</p><p class="en">will not die</p></div>
+      <div class="unit"><p class="gk">ἀλλ</p><p class="en">but</p></div>
+      <div class="unit"><p class="gk">ἔχῃ</p><p class="en">will have</p></div>
+      <div class="unit"><p class="gk">ζωὴν αἰώνιον</p><p class="en">eternal life</p></div>
     </div>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script>
-      function toggle(id) {
-        el = document.getElementById(id);
-        if (el.style.color == "gray") {
-          el.style.color = "white";
-        }
-        else {
-          el.style.color = "gray";
-        }
-      }
+      $(function() {
+        $(".unit").on("click", function() {
+          $(this).children("p.en").toggleClass("show");
+        });
+      });
     </script>
   </body>
 </html>
