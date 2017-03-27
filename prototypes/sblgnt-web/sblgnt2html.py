@@ -3,6 +3,130 @@
 from pysblgnt import morphgnt_rows
 
 
+def pos_parse(row):
+    pos = {
+        "RA": "article",
+        "A-": "adjective",
+        "N-": "noun",
+        "C-": "conjunction",
+        "RP": "personal pronoun",
+        "RR": "relative pronoun",
+        "V-": "verb",
+        "P-": "preposition",
+        "D-": "adverb",
+        "RD": "demonstrative",
+        "RI": "interoggative/indefinite pronoun",
+        "X-": "particle",
+        "I-": "interjection",
+    }[row["ccat-pos"]]
+    person, tense, voice, mood, case, number, gender, degree = row["ccat-parse"]
+    parse = []
+    if pos == "verb":
+        if mood == "P":
+            parse.append({
+                "P": "present",
+                "A": "aorist",
+                "X": "perfect",
+                "F": "future",
+            }[tense])
+            parse.append({
+                "A": "active",
+                "M": "middle",
+                "P": "passive",
+            }[voice])
+            parse.append("participle")
+            parse.append({
+                "N": "nominative",
+                "A": "accusative",
+                "G": "genitive",
+                "D": "dative",
+                "V": "vocative",
+                "-": "",
+            }[case])
+            parse.append({
+                "S": "singular",
+                "P": "plural",
+                "-": "",
+            }[number])
+            parse.append({
+                "M": "masculine",
+                "F": "feminine",
+                "N": "neuter",
+                "-": "",
+            }[gender])
+        elif mood == "N":
+            parse.append({
+                "P": "present",
+                "A": "aorist",
+                "X": "perfect",
+                "F": "future",
+            }[tense])
+            parse.append({
+                "A": "active",
+                "M": "middle",
+                "P": "passive",
+            }[voice])
+            parse.append("infinitive")
+        else:
+            parse.append({
+                "P": "present",
+                "F": "future",
+                "A": "aorist",
+                "X": "perfect",
+                "Y": "pluperfect",
+                "I": "imperfect",
+            }[tense])
+            parse.append({
+                "A": "active",
+                "M": "middle",
+                "P": "passive",
+            }[voice])
+            parse.append({
+                "I": "indicative",
+                "S": "subjunctive",
+                "D": "imperative",
+                "O": "optative",
+            }[mood])
+            parse.append({
+                "1": "1st person",
+                "2": "2nd person",
+                "3": "3rd person",
+            }[person])
+            parse.append({
+                "S": "singular",
+                "P": "plural",
+                "-": "",
+            }[number])
+    else:
+        parse.append({
+            "N": "nominative",
+            "A": "accusative",
+            "G": "genitive",
+            "D": "dative",
+            "V": "vocative",
+            "-": "",
+        }[case])
+        parse.append({
+            "S": "singular",
+            "P": "plural",
+            "-": "",
+        }[number])
+        parse.append({
+            "M": "masculine",
+            "F": "feminine",
+            "N": "neuter",
+            "-": "",
+        }[gender])
+        parse.append({
+            "C": "comparative",
+            "S": "superlative",
+            "-": "",
+        }[degree])
+    parse = " ".join(parse).strip()
+
+    return pos, parse
+
+
 def generate(book_title, book_num, output_filename, chapter_count):
 
     with open(output_filename, "w") as output:
@@ -36,125 +160,7 @@ def generate(book_title, book_num, output_filename, chapter_count):
         last_chapter = 0
 
         for row in morphgnt_rows(book_num):
-            pos = {
-                "RA": "article",
-                "A-": "adjective",
-                "N-": "noun",
-                "C-": "conjunction",
-                "RP": "personal pronoun",
-                "RR": "relative pronoun",
-                "V-": "verb",
-                "P-": "preposition",
-                "D-": "adverb",
-                "RD": "demonstrative",
-                "RI": "interoggative/indefinite pronoun",
-                "X-": "particle",
-                "I-": "interjection",
-            }[row["ccat-pos"]]
-            person, tense, voice, mood, case, number, gender, degree = row["ccat-parse"]
-            parse = []
-            if pos == "verb":
-                if mood == "P":
-                    parse.append({
-                        "P": "present",
-                        "A": "aorist",
-                        "X": "perfect",
-                        "F": "future",
-                    }[tense])
-                    parse.append({
-                        "A": "active",
-                        "M": "middle",
-                        "P": "passive",
-                    }[voice])
-                    parse.append("participle")
-                    parse.append({
-                        "N": "nominative",
-                        "A": "accusative",
-                        "G": "genitive",
-                        "D": "dative",
-                        "V": "vocative",
-                        "-": "",
-                    }[case])
-                    parse.append({
-                        "S": "singular",
-                        "P": "plural",
-                        "-": "",
-                    }[number])
-                    parse.append({
-                        "M": "masculine",
-                        "F": "feminine",
-                        "N": "neuter",
-                        "-": "",
-                    }[gender])
-                elif mood == "N":
-                    parse.append({
-                        "P": "present",
-                        "A": "aorist",
-                        "X": "perfect",
-                        "F": "future",
-                    }[tense])
-                    parse.append({
-                        "A": "active",
-                        "M": "middle",
-                        "P": "passive",
-                    }[voice])
-                    parse.append("infinitive")
-                else:
-                    parse.append({
-                        "P": "present",
-                        "F": "future",
-                        "A": "aorist",
-                        "X": "perfect",
-                        "Y": "pluperfect",
-                        "I": "imperfect",
-                    }[tense])
-                    parse.append({
-                        "A": "active",
-                        "M": "middle",
-                        "P": "passive",
-                    }[voice])
-                    parse.append({
-                        "I": "indicative",
-                        "S": "subjunctive",
-                        "D": "imperative",
-                        "O": "optative",
-                    }[mood])
-                    parse.append({
-                        "1": "1st person",
-                        "2": "2nd person",
-                        "3": "3rd person",
-                    }[person])
-                    parse.append({
-                        "S": "singular",
-                        "P": "plural",
-                        "-": "",
-                    }[number])
-            else:
-                parse.append({
-                    "N": "nominative",
-                    "A": "accusative",
-                    "G": "genitive",
-                    "D": "dative",
-                    "V": "vocative",
-                    "-": "",
-                }[case])
-                parse.append({
-                    "S": "singular",
-                    "P": "plural",
-                    "-": "",
-                }[number])
-                parse.append({
-                    "M": "masculine",
-                    "F": "feminine",
-                    "N": "neuter",
-                    "-": "",
-                }[gender])
-                parse.append({
-                    "C": "comparative",
-                    "S": "superlative",
-                    "-": "",
-                }[degree])
-            parse = " ".join(parse).strip()
+            pos, parse = pos_parse(row)
             chapter = int(row["bcv"][2:4])
             verse = int(row["bcv"][4:])
             cv = f"{chapter}-{verse}"
@@ -172,7 +178,7 @@ def generate(book_title, book_num, output_filename, chapter_count):
                 last_verse = verse
                 print(f"""<span class="verse" id="verse-{cv}">""", file=output)
             text, form, lemma = row["text"], row["norm"], row["lemma"]
-            print(f"""<a href="#" class="word" data-form="{form}" data-pos="{pos}" data-parse="{parse}" data-lemma="{lemma}">{text}</a>""", file=output)
+            print(f"""<span class="word" data-form="{form}" data-pos="{pos}" data-parse="{parse}" data-lemma="{lemma}">{text}</span>""", file=output)
 
         print("""
         </span>

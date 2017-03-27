@@ -51,6 +51,7 @@ h1 {
 .word {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 .lowlight {
   color: #999;
