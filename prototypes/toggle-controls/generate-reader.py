@@ -51,10 +51,10 @@ def generate(book_title, book_num, output_filename):
         for row in morphgnt_rows(book_num):
             verse = int(row["bcv"][4:])
 
-            print("<span>", file=output)
+            print("<span>", end="", file=output)
 
             if verse != last_verse:
-                print(f"""<span class="verse">{verse}&nbsp;</span>""", file=output)
+                print(f"""<span class="verse">{verse}&nbsp;</span>""", end="", file=output)
                 last_verse = verse
 
             word = row["word"]
@@ -63,7 +63,7 @@ def generate(book_title, book_num, output_filename):
             mood = row["ccat-parse"][3]
             case = row["ccat-parse"][4]
             before, after = text[:text.index(word)], text[text.index(word) + len(word):]
-            print(f"""{before}<span class="pos-{pos} mood-{mood} case-{case}">{word}</span>{after}""", file=output)
+            print(f"""{before}<span class="pos-{pos} mood-{mood} case-{case}">{word}</span>{after}""", end="", file=output)
 
             print("</span>", file=output)
 
