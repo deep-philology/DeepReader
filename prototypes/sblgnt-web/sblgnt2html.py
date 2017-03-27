@@ -12,134 +12,8 @@ def generate(book_title, book_num, output_filename, chapter_count):
         <html>
             <head>
                 <title>{book_title}</title>
-        """, file=output)
-
-        print("""
-                <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-                <style>
-                    body {
-                        font-family: sans-serif;
-                        margin: 0;
-                    }
-                    h1 {
-                        margin-top: 50px;
-                        margin-left: 210px;
-                    }
-                    .header {
-                        margin: 0;
-                        position: fixed;
-                        top: 0px;
-                    }
-                    .book {
-                        padding: 5px 10px;
-                        font-size: 12pt;
-                        font-weight: bold;
-                    }
-                    .nav {
-                        margin: 0;
-                        padding: 0;
-                        list-style: none;
-                        width: 160px;
-                        font-weight: 100;
-                        font-size: 10pt;
-                        text-align: right;
-                    }
-                    .nav li.active a {
-                        background: #EEE;
-                        font-weight: bold;
-                    }
-                    .nav a {
-                        padding: 5px 10px;
-                        display: block;
-                        text-decoration: none;
-                        color: black;
-                    }
-                    .nav a:hover {
-                        font-weight: bold;
-                    }
-                    .text {
-                        width: 450px;
-                        margin: 0 250px;
-                    }
-                    .gk {
-                        font-size: 16pt;
-                        color: #444;
-                        line-height: 32pt;
-                        font-family: sans-serif;
-                    }
-                    .word {
-                        text-decoration: none;
-                        color: inherit;
-                    }
-                    .lowlight {
-                        color: #999;
-                    }
-                    .highlight {
-                        color: black;
-                    }
-                    .verse_num {
-                        color: #999;
-                        font-size: 10pt;
-                        position: absolute;
-                        left: 200px;
-                        padding: 0 20px;
-                        text-decoration: none;
-                    }
-                    .verse_num:hover {
-                        color: #000;
-                    }
-
-                    .verse:target {
-                        background: #FF6;
-                    }
-                    .analysis {
-                        color: black;
-                        min-width: 200px;
-                        position: absolute;
-                        left: 750px;
-                        background: #F7F7F7;
-                        padding: 4px 8px;
-                    }
-                    .analysis .form {
-                        font-weight: bold;
-                        font-size: 16pt;
-                        line-height: 16pt;
-                    }
-                    .analysis .pos {
-                        color: #999;
-                        font-size: 10pt;
-                        line-height: 10pt;
-                    }
-                    .analysis .parse {
-                        color: #999;
-                        font-size: 10pt;
-                        line-height: 10pt;
-                        font-style: italic;
-                    }
-                    .analysis .lemma {
-                        font-size: 12pt;
-                        line-height: 16pt;
-                    }
-                    .word:hover {
-                        background: #FF6;
-                        color: black;
-                    }
-                    .book_title {
-                        font-weight: bold;
-                    }
-                    .site_title {
-                        margin-top: 20px;
-                        text-align: right;
-                    }
-                    .site_title a {
-                        text-decoration: none;
-                        color: black;
-                        font-weight: bold;
-                    }
-                    .site_title a:hover {
-                        color: #666;
-                    }
-                </style>
+                <meta charset="utf-8">
+                <link rel="stylesheet" href="sblgnt.css">
             </head>
         """, file=output)
 
@@ -373,30 +247,30 @@ def generate(book_title, book_num, output_filename, chapter_count):
     assert chapter == chapter_count, chapter
 
 
-generate("Matthew", 1, "matthew.html", 28)
+# generate("Matthew", 1, "matthew.html", 28)
 generate("Mark", 2, "mark.html", 16)
-generate("Luke", 3, "luke.html", 24)
-generate("John", 4, "john.html", 21)
-generate("Acts", 5, "acts.html", 28)
-generate("Romans", 6, "romans.html", 16)
-generate("1 Corinthians", 7, "1corinthians.html", 16)
-generate("2 Corinthians", 8, "2corinthians.html", 13)
-generate("Galatians", 9, "galatians.html", 6)
-generate("Ephesians", 10, "ephesians.html", 6)
-generate("Philippians", 11, "philippians.html", 4)
-generate("Colossians", 12, "colossians.html", 4)
-generate("1 Thessalonians", 13, "1thessalonians.html", 5)
-generate("2 Thessalonians", 14, "2thessalonians.html", 3)
-generate("1 Timothy", 15, "1timothy.html", 6)
-generate("2 Timothy", 16, "2timothy.html", 4)
-generate("Titus", 17, "titus.html", 3)
-generate("Philemon", 18, "philemon.html", 1)
-generate("Hebrews", 19, "hebrews.html", 13)
-generate("James", 20, "james.html", 5)
-generate("1 Peter", 21, "1peter.html", 5)
-generate("2 Peter", 22, "2peter.html", 3)
-generate("1 John", 23, "1john.html", 5)
-generate("2 John", 24, "2john.html", 1)
-generate("3 John", 25, "3john.html", 1)
-generate("Jude", 26, "jude.html", 1)
-generate("Revelation", 27, "revelation.html", 22)
+# generate("Luke", 3, "luke.html", 24)
+# generate("John", 4, "john.html", 21)
+# generate("Acts", 5, "acts.html", 28)
+# generate("Romans", 6, "romans.html", 16)
+# generate("1 Corinthians", 7, "1corinthians.html", 16)
+# generate("2 Corinthians", 8, "2corinthians.html", 13)
+# generate("Galatians", 9, "galatians.html", 6)
+# generate("Ephesians", 10, "ephesians.html", 6)
+# generate("Philippians", 11, "philippians.html", 4)
+# generate("Colossians", 12, "colossians.html", 4)
+# generate("1 Thessalonians", 13, "1thessalonians.html", 5)
+# generate("2 Thessalonians", 14, "2thessalonians.html", 3)
+# generate("1 Timothy", 15, "1timothy.html", 6)
+# generate("2 Timothy", 16, "2timothy.html", 4)
+# generate("Titus", 17, "titus.html", 3)
+# generate("Philemon", 18, "philemon.html", 1)
+# generate("Hebrews", 19, "hebrews.html", 13)
+# generate("James", 20, "james.html", 5)
+# generate("1 Peter", 21, "1peter.html", 5)
+# generate("2 Peter", 22, "2peter.html", 3)
+# generate("1 John", 23, "1john.html", 5)
+# generate("2 John", 24, "2john.html", 1)
+# generate("3 John", 25, "3john.html", 1)
+# generate("Jude", 26, "jude.html", 1)
+# generate("Revelation", 27, "revelation.html", 22)

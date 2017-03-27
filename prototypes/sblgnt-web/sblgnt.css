@@ -1,0 +1,122 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+}
+h1 {
+  margin-top: 50px;
+  margin-left: 210px;
+}
+.header {
+  margin: 0;
+  position: fixed;
+  top: 0px;
+}
+.book {
+  padding: 5px 10px;
+  font-size: 12pt;
+  font-weight: bold;
+}
+.nav {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  width: 160px;
+  font-weight: 100;
+  font-size: 10pt;
+  text-align: right;
+}
+.nav li.active a {
+  background: #EEE;
+  font-weight: bold;
+}
+.nav a {
+  padding: 5px 10px;
+  display: block;
+  text-decoration: none;
+  color: black;
+}
+.nav a:hover {
+  font-weight: bold;
+}
+.text {
+  width: 450px;
+  margin: 0 250px;
+}
+.gk {
+  font-size: 16pt;
+  color: #444;
+  line-height: 32pt;
+  font-family: sans-serif;
+}
+.word {
+  text-decoration: none;
+  color: inherit;
+}
+.lowlight {
+  color: #999;
+}
+.highlight {
+  color: black;
+}
+.verse_num {
+  color: #999;
+  font-size: 10pt;
+  position: absolute;
+  left: 200px;
+  padding: 0 20px;
+  text-decoration: none;
+}
+.verse_num:hover {
+  color: #000;
+}
+
+.verse:target {
+  background: #FF6;
+}
+.analysis {
+  color: black;
+  min-width: 200px;
+  position: absolute;
+  left: 750px;
+  background: #F7F7F7;
+  padding: 4px 8px;
+}
+.analysis .form {
+  font-weight: bold;
+  font-size: 16pt;
+  line-height: 16pt;
+}
+.analysis .pos {
+  color: #999;
+  font-size: 10pt;
+  line-height: 10pt;
+}
+.analysis .parse {
+  color: #999;
+  font-size: 10pt;
+  line-height: 10pt;
+  font-style: italic;
+}
+.analysis .lemma {
+  font-size: 12pt;
+  line-height: 16pt;
+}
+.word:hover {
+  background: #FF6;
+  color: black;
+}
+.book_title {
+  font-weight: bold;
+}
+.site_title {
+  margin-top: 20px;
+  text-align: right;
+}
+.site_title a {
+  text-decoration: none;
+  color: black;
+  font-weight: bold;
+}
+.site_title a:hover {
+  color: #666;
+}
