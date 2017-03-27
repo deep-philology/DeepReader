@@ -77,6 +77,8 @@ def generate(book_title, book_num, output_filename):
 </html>
         """, file=output)
 
+        print(f"wrote {output_filename}")
+
 
 if not os.path.exists("output"):
     os.makedirs("output")
