@@ -47,7 +47,7 @@ $(function() {
       var pos = $(this).data("pos")
       var parse = $(this).data("parse");
       var lemma = $(this).data("lemma");
-      $(this).after('<span class="analysis"><div class="form">' + form + '</div><div class="pos">' + pos + '</div><div class="parse">' + parse + '</div><div class="lemma">' + lemma + '</div></span>');
+      $(this).after(' <span class="analysis"><div class="form">' + form + '</div><div class="pos">' + pos + '</div><div class="parse">' + parse + '</div><div class="lemma">' + lemma + '</div></span> ');
     },
     function() {
       $(".analysis").remove();
