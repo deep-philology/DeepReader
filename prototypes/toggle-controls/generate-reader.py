@@ -127,4 +127,4 @@ if not os.path.exists("output"):
     print("created directory")
 
 
-generate("2 John", 24, "2john.html")
+generate("2 John", 24, "output/2john.html")
