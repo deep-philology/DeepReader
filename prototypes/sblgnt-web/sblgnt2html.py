@@ -15,7 +15,7 @@ def pos_parse(row):
         "P-": "preposition",
         "D-": "adverb",
         "RD": "demonstrative",
-        "RI": "interoggative/indefinite pronoun",
+        "RI": "interogative/indefinite pronoun",
         "X-": "particle",
         "I-": "interjection",
     }[row["ccat-pos"]]
