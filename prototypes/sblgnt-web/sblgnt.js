@@ -15,12 +15,12 @@ $(function() {
     for (var i=0; i<positions.length; i++) {
       if (window_start < positions[i].end && window_end > positions[i].start) {
         if (!positions[i].selected) {
-          $("a[href=#" + positions[i].id + "]").parent().addClass("active");
+          $("a[href='#" + positions[i].id + "']").parent().addClass("active");
           positions[i].selected = true;
         }
       } else {
         if (positions[i].selected) {
-          $("a[href=#" + positions[i].id + "]").parent().removeClass("active");
+          $("a[href='#" + positions[i].id + "']").parent().removeClass("active");
           positions[i].selected = false;
         }
       }
