@@ -1,6 +1,7 @@
 import csv
 import operator
 
+
 def bcv(ref):
     if ref.count("|") == 2:
         book1, book2, cv = ref.split("|")
@@ -41,6 +42,7 @@ def bcv(ref):
     }[book.lower()]
     return f"{b:02d}{c:02d}{v:02d}"
 
+
 def load_interlinear():
 
     entries = []
@@ -57,6 +59,7 @@ def load_interlinear():
                     "english": row[14].strip(),
                 })
     return entries
+
 
 def get_verse(entries, bcv):
     return sorted(

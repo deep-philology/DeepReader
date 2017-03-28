@@ -2,12 +2,13 @@
 
 from berean import load_interlinear, get_verse
 
+
 def output(title, bcv):
     print(f"""
 <html>
 <head>
 <title>{title}</title>
-<meta http-equiv="Content-type" content='text/html; charset="utf-8"' />
+<meta charset="utf-8">
     """)
     print("""
 <style>
