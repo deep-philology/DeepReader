@@ -175,52 +175,52 @@ def rows_by_verses_by_chapters_for_book(book_num):
     return chapters
 
 
-def generate(book_title, book_num, output_filename, chapter_count):
+def generate(book_title, book_num, output_filename):
+
+    book_content = rows_by_verses_by_chapters_for_book(book_num)
 
     with open(output_filename, "w") as output:
         template = env.get_template("template.html")
         print(template.render(
             book_title=book_title,
-            chapter_count=chapter_count,
-            book=rows_by_verses_by_chapters_for_book(book_num),
+            book_content=book_content,
             render_pos=render_pos,
             render_parse=render_parse,
         ), file=output)
-
-    print(f"wrote {output_filename}")
+        print(f"wrote {output_filename}")
 
 
 if not os.path.exists("output"):
     os.makedirs("output")
     print("created directory")
 
-generate("Matthew", 1, "output/matthew.html", 28)
-generate("Mark", 2, "output/mark.html", 16)
-generate("Luke", 3, "output/luke.html", 24)
-generate("John", 4, "output/john.html", 21)
-generate("Acts", 5, "output/acts.html", 28)
-generate("Romans", 6, "output/romans.html", 16)
-generate("1 Corinthians", 7, "output/1corinthians.html", 16)
-generate("2 Corinthians", 8, "output/2corinthians.html", 13)
-generate("Galatians", 9, "output/galatians.html", 6)
-generate("Ephesians", 10, "output/ephesians.html", 6)
-generate("Philippians", 11, "output/philippians.html", 4)
-generate("Colossians", 12, "output/colossians.html", 4)
-generate("1 Thessalonians", 13, "output/1thessalonians.html", 5)
-generate("2 Thessalonians", 14, "output/2thessalonians.html", 3)
-generate("1 Timothy", 15, "output/1timothy.html", 6)
-generate("2 Timothy", 16, "output/2timothy.html", 4)
-generate("Titus", 17, "output/titus.html", 3)
-generate("Philemon", 18, "output/philemon.html", 1)
-generate("Hebrews", 19, "output/hebrews.html", 13)
-generate("James", 20, "output/james.html", 5)
-generate("1 Peter", 21, "output/1peter.html", 5)
-generate("2 Peter", 22, "output/2peter.html", 3)
-generate("1 John", 23, "output/1john.html", 5)
-generate("2 John", 24, "output/2john.html", 1)
-generate("3 John", 25, "output/3john.html", 1)
-generate("Jude", 26, "output/jude.html", 1)
-generate("Revelation", 27, "output/revelation.html", 22)
+generate("Matthew", 1, "output/matthew.html")
+generate("Mark", 2, "output/mark.html")
+generate("Luke", 3, "output/luke.html")
+generate("John", 4, "output/john.html")
+generate("Acts", 5, "output/acts.html")
+generate("Romans", 6, "output/romans.html")
+generate("1 Corinthians", 7, "output/1corinthians.html")
+generate("2 Corinthians", 8, "output/2corinthians.html")
+generate("Galatians", 9, "output/galatians.html")
+generate("Ephesians", 10, "output/ephesians.html")
+generate("Philippians", 11, "output/philippians.html")
+generate("Colossians", 12, "output/colossians.html")
+generate("1 Thessalonians", 13, "output/1thessalonians.html")
+generate("2 Thessalonians", 14, "output/2thessalonians.html")
+generate("1 Timothy", 15, "output/1timothy.html")
+generate("2 Timothy", 16, "output/2timothy.html")
+generate("Titus", 17, "output/titus.html")
+generate("Philemon", 18, "output/philemon.html")
+generate("Hebrews", 19, "output/hebrews.html")
+generate("James", 20, "output/james.html")
+generate("1 Peter", 21, "output/1peter.html")
+generate("2 Peter", 22, "output/2peter.html")
+generate("1 John", 23, "output/1john.html")
+generate("2 John", 24, "output/2john.html")
+generate("3 John", 25, "output/3john.html")
+generate("Jude", 26, "output/jude.html")
+generate("Revelation", 27, "output/revelation.html")
 
 shutil.copy("sblgnt.css", "output/sblgnt.css")
 shutil.copy("sblgnt.js", "output/sblgnt.js")

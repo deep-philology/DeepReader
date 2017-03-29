@@ -10,14 +10,14 @@
       <div class="site_title"><a href="./">MorphGNT SBLGNT</a></div>
       <ul class="nav">
         <li class="book_title">{{ book_title }}</li>
-        {%- for chapter in range(1, chapter_count + 1) %}
-        <li><a href="#chapter-{{ chapter }}">{{ chapter }}</a></li>
+        {%- for c, verses in book_content %}
+        <li><a href="#chapter-{{ c }}">{{ c }}</a></li>
         {%- endfor %}
       </ul>
     </div>
     <h1>{{ book_title }}</h1>
     <div class="text gk" id="text">
-      {% for c, verses in book %}
+      {% for c, verses in book_content %}
           <div id="chapter-{{c}}" class="chapter">
           {% for v, rows in verses %}
             <a href="#verse-{{c}}-{{v}}" class="verse_num" data-verse="{{c}}-{{v}}">{{ v }}</a>
