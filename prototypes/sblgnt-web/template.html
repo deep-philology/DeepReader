@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{ book_title }}</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="sblgnt.css">
+  </head>
+  <body>
+    <div id="chapter-nav" class="header">
+      <div class="site_title"><a href="./">MorphGNT SBLGNT</a></div>
+      <ul class="nav">
+        <li class="book_title">{{ book_title }}</li>
+        {%- for c, verses in book_content %}
+        <li><a href="#chapter-{{ c }}">{{ c }}</a></li>
+        {%- endfor %}
+      </ul>
+    </div>
+    <h1>{{ book_title }}</h1>
+    <div class="text gk" id="text">
+      {% for c, verses in book_content %}
+          <div id="chapter-{{c}}" class="chapter">
+          {% for v, rows in verses %}
+            <a href="#verse-{{c}}-{{v}}" class="verse_num" data-verse="{{c}}-{{v}}">{{ v }}</a>
+            <span class="verse" id="verse-{{c}}-{{v}}">
+            {% for row in rows %}
+                <span class="word" data-form="{{ row['norm'] }}" data-pos="{{ render_pos(row) }}" data-parse="{{ render_parse(row) }}" data-lemma="{{ row['lemma'] }}">{{ row["text"] }}</span>
+            {% endfor %}
+            </span>
+          {% endfor %}
+          </span>
+          </div>
+      {% endfor %}
+    </div>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="sblgnt.js"></script>
+  </body>
+</html>
