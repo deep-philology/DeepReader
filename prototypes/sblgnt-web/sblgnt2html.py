@@ -187,41 +187,28 @@ def generate(book_title, book_num, output_filename):
             render_pos=render_pos,
             render_parse=render_parse,
         ), file=output)
-        print(f"wrote {output_filename}")
 
 
-if not os.path.exists("output"):
-    os.makedirs("output")
-    print("created directory")
+OUTPUT_DIR = "output"
 
-generate("Matthew", 1, "output/matthew.html")
-generate("Mark", 2, "output/mark.html")
-generate("Luke", 3, "output/luke.html")
-generate("John", 4, "output/john.html")
-generate("Acts", 5, "output/acts.html")
-generate("Romans", 6, "output/romans.html")
-generate("1 Corinthians", 7, "output/1corinthians.html")
-generate("2 Corinthians", 8, "output/2corinthians.html")
-generate("Galatians", 9, "output/galatians.html")
-generate("Ephesians", 10, "output/ephesians.html")
-generate("Philippians", 11, "output/philippians.html")
-generate("Colossians", 12, "output/colossians.html")
-generate("1 Thessalonians", 13, "output/1thessalonians.html")
-generate("2 Thessalonians", 14, "output/2thessalonians.html")
-generate("1 Timothy", 15, "output/1timothy.html")
-generate("2 Timothy", 16, "output/2timothy.html")
-generate("Titus", 17, "output/titus.html")
-generate("Philemon", 18, "output/philemon.html")
-generate("Hebrews", 19, "output/hebrews.html")
-generate("James", 20, "output/james.html")
-generate("1 Peter", 21, "output/1peter.html")
-generate("2 Peter", 22, "output/2peter.html")
-generate("1 John", 23, "output/1john.html")
-generate("2 John", 24, "output/2john.html")
-generate("3 John", 25, "output/3john.html")
-generate("Jude", 26, "output/jude.html")
-generate("Revelation", 27, "output/revelation.html")
+BOOK_NAMES = [
+    "Matthew", "Mark", "Luke", "John", "Acts", "Romans", "1 Corinthians",
+    "2 Corinthians", "Galatians", "Ephesians", "Philippians", "Colossians",
+    "1 Thessalonians", "2 Thessalonians", "1 Timothy", "2 Timothy", "Titus",
+    "Philemon", "Hebrews", "James", "1 Peter", "2 Peter", "1 John", "2 John",
+    "3 John", "Jude", "Revelation"
+]
 
-shutil.copy("sblgnt.css", "output/sblgnt.css")
-shutil.copy("sblgnt.js", "output/sblgnt.js")
-shutil.copy("index.html", "output/index.html")
+if not os.path.exists(OUTPUT_DIR):
+    os.makedirs(OUTPUT_DIR)
+    print(f"created {OUTPUT_DIR}")
+
+for i, book_name in enumerate(BOOK_NAMES):
+    output_filename = os.path.join(OUTPUT_DIR, f"{book_name.replace(' ', '').lower()}.html")
+    generate(book_name, i + 1, output_filename)
+    print(f"wrote {output_filename}")
+
+for filename in ["sblgnt.css", "sblgnt.js", "index.html"]:
+    output_filename = os.path.join(OUTPUT_DIR, filename)
+    shutil.copy(filename, output_filename)
+    print(f"copied {output_filename}")
