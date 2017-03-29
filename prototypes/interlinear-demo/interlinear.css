@@ -1,6 +1,12 @@
+h1 {
+  font-family: "Skolar";
+  color: #933;
+  font-weight: 300;
+  font-variant: small-caps;
+}
 div.container {
-    width: 800px;
-    margin: 50px auto;
+  width: 800px;
+  margin: 50px auto;
 }
 div.unit {
   float: left;
