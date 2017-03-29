@@ -1,1 +1,2 @@
 py-sblgnt==0.10
+Jinja2==2.9.5

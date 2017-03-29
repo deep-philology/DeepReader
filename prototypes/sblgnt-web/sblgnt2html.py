@@ -3,11 +3,12 @@
 import os
 import shutil
 
+from jinja2 import Environment, FileSystemLoader
 from pysblgnt import morphgnt_rows
 
 
-def pos_parse(row):
-    pos = {
+def render_pos(row):
+    return {
         "RA": "article",
         "A-": "adjective",
         "N-": "noun",
@@ -22,9 +23,13 @@ def pos_parse(row):
         "X-": "particle",
         "I-": "interjection",
     }[row["ccat-pos"]]
+
+
+def render_parse(row):
+    pos = row["ccat-pos"]
     person, tense, voice, mood, case, number, gender, degree = row["ccat-parse"]
     parse = []
-    if pos == "verb":
+    if pos == "V-":
         if mood == "P":
             parse.append({
                 "P": "present",
@@ -125,75 +130,63 @@ def pos_parse(row):
             "S": "superlative",
             "-": "",
         }[degree])
-    parse = " ".join(parse).strip()
 
-    return pos, parse
+    return " ".join(parse).strip()
+
+
+env = Environment(
+    loader=FileSystemLoader("."),
+)
+
+
+def rows_by_verses_by_chapters_for_book(book_num):
+
+    last_chapter = 0
+    chapters = []
+    verses = None
+    rows = None
+
+    for row in morphgnt_rows(book_num):
+        chapter = int(row["bcv"][2:4])
+        verse = int(row["bcv"][4:6])
+
+        if chapter != last_chapter:
+
+            if verses:
+                verses[1].append(rows)
+                chapters.append(verses)
+
+            verses = (chapter, [])
+            rows = None
+            last_chapter = chapter
+            last_verse = 0
+
+        if verse != last_verse:
+            if rows:
+                verses[1].append(rows)
+            rows = (verse, [])
+            last_verse = verse
+
+        rows[1].append(row)
+
+    verses[1].append(rows)
+    chapters.append(verses)
+
+    return chapters
 
 
 def generate(book_title, book_num, output_filename, chapter_count):
 
     with open(output_filename, "w") as output:
+        template = env.get_template("template.html")
+        print(template.render(
+            book_title=book_title,
+            chapter_count=chapter_count,
+            book=rows_by_verses_by_chapters_for_book(book_num),
+            render_pos=render_pos,
+            render_parse=render_parse,
+        ), file=output)
 
-        print(f"""
-        <!doctype html>
-        <html>
-        <head>
-        <title>{book_title}</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="sblgnt.css">
-        </head>
-        <body>
-        <div id="chapter-nav" class="header">
-        <div class="site_title"><a href="./">MorphGNT SBLGNT</a></div>
-        <ul class="nav">
-        <li class="book_title">{book_title}</li>
-        """, file=output)
-
-        for chapter in range(1, chapter_count + 1):
-            print(f"""<li><a href="#chapter-{chapter}">{chapter}</a></li>""", file=output)
-
-        print(f"""
-        </ul>
-        </div>
-        <h1>{book_title}</h1>
-        <div class="text gk" id="text">
-        """, file=output)
-
-        last_verse = 0
-        last_chapter = 0
-
-        for row in morphgnt_rows(book_num):
-            pos, parse = pos_parse(row)
-            chapter = int(row["bcv"][2:4])
-            verse = int(row["bcv"][4:])
-            cv = f"{chapter}-{verse}"
-            if chapter != last_chapter:
-                if last_chapter:
-                    print("""</span>""", file=output)
-                    print("""</div>""", file=output)
-                print(f"""<div id="chapter-{chapter}" class="chapter">""", file=output)
-                last_chapter = chapter
-                last_verse = 0
-            if verse != last_verse:
-                if last_verse:
-                    print("""</span>""", file=output)
-                print(f"""<a href="#verse-{cv}" class="verse_num" data-verse="{cv}">{verse}</a>""", file=output)
-                last_verse = verse
-                print(f"""<span class="verse" id="verse-{cv}">""", file=output)
-            text, form, lemma = row["text"], row["norm"], row["lemma"]
-            print(f"""<span class="word" data-form="{form}" data-pos="{pos}" data-parse="{parse}" data-lemma="{lemma}">{text}</span>""", file=output)
-
-        print("""
-        </span>
-        </div>
-        </div>
-        <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-        <script src="sblgnt.js"></script>
-        </body>
-        </html>
-        """, file=output)
-
-    assert chapter == chapter_count, chapter
     print(f"wrote {output_filename}")
 
 
@@ -229,4 +222,6 @@ generate("3 John", 25, "output/3john.html", 1)
 generate("Jude", 26, "output/jude.html", 1)
 generate("Revelation", 27, "output/revelation.html", 22)
 
+shutil.copy("sblgnt.css", "output/sblgnt.css")
+shutil.copy("sblgnt.js", "output/sblgnt.js")
 shutil.copy("index.html", "output/index.html")
