@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import os
-import shutil
 
 from jinja2 import Environment, FileSystemLoader
 
