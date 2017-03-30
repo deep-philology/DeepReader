@@ -1,52 +1,46 @@
 #!/usr/bin/env python3
 
+import os
+import shutil
+
+from jinja2 import Environment, FileSystemLoader
+
 from berean import load_interlinear, get_verse
 
 
-def output(title, bcv):
-    print(f"""
-<html>
-<head>
-<title>{title}</title>
-<meta charset="utf-8">
-    """)
-    print("""
-<style>
-div.unit {
- float: left;
- margin-bottom: 1em;
- color: black;
-}
-p.gk {
- font-size: 16pt;
- margin: 0em;
- padding: 0em 0.5em;
-}
-p.en {
- font-size: 10pt;
- font-family: sans-serif;
- color: gray;
- margin: 0em;
- padding: 0em 1em;
-}
-</style>
-    """)
-    print(f"""
-</head>
-<body>
-<h1>{title}</h1>
-    """)
+env = Environment(
+    loader=FileSystemLoader("."),
+)
+template = env.get_template("template.html")
+
+
+def generate(title, bcv, output_filename):
 
     entries = load_interlinear()
-    for row in get_verse(entries, bcv):
-        greek = row["greek"]
-        english = row["english"]
-        print(f"""<div class="unit"><p class="gk">{greek}</p><p class="en">{english}</p></div>""")
 
-    print("""
-    </body>
-    </html>
-    """)
+    with open(output_filename, "w") as output:
+        print(template.render(
+            title=title,
+            rows=get_verse(entries, bcv),
+        ), file=output)
 
 
-output("John 3.16", "040316")
+OUTPUT_DIR = "output"
+
+
+if __name__ == "__main__":
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+        print(f"created {OUTPUT_DIR}")
+
+    book_name = "John"
+    book_num = 4
+    chapter_num = 3
+    verse_num = 16
+
+    title = f"{book_name} {chapter_num}.{verse_num}"
+    bcv = f"{book_num:02d}{chapter_num:02d}{verse_num:02d}"
+
+    output_filename = os.path.join(OUTPUT_DIR, f"{bcv}.html")
+    generate(title, bcv, output_filename)
+    print(f"wrote {output_filename}")

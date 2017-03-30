@@ -3,91 +3,60 @@
 import os
 import shutil
 
-from pysblgnt import morphgnt_rows
+from jinja2 import Environment, FileSystemLoader
+
+from utils import rows_by_verses_by_chapters_for_book
 
 
-def generate(book_title, book_num, output_filename):
+env = Environment(
+    loader=FileSystemLoader("."),
+)
+template = env.get_template("template.html")
+
+
+def before(row):
+    word = row["word"]
+    text = row["text"]
+    return text[:text.index(word)]
+
+
+def after(row):
+    word = row["word"]
+    text = row["text"]
+    return text[text.index(word) + len(word):]
+
+
+def generate(book_num, chapter_num, output_filename):
+
+    book_content = rows_by_verses_by_chapters_for_book(book_num)
+    verses = book_content[chapter_num - 1][1]
 
     with open(output_filename, "w") as output:
-        print(f"""<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Online Reader</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ==" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Sans">
-    <link rel="stylesheet" href="skolar.css">
-    <link rel="stylesheet" href="reader.css">
-  </head>
-  <body>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-2">
-        """, file=output)
-        print(f"""<div class="toggles">
-            <span class="toggle" data-target="show-verses"><span class="show-verses">&#x25CF;</span>&nbsp;show verse numbers</span>
-            <hr>
-            <span class="toggle" data-target="larger-text"><span class="larger-text">&#x25CF;</span>&nbsp;larger text</span>
-            <span class="toggle" data-target="extra-line-height"><span class="extra-line-height">&#x25CF;</span>&nbsp;extra line height</span>
-            <span class="toggle" data-target="extra-word-spacing"><span class="extra-word-spacing">&#x25CF;</span>&nbsp;extra word spacing</span>
-            <hr>
-            <span class="toggle" data-target="case-N"><span class="case-N">&#x25CF;</span>&nbsp;nominative</span>
-            <span class="toggle" data-target="case-G"><span class="case-G">&#x25CF;</span>&nbsp;genitive</span>
-            <span class="toggle" data-target="case-D"><span class="case-D">&#x25CF;</span>&nbsp;dative</span>
-            <span class="toggle" data-target="case-A"><span class="case-A">&#x25CF;</span>&nbsp;accusative</span>
-            <hr>
-            <span class="toggle" data-target="ind"><span class="pos-V- mood-I">&#x25CF;</span>&nbsp;indicative</span>
-            <span class="toggle" data-target="part"><span class="pos-V- mood-P">&#x25CF;</span>&nbsp;participle</span>
-            <span class="toggle" data-target="inf"><span class="pos-V- mood-N">&#x25CF;</span>&nbsp;infinitive</span>
-            <hr>
-            <span class="toggle" data-target="pos-D"><span class="pos-D-">&#x25CF;</span>&nbsp;adverb</span>
-            <span class="toggle" data-target="pos-C"><span class="pos-C-">&#x25CF;</span>&nbsp;conjunction</span>
-          </div>
-        </div>
-        <div class="col-md-10">
-          <div class="text">
-        """, file=output)
-
-        last_verse = 0
-
-        for row in morphgnt_rows(book_num):
-            verse = int(row["bcv"][4:])
-
-            print("<span>", end="", file=output)
-
-            if verse != last_verse:
-                print(f"""<span class="verse">{verse}&nbsp;</span>""", end="", file=output)
-                last_verse = verse
-
-            word = row["word"]
-            text = row["text"]
-            pos = row["ccat-pos"]
-            mood = row["ccat-parse"][3]
-            case = row["ccat-parse"][4]
-            before, after = text[:text.index(word)], text[text.index(word) + len(word):]
-            print(f"""{before}<span class="pos-{pos} mood-{mood} case-{case}">{word}</span>{after}""", end="", file=output)
-
-            print("</span>", file=output)
-
-        print(f"""</div>
-        </div>
-      </div>
-    </div>
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="reader.js"></script>
-  </body>
-</html>
-        """, file=output)
-
-        print(f"wrote {output_filename}")
+        print(template.render(
+            verses=verses,
+            before=before,
+            after=after,
+        ), file=output)
 
 
-if not os.path.exists("output"):
-    os.makedirs("output")
-    print("created directory")
+OUTPUT_DIR = "output"
 
 
-generate("2 John", 24, "output/2john.html")
+if __name__ == "__main__":
+    if not os.path.exists(OUTPUT_DIR):
+        os.makedirs(OUTPUT_DIR)
+        print(f"created {OUTPUT_DIR}")
 
-shutil.copy("skolar.css", "output/skolar.css")
-shutil.copy("reader.css", "output/reader.css")
-shutil.copy("reader.js", "output/reader.js")
+    book_name = "2 John"
+    book_num = 24
+    chapter_num = 1
+
+    output_filename = os.path.join(
+        OUTPUT_DIR, f"{book_name.replace(' ', '').lower()}_{chapter_num:02d}.html")
+    generate(book_num, chapter_num, output_filename)
+    print(f"wrote {output_filename}")
+
+    for filename in ["skolar.css", "reader.css", "reader.js"]:
+        output_filename = os.path.join(OUTPUT_DIR, filename)
+        shutil.copy(filename, output_filename)
+        print(f"copied {output_filename}")
