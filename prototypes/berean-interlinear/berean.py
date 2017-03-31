@@ -1,6 +1,7 @@
 import collections
 import csv
 import operator
+import os
 
 
 def bcv(ref):
@@ -54,7 +55,7 @@ class BereanInterlinear:
         self.strongs_count = collections.defaultdict(int)  # for frequency
 
     def load(self):
-        with open("berean_tables.csv", newline="") as csvfile:
+        with open(os.path.join("data", "berean_tables.csv"), newline="") as csvfile:
             reader = csv.reader(csvfile)
             next(reader)
             for row in reader:
