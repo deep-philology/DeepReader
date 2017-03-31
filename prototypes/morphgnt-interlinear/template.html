@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../interlinear-demo/interlinear.css">
+  </head>
+  <body class="plain">
+    <div class="container">
+      <h1>{{ title }}</h1>
+      {% for row in rows -%}
+        <div class="unit"><p class="gk">{{ row["text"] }}</p><p class="en">{{ row["robinson"] }}<br>{{ row["lemma"] }}</p></div>
+      {% endfor %}
+    </div>
+  </body>
+</html>
