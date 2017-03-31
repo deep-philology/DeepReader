@@ -5,7 +5,7 @@ import shutil
 
 from jinja2 import Environment, FileSystemLoader
 
-from berean import load_interlinear, get_verse
+from berean import BereanInterlinear
 
 
 env = Environment(
@@ -17,12 +17,8 @@ templates = {
     for name in ["plain", "hover", "toggle", "frequency"]
 }
 
-entries = load_interlinear()
 
-
-def generate(title, bcv, template_type, output_filename):
-
-    rows = get_verse(entries, bcv)
+def generate(title, rows, template_type, output_filename):
 
     with open(output_filename, "w") as output:
         print(templates[template_type].render(
@@ -47,9 +43,14 @@ if __name__ == "__main__":
     title = f"{book_name} {chapter_num}.{verse_num}"
     bcv = f"{book_num:02d}{chapter_num:02d}{verse_num:02d}"
 
+    interlinear = BereanInterlinear()
+    interlinear.load()
+
+    rows = interlinear.get_verse(bcv)
+
     for template_type in ["plain", "hover", "toggle", "frequency"]:
         output_filename = os.path.join(OUTPUT_DIR, f"{template_type}_{bcv}.html")
-        generate(title, bcv, template_type, output_filename)
+        generate(title, rows, template_type, output_filename)
         print(f"wrote {output_filename}")
 
     for filename in ["interlinear.css", "skolar.css"]:

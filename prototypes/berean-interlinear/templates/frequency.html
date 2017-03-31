@@ -17,7 +17,7 @@
         times.
       </p>
       {% for row in rows -%}
-        <div class="unit"><p class="txt">{{ row["greek"] }}</p><p class="gls">{{ row["english"] }}</p></div>
+        <div class="unit"><p class="txt">{{ row["greek"] }}</p><p class="gls" data-freq="{{ row['frequency'] }}">{{ row["english"] }}</p></div>
       {% endfor %}
     </div>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
