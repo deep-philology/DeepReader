@@ -16,11 +16,12 @@ template = env.get_template("template.html")
 def generate(title, bcv, output_filename):
 
     entries = load_interlinear()
+    rows = get_verse(entries, bcv)
 
     with open(output_filename, "w") as output:
         print(template.render(
             title=title,
-            rows=get_verse(entries, bcv),
+            rows=rows,
         ), file=output)
 
 
