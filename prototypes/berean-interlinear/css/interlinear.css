@@ -49,7 +49,16 @@ body.hover div.unit:hover p.gls {
   color: gray;
 }
 
+p.freq-controls {
+  font-family: sans-serif;
+  margin: 2em 0;
+}
+
 span.freq-toggle {
   cursor: pointer;
   text-decoration: underline;
+}
+
+span.freq-toggle.selected {
+  font-weight: bold;
 }
