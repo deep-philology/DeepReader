@@ -30,7 +30,7 @@ p.gls {
 }
 
 body.hover div.unit, body.toggle div.unit {
-  cursor: hand;
+  cursor: pointer;
   color: #333;
 }
 body.hover div.unit:hover, body.toggle div.unit:hover {
@@ -50,6 +50,6 @@ body.hover div.unit:hover p.gls {
 }
 
 span.freq-toggle {
-  cursor: hand;
+  cursor: pointer;
   text-decoration: underline;
 }
