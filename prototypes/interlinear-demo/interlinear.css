@@ -16,12 +16,12 @@ div.unit {
   color: black;
   font-family: "Skolar";
 }
-p.gk {
+p.txt {
   font-size: 16pt;
   margin: 0em;
   padding: 0em 0.5em;
 }
-p.en {
+p.gls {
   font-size: 10pt;
   font-family: sans-serif;
   color: gray;
@@ -37,15 +37,15 @@ body.hover div.unit:hover, body.toggle div.unit:hover {
   color: #000;
 }
 
-body.hover p.en, body.toggle p.en, body.frequency p.en {
+body.hover p.gls, body.toggle p.gls, body.frequency p.gls {
   color: white;
 }
 
-body.toggle p.en.show, body.frequency p.en.show {
+body.toggle p.gls.show, body.frequency p.gls.show {
   color: gray;
 }
 
-body.hover div.unit:hover p.en {
+body.hover div.unit:hover p.gls {
   color: gray;
 }
 

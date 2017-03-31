@@ -9,7 +9,7 @@
     <div class="container">
       <h1>{{ title }}</h1>
       {% for row in rows -%}
-        <div class="unit"><p class="txt">{{ row["greek"] }}</p><p class="gls">{{ row["english"] }}</p></div>
+        <div class="unit"><p class="txt">{{ row["text"] }}</p><p class="gls">{{ row["robinson"] }}<br>{{ row["lemma"] }}</p></div>
       {% endfor %}
     </div>
   </body>
