@@ -6,6 +6,11 @@ h1 {
   font-weight: 300;
   font-variant: small-caps;
 }
+h1 span.interlinear-type {
+  color: #999;
+  font-size: 80%;
+}
+
 div.container {
   width: 800px;
   margin: 50px auto;

@@ -7,9 +7,9 @@
   </head>
   <body class="{% block class %}plain{% endblock %}">
     <div class="container">
-      <h1>{{ title }}</h1>
+      <h1>{{ title }} <span class="interlinear-type">[{{ self.class() }}]</span></h1>
       {% block controls %}{% endblock %}
-        {% block unit %}{% endblock %}
+      {% block text %}{% endblock %}
     </div>
     {% block scripts %}{% endblock %}
   </body>
