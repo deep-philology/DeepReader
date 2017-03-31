@@ -21,22 +21,6 @@
       {% endfor %}
     </div>
     <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script>
-      $(function() {
-        $(".freq-toggle").on("click", function() {
-          var limit = parseInt($(this).data("limit"));
-          $("p.gls").each(function() {
-            var freq = parseInt($(this).data("freq"));
-            if (freq < limit) {
-              console.log(limit, freq, true);
-              $(this).addClass("show");
-            } else {
-              console.log(limit, freq, false);
-              $(this).removeClass("show");
-            }
-          });
-        });
-      });
-    </script>
+    <script src="frequency.js"></script>
   </body>
 </html>
