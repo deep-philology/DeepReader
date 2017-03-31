@@ -1,0 +1,24 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="../../interlinear-demo/interlinear.css">
+  </head>
+  <body class="toggle">
+    <div class="container">
+      <h1>{{ title }}</h1>
+      {% for row in rows -%}
+        <div class="unit"><p class="txt">{{ row["greek"] }}</p><p class="gls">{{ row["english"] }}</p></div>
+      {% endfor %}
+    </div>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+      $(function() {
+        $(".unit").on("click", function() {
+          $(this).children("p.gls").toggleClass("show");
+        });
+      });
+    </script>
+  </body>
+</html>

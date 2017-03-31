@@ -1,0 +1,42 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="interlinear.css">
+  </head>
+  <body class="frequency">
+    <div class="container">
+      <h1>{{ title }}</h1>
+      <p>
+        show
+        <span class="freq-toggle" data-limit="50000">all</span>;
+        words occurring
+        <span class="freq-toggle" data-limit="1000">less than 1000</span>,
+        <span class="freq-toggle" data-limit="100">less than 100</span>
+        times.
+      </p>
+      {% for row in rows -%}
+        <div class="unit"><p class="txt">{{ row["greek"] }}</p><p class="gls">{{ row["english"] }}</p></div>
+      {% endfor %}
+    </div>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+      $(function() {
+        $(".freq-toggle").on("click", function() {
+          var limit = parseInt($(this).data("limit"));
+          $("p.gls").each(function() {
+            var freq = parseInt($(this).data("freq"));
+            if (freq < limit) {
+              console.log(limit, freq, true);
+              $(this).addClass("show");
+            } else {
+              console.log(limit, freq, false);
+              $(this).removeClass("show");
+            }
+          });
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -8,18 +8,23 @@ from berean import load_interlinear, get_verse
 
 
 env = Environment(
-    loader=FileSystemLoader("."),
+    loader=FileSystemLoader("templates"),
 )
-template = env.get_template("template.html")
+
+templates = {
+    name: env.get_template(f"{name}.html")
+    for name in ["plain", "hover", "toggle", "frequency"]
+}
+
+entries = load_interlinear()
 
 
-def generate(title, bcv, output_filename):
+def generate(title, bcv, template_type, output_filename):
 
-    entries = load_interlinear()
     rows = get_verse(entries, bcv)
 
     with open(output_filename, "w") as output:
-        print(template.render(
+        print(templates[template_type].render(
             title=title,
             rows=rows,
         ), file=output)
@@ -41,6 +46,7 @@ if __name__ == "__main__":
     title = f"{book_name} {chapter_num}.{verse_num}"
     bcv = f"{book_num:02d}{chapter_num:02d}{verse_num:02d}"
 
-    output_filename = os.path.join(OUTPUT_DIR, f"{bcv}.html")
-    generate(title, bcv, output_filename)
-    print(f"wrote {output_filename}")
+    for template_type in ["plain", "hover", "toggle", "frequency"]:
+        output_filename = os.path.join(OUTPUT_DIR, f"{template_type}_{bcv}.html")
+        generate(title, bcv, template_type, output_filename)
+        print(f"wrote {output_filename}")
