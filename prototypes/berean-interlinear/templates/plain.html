@@ -1,16 +1,10 @@
-<!doctype html>
-<html>
-  <head>
-    <title>{{ title }}</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="interlinear.css">
-  </head>
-  <body class="plain">
-    <div class="container">
-      <h1>{{ title }}</h1>
-      {% for row in rows -%}
-        <div class="unit"><p class="txt">{{ row["greek"] }}</p><p class="gls">{{ row["english"] }}</p></div>
-      {% endfor %}
+{% extends "base.html" %}
+
+{% block unit -%}
+  {% for row in rows -%}
+    <div class="unit">
+      <p class="txt">{{ row["greek"] }}</p>
+      <p class="gls">{{ row["english"] }}</p>
     </div>
-  </body>
-</html>
+  {% endfor %}
+{% endblock %}

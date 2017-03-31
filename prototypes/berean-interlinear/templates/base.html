@@ -1,0 +1,16 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="interlinear.css">
+  </head>
+  <body class="{% block class %}plain{% endblock %}">
+    <div class="container">
+      <h1>{{ title }}</h1>
+      {% block controls %}{% endblock %}
+        {% block unit %}{% endblock %}
+    </div>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>

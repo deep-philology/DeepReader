@@ -1,18 +1,8 @@
-<!doctype html>
-<html>
-  <head>
-    <title>{{ title }}</title>
-    <meta charset="utf-8">
-    <link rel="stylesheet" href="interlinear.css">
-  </head>
-  <body class="toggle">
-    <div class="container">
-      <h1>{{ title }}</h1>
-      {% for row in rows -%}
-        <div class="unit"><p class="txt">{{ row["greek"] }}</p><p class="gls">{{ row["english"] }}</p></div>
-      {% endfor %}
-    </div>
-    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
-    <script src="toggle.js"></script>
-  </body>
-</html>
+{% extends "plain.html" %}
+
+{% block class %}toggle{% endblock %}
+
+{% block scripts %}
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="toggle.js"></script>
+{% endblock %}
