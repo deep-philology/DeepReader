@@ -1,21 +1,40 @@
 #!/usr/bin/env python3
 
 import os
-# import shutil
+import shutil
 
 from jinja2 import Environment, FileSystemLoader
 from pysblgnt import morphgnt_rows
 
 
 env = Environment(
-    loader=FileSystemLoader("."),
+    loader=FileSystemLoader("templates"),
 )
 template = env.get_template("template.html")
 
 
+def pos(row):
+    return row["ccat-pos"].strip("-")
+
+
+def parse(row):
+    if row["ccat-parse"][3] == "-":
+        return row["ccat-parse"][4:].strip("-")
+    elif row["ccat-parse"][3] == "N":
+        return row["ccat-parse"][1:4]
+    elif row["ccat-parse"][3] == "P":
+        return row["ccat-parse"][1:4] + "." + row["ccat-parse"][4:7]
+    elif row["ccat-parse"][3] in "DISO":
+        return row["ccat-parse"][1:4] + "." + row["ccat-parse"][0] + row["ccat-parse"][5]
+
+
 def generate(title, book_num, bcv, output_filename):
 
-    rows = [row for row in morphgnt_rows(book_num) if row["bcv"] == bcv]
+    rows = [
+        {**row, "pos": pos(row), "parse": parse(row)}
+        for row in morphgnt_rows(book_num)
+        if row["bcv"] == bcv
+    ]
 
     with open(output_filename, "w") as output:
         print(template.render(
@@ -44,7 +63,8 @@ if __name__ == "__main__":
     generate(title, book_num, bcv, output_filename)
     print(f"wrote {output_filename}")
 
-    # for filename in ["skolar.css", "reader.css", "reader.js"]:
-    #     output_filename = os.path.join(OUTPUT_DIR, filename)
-    #     shutil.copy(filename, output_filename)
-    #     print(f"copied {output_filename}")
+    for filename in ["interlinear.css", "skolar.css"]:
+        input_filename = os.path.join("css", filename)
+        output_filename = os.path.join(OUTPUT_DIR, filename)
+        shutil.copy(input_filename, output_filename)
+        print(f"copied {output_filename}")
