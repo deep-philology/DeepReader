@@ -1,0 +1,55 @@
+@import "skolar.css";
+
+h1 {
+  font-family: "Skolar";
+  color: #933;
+  font-weight: 300;
+  font-variant: small-caps;
+}
+div.container {
+  width: 800px;
+  margin: 50px auto;
+}
+div.unit {
+  float: left;
+  margin-bottom: 1em;
+  color: black;
+  font-family: "Skolar";
+}
+p.txt {
+  font-size: 16pt;
+  margin: 0em;
+  padding: 0em 0.5em;
+}
+p.gls {
+  font-size: 10pt;
+  font-family: sans-serif;
+  color: gray;
+  margin: 0em;
+  padding: 0em 1em;
+}
+
+body.hover div.unit, body.toggle div.unit {
+  cursor: pointer;
+  color: #333;
+}
+body.hover div.unit:hover, body.toggle div.unit:hover {
+  color: #000;
+}
+
+body.hover p.gls, body.toggle p.gls, body.frequency p.gls {
+  color: transparent;
+}
+
+body.toggle p.gls.show, body.frequency p.gls.show {
+  color: gray;
+}
+
+body.hover div.unit:hover p.gls {
+  color: gray;
+}
+
+span.freq-toggle {
+  cursor: pointer;
+  text-decoration: underline;
+}

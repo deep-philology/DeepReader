@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <title>{{ title }}</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="interlinear.css">
+  </head>
+  <body class="toggle">
+    <div class="container">
+      <h1>{{ title }}</h1>
+      {% for row in rows -%}
+        <div class="unit">
+          <p class="txt">{{ row.text }}</p>
+          <p class="gls pos-{{row.pos}}">
+            <span class="pos">{{ row.pos }}</span>
+            <span class="parse">{{ row.parse }}</span>
+            <br>
+            <span class="lemma">{{ row.lemma }}</span>
+          </p>
+        </div>
+      {% endfor %}
+    </div>
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script>
+      $(function() {
+        $(".unit").on("click", function() {
+          $(this).children("p.gls").toggleClass("show");
+        });
+      });
+    </script>
+  </body>
+</html>
