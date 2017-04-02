@@ -52,7 +52,7 @@ if __name__ == "__main__":
         else:
             prev_file = None
 
-        if i < len(chapters) - 1:
+        if i < len(verses) - 1:
             next_file = os.path.join(OUTPUT_DIR, f"{verses[i + 1][0]}.html")
         else:
             next_file = None
