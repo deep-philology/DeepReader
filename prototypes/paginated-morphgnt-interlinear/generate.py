@@ -4,7 +4,7 @@ import os
 import shutil
 
 from jinja2 import Environment, FileSystemLoader
-from pysblgnt import morphgnt_rows
+from utils import rows_by_verses_by_chapters_for_book
 
 
 env = Environment(
@@ -28,21 +28,6 @@ def parse(row):
         return row["ccat-parse"][1:4] + "." + row["ccat-parse"][0] + row["ccat-parse"][5]
 
 
-def generate(title, book_num, bcv, output_filename):
-
-    rows = [
-        {**row, "pos": pos(row), "parse": parse(row)}
-        for row in morphgnt_rows(book_num)
-        if row["bcv"] == bcv
-    ]
-
-    with open(output_filename, "w") as output:
-        print(template.render(
-            title=title,
-            rows=rows,
-        ), file=output)
-
-
 OUTPUT_DIR = "output"
 
 
@@ -53,17 +38,38 @@ if __name__ == "__main__":
 
     book_name = "John"
     book_num = 4
-    chapter_num = 3
-    verse_num = 16
 
-    title = f"{book_name} {chapter_num}.{verse_num}"
-    bcv = f"{book_num:02d}{chapter_num:02d}{verse_num:02d}"
+    chapters = rows_by_verses_by_chapters_for_book(book_num)
 
-    output_filename = os.path.join(OUTPUT_DIR, f"{bcv}.html")
-    generate(title, book_num, bcv, output_filename)
-    print(f"wrote {output_filename}")
+    chapter_num, verses = chapters[2]
 
-    for filename in ["interlinear.css", "skolar.css"]:
+    for i in range(len(verses)):
+        verse_num, rows = verses[i]
+        output_filename = os.path.join(OUTPUT_DIR, f"{verse_num}.html")
+
+        if i > 0:
+            prev_file = os.path.join(OUTPUT_DIR, f"{verses[i - 1][0]}.html")
+        else:
+            prev_file = None
+
+        if i < len(chapters) - 1:
+            next_file = os.path.join(OUTPUT_DIR, f"{verses[i + 1][0]}.html")
+        else:
+            next_file = None
+
+        with open(output_filename, "w") as output:
+            print(template.render(
+                title=f"{book_name} {chapter_num}.{verse_num}",
+                rows=[
+                    {**row, "pos": pos(row), "parse": parse(row)}
+                    for row in rows
+                ],
+                prev_file=prev_file,
+                next_file=next_file,
+            ), file=output)
+        print(f"wrote {output_filename}")
+
+    for filename in ["interlinear.css", "pagination.css", "skolar.css"]:
         input_filename = os.path.join("css", filename)
         output_filename = os.path.join(OUTPUT_DIR, filename)
         shutil.copy(input_filename, output_filename)
