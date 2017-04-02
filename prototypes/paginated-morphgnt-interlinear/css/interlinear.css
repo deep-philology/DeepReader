@@ -11,22 +11,22 @@ div.container {
   margin: 50px auto;
 }
 div.unit {
-  float: left;
+  display: inline-block;
   margin-bottom: 1em;
   color: black;
   font-family: "Skolar";
+  padding: 2px 4px;
 }
-p.txt {
+.txt {
+  display: inline-block;
   font-size: 16pt;
-  margin: 0em;
-  padding: 0em 0.5em;
+  margin-right: 0.5em;
 }
-p.gls {
+.gls {
+  display: inline-block;
   font-size: 10pt;
   font-family: sans-serif;
   color: gray;
-  margin: 0em;
-  padding: 0em 1em;
 }
 
 body.hover div.unit, body.toggle div.unit {
@@ -37,15 +37,15 @@ body.hover div.unit:hover, body.toggle div.unit:hover {
   color: #000;
 }
 
-body.hover p.gls, body.toggle p.gls, body.frequency p.gls {
+body.hover .gls, body.toggle .gls, body.frequency .gls {
   color: transparent;
 }
 
-body.toggle p.gls.show, body.frequency p.gls.show {
+body.toggle .gls.show, body.frequency .gls.show {
   color: gray;
 }
 
-body.hover div.unit:hover p.gls {
+body.hover div.unit:hover .gls {
   color: gray;
 }
 
