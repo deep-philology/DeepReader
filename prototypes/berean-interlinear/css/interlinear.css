@@ -1,4 +1,4 @@
-@import "../jktauber-labs/skolar.css";
+@import "skolar.css";
 
 h1 {
   font-family: "Skolar";
@@ -6,6 +6,11 @@ h1 {
   font-weight: 300;
   font-variant: small-caps;
 }
+h1 span.interlinear-type {
+  color: #999;
+  font-size: 80%;
+}
+
 div.container {
   width: 800px;
   margin: 50px auto;
@@ -30,7 +35,7 @@ p.gls {
 }
 
 body.hover div.unit, body.toggle div.unit {
-  cursor: hand;
+  cursor: pointer;
   color: #333;
 }
 body.hover div.unit:hover, body.toggle div.unit:hover {
@@ -49,7 +54,16 @@ body.hover div.unit:hover p.gls {
   color: gray;
 }
 
+p.freq-controls {
+  font-family: sans-serif;
+  margin: 2em 0;
+}
+
 span.freq-toggle {
-  cursor: hand;
+  cursor: pointer;
   text-decoration: underline;
+}
+
+span.freq-toggle.selected {
+  font-weight: bold;
 }

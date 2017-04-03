@@ -1,8 +1,13 @@
+import collections
 import csv
 import operator
+import os
 
 
 def bcv(ref):
+    """
+    converts their Verse reference (column 8) to a six-character BBCCVV
+    """
     if ref.count("|") == 2:
         book1, book2, cv = ref.split("|")
         book = book1 + book2
@@ -43,26 +48,34 @@ def bcv(ref):
     return f"{b:02d}{c:02d}{v:02d}"
 
 
-def load_interlinear():
+class BereanInterlinear:
 
-    entries = []
-    with open("berean_tables.csv", newline="") as csvfile:
-        reader = csv.reader(csvfile)
-        next(reader)
-        for row in reader:
-            if row[1]:
-                entries.append({
-                    "sort": int(row[1]),
-                    "bcv": bcv(row[7]),
-                    "verse_num": int(row[8]),
-                    "greek": row[12].strip(),
-                    "english": row[14].strip(),
-                })
-    return entries
+    def __init__(self):
+        self.entries = []
+        self.strongs_count = collections.defaultdict(int)  # for frequency
 
+    def load(self):
+        with open(os.path.join("data", "berean_tables.csv"), newline="") as csvfile:
+            reader = csv.reader(csvfile)
+            next(reader)
+            for row in reader:
+                if row[1]:
+                    self.entries.append({
+                        "sort": int(row[1]),
+                        "bcv": bcv(row[7]),
+                        "verse_num": int(row[8]),
+                        "greek": row[12].strip(),
+                        "english": row[14].strip(),
+                        "strongs": int(row[19]),
+                    })
+                    self.strongs_count[int(row[19])] += 1
 
-def get_verse(entries, bcv):
-    return sorted(
-        [entry for entry in load_interlinear() if entry["bcv"] == bcv],
-        key=operator.itemgetter("sort")
-    )
+    def get_verse(self, bcv):
+        return sorted(
+            [
+                {**entry, "frequency": self.strongs_count[entry["strongs"]]}
+                for entry in self.entries
+                if entry["bcv"] == bcv
+            ],
+            key=operator.itemgetter("sort")
+        )

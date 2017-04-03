@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block class %}frequency{% endblock %}
+
+{% block controls -%}
+  <p class="freq-controls">
+    show
+    <span class="freq-toggle" data-limit="50000">all</span>,
+    <span class="freq-toggle selected" data-limit="0">none</span>;
+    words occurring
+    <span class="freq-toggle" data-limit="1000">less than 1000</span>,
+    <span class="freq-toggle" data-limit="100">less than 100</span>
+    times.
+  </p>
+{%- endblock %}
+
+{% block text -%}
+  {% for row in rows -%}
+    <div class="unit">
+      <p class="txt">{{ row.greek }}</p>
+      <p class="gls" data-freq="{{row.frequency}}">{{ row.english }}</p>
+    </div>
+  {% endfor %}
+{%- endblock %}
+
+{% block scripts %}
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="frequency.js"></script>
+{% endblock %}

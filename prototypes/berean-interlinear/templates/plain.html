@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block text -%}
+  {% for row in rows -%}
+    <div class="unit">
+      <p class="txt">{{ row.greek }}</p>
+      <p class="gls">{{ row.english }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}
