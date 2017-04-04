@@ -27,6 +27,7 @@ def generate(title, rows, template_type, output_filename):
         ), file=output)
 
 
+COMMONS_DIR = "../../commons"
 OUTPUT_DIR = "output"
 
 
@@ -54,13 +55,13 @@ if __name__ == "__main__":
         print(f"wrote {output_filename}")
 
     for filename in ["interlinear.css", "skolar.css"]:
-        input_filename = os.path.join("css", filename)
+        input_filename = os.path.join(COMMONS_DIR, "css", filename)
         output_filename = os.path.join(OUTPUT_DIR, filename)
         shutil.copy(input_filename, output_filename)
         print(f"copied {output_filename}")
 
     for filename in ["toggle.js", "frequency.js"]:
-        input_filename = os.path.join("js", filename)
+        input_filename = os.path.join(COMMONS_DIR, "js", filename)
         output_filename = os.path.join(OUTPUT_DIR, filename)
         shutil.copy(input_filename, output_filename)
         print(f"copied {output_filename}")

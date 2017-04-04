@@ -28,6 +28,7 @@ def parse(row):
         return row["ccat-parse"][1:4] + "." + row["ccat-parse"][0] + row["ccat-parse"][5]
 
 
+COMMONS_DIR = "../../commons"
 OUTPUT_DIR = "output"
 
 
@@ -70,7 +71,7 @@ if __name__ == "__main__":
         print(f"wrote {output_filename}")
 
     for filename in ["interlinear.css", "pagination.css", "skolar.css"]:
-        input_filename = os.path.join("css", filename)
+        input_filename = os.path.join(COMMONS_DIR, "css", filename)
         output_filename = os.path.join(OUTPUT_DIR, filename)
         shutil.copy(input_filename, output_filename)
         print(f"copied {output_filename}")
