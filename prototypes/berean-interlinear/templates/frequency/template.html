@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block class %}frequency{% endblock %}
+
+{% block controls -%}
+  {% include "_frequency_selector.html" %}
+{%- endblock %}
+
+{% block scripts %}
+  <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+  <script src="frequency.js"></script>
+{% endblock %}

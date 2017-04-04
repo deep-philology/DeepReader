@@ -3,12 +3,18 @@
 import os
 import shutil
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, ChoiceLoader, FileSystemLoader
 from pysblgnt import morphgnt_rows
 
 
+COMMONS_DIR = "../../commons"
+OUTPUT_DIR = "output"
+
 env = Environment(
-    loader=FileSystemLoader("templates"),
+    loader=ChoiceLoader([
+        FileSystemLoader("templates"),
+        FileSystemLoader(os.path.join(COMMONS_DIR, "templates")),
+    ])
 )
 template = env.get_template("template.html")
 
@@ -43,10 +49,6 @@ def generate(title, book_num, bcv, output_filename):
         ), file=output)
 
 
-COMMONS_DIR = "../../commons"
-OUTPUT_DIR = "output"
-
-
 if __name__ == "__main__":
     if not os.path.exists(OUTPUT_DIR):
         os.makedirs(OUTPUT_DIR)
@@ -66,6 +68,12 @@ if __name__ == "__main__":
 
     for filename in ["interlinear.css", "skolar.css"]:
         input_filename = os.path.join(COMMONS_DIR, "css", filename)
+        output_filename = os.path.join(OUTPUT_DIR, filename)
+        shutil.copy(input_filename, output_filename)
+        print(f"copied {output_filename}")
+
+    for filename in ["toggle.js"]:
+        input_filename = os.path.join(COMMONS_DIR, "js", filename)
         output_filename = os.path.join(OUTPUT_DIR, filename)
         shutil.copy(input_filename, output_filename)
         print(f"copied {output_filename}")

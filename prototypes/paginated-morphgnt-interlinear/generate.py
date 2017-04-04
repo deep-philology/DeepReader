@@ -3,12 +3,18 @@
 import os
 import shutil
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, ChoiceLoader, FileSystemLoader
 from utils import rows_by_verses_by_chapters_for_book
 
 
+COMMONS_DIR = "../../commons"
+OUTPUT_DIR = "output"
+
 env = Environment(
-    loader=FileSystemLoader("templates"),
+    loader=ChoiceLoader([
+        FileSystemLoader("templates"),
+        FileSystemLoader(os.path.join(COMMONS_DIR, "templates")),
+    ])
 )
 template = env.get_template("template.html")
 
@@ -26,10 +32,6 @@ def parse(row):
         return row["ccat-parse"][1:4] + "." + row["ccat-parse"][4:7]
     elif row["ccat-parse"][3] in "DISO":
         return row["ccat-parse"][1:4] + "." + row["ccat-parse"][0] + row["ccat-parse"][5]
-
-
-COMMONS_DIR = "../../commons"
-OUTPUT_DIR = "output"
 
 
 if __name__ == "__main__":
@@ -72,6 +74,12 @@ if __name__ == "__main__":
 
     for filename in ["interlinear.css", "pagination.css", "skolar.css"]:
         input_filename = os.path.join(COMMONS_DIR, "css", filename)
+        output_filename = os.path.join(OUTPUT_DIR, filename)
+        shutil.copy(input_filename, output_filename)
+        print(f"copied {output_filename}")
+
+    for filename in ["toggle.js"]:
+        input_filename = os.path.join(COMMONS_DIR, "js", filename)
         output_filename = os.path.join(OUTPUT_DIR, filename)
         shutil.copy(input_filename, output_filename)
         print(f"copied {output_filename}")

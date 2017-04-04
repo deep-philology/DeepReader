@@ -3,17 +3,22 @@
 import os
 import shutil
 
-from jinja2 import Environment, FileSystemLoader
+from jinja2 import Environment, ChoiceLoader, FileSystemLoader
 
 from berean import BereanInterlinear
 
 
-env = Environment(
-    loader=FileSystemLoader("templates"),
-)
+COMMONS_DIR = "../../commons"
+OUTPUT_DIR = "output"
 
 templates = {
-    name: env.get_template(f"{name}.html")
+    name: Environment(
+        loader=ChoiceLoader([
+            FileSystemLoader(os.path.join("templates", name)),
+            FileSystemLoader(os.path.join("templates")),
+            FileSystemLoader(os.path.join(COMMONS_DIR, "templates")),
+        ])
+    ).get_template("template.html")
     for name in ["plain", "hover", "toggle", "frequency"]
 }
 
@@ -25,10 +30,6 @@ def generate(title, rows, template_type, output_filename):
             title=title,
             rows=rows,
         ), file=output)
-
-
-COMMONS_DIR = "../../commons"
-OUTPUT_DIR = "output"
 
 
 if __name__ == "__main__":
