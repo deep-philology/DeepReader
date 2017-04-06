@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 
 import os
-import shutil
 
 from jinja2 import Environment, ChoiceLoader, FileSystemLoader
 from pysblgnt import morphgnt_rows
 
+from reader import fs
 
-COMMONS_DIR = "../../commons"
+
 OUTPUT_DIR = "output"
 
 env = Environment(
     loader=ChoiceLoader([
         FileSystemLoader("templates"),
-        FileSystemLoader(os.path.join(COMMONS_DIR, "templates")),
+        FileSystemLoader(os.path.join(fs.COMMONS_DIR, "templates")),
     ])
 )
 template = env.get_template("template.html")
@@ -50,9 +50,7 @@ def generate(title, book_num, bcv, output_filename):
 
 
 if __name__ == "__main__":
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
-        print(f"created {OUTPUT_DIR}")
+    fs.create_dir(OUTPUT_DIR)
 
     book_name = "John"
     book_num = 4
@@ -66,14 +64,5 @@ if __name__ == "__main__":
     generate(title, book_num, bcv, output_filename)
     print(f"wrote {output_filename}")
 
-    for filename in ["interlinear.css", "skolar.css"]:
-        input_filename = os.path.join(COMMONS_DIR, "css", filename)
-        output_filename = os.path.join(OUTPUT_DIR, filename)
-        shutil.copy(input_filename, output_filename)
-        print(f"copied {output_filename}")
-
-    for filename in ["toggle.js"]:
-        input_filename = os.path.join(COMMONS_DIR, "js", filename)
-        output_filename = os.path.join(OUTPUT_DIR, filename)
-        shutil.copy(input_filename, output_filename)
-        print(f"copied {output_filename}")
+    fs.copy_css(["interlinear.css", "skolar.css"], OUTPUT_DIR)
+    fs.copy_js(["toggle.js"], OUTPUT_DIR)
