@@ -1,6 +1,43 @@
 from pysblgnt import morphgnt_rows
 
 
+def rows_for_verse(book_num, chapter_num, verse_num):
+    rows = []
+
+    for row in morphgnt_rows(book_num):
+        chapter = int(row["bcv"][2:4])
+        verse = int(row["bcv"][4:6])
+
+        if chapter == chapter_num and verse == verse_num:
+            rows.append(row)
+
+    return rows
+
+
+def rows_by_verses_for_chapter(book_num, chapter_num):
+    last_verse = 0
+    verses = []
+    rows = None
+
+    for row in morphgnt_rows(book_num):
+        chapter = int(row["bcv"][2:4])
+        verse = int(row["bcv"][4:6])
+
+        if chapter == chapter_num:
+            if verse != last_verse:
+
+                if rows:
+                    verses.append(rows)
+                rows = (verse, [])
+                last_verse = verse
+
+            rows[1].append(row)
+
+    verses.append(rows)
+
+    return verses
+
+
 def rows_by_verses_by_chapters_for_book(book_num):
 
     last_chapter = 0

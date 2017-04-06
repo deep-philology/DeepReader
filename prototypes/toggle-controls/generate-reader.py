@@ -2,9 +2,7 @@
 
 import os
 
-from reader import fs, templates
-
-from utils import rows_by_verses_by_chapters_for_book
+from reader import fs, templates, morphgnt
 
 
 OUTPUT_DIR = "output"
@@ -26,8 +24,7 @@ def after(row):
 
 def generate(book_num, chapter_num, output_filename):
 
-    book_content = rows_by_verses_by_chapters_for_book(book_num)
-    verses = book_content[chapter_num - 1][1]
+    verses = morphgnt.rows_by_verses_for_chapter(book_num, chapter_num)
 
     with open(output_filename, "w") as output:
         print(template.render(

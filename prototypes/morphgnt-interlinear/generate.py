@@ -2,8 +2,6 @@
 
 import os
 
-from pysblgnt import morphgnt_rows
-
 from reader import fs, templates, morphgnt
 
 
@@ -12,12 +10,11 @@ OUTPUT_DIR = "output"
 template = templates.load("template.html")
 
 
-def generate(title, book_num, bcv, output_filename):
+def generate(title, book_num, chapter_num, verse_num, output_filename):
 
     rows = [
         {**row, "pos": morphgnt.pos(row), "parse": morphgnt.parse(row)}
-        for row in morphgnt_rows(book_num)
-        if row["bcv"] == bcv
+        for row in morphgnt.rows_for_verse(book_num, chapter_num, verse_num)
     ]
 
     with open(output_filename, "w") as output:
@@ -36,10 +33,9 @@ if __name__ == "__main__":
     verse_num = 16
 
     title = f"{book_name} {chapter_num}.{verse_num}"
-    bcv = f"{book_num:02d}{chapter_num:02d}{verse_num:02d}"
 
-    output_filename = os.path.join(OUTPUT_DIR, f"{bcv}.html")
-    generate(title, book_num, bcv, output_filename)
+    output_filename = os.path.join(OUTPUT_DIR, f"{book_num:02d}{chapter_num:02d}{verse_num:02d}.html")
+    generate(title, book_num, chapter_num, verse_num, output_filename)
     print(f"wrote {output_filename}")
 
     fs.copy_css(["interlinear.css", "skolar.css"], OUTPUT_DIR)
