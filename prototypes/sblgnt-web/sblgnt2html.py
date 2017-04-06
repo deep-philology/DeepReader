@@ -2,10 +2,9 @@
 
 import os
 
-from reader import fs, templates
+from reader import fs, templates, morphgnt
 
 from render_parse_codes import render_pos, render_parse
-from utils import rows_by_verses_by_chapters_for_book
 
 
 book_template = templates.load("template.html")
@@ -13,7 +12,7 @@ book_template = templates.load("template.html")
 
 def generate(book_title, book_num, output_filename):
 
-    book_content = rows_by_verses_by_chapters_for_book(book_num)
+    book_content = morphgnt.rows_by_verses_by_chapters_for_book(book_num)
 
     with open(output_filename, "w") as output:
         print(book_template.render(

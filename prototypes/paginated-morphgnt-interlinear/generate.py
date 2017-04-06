@@ -2,8 +2,6 @@
 
 import os
 
-from utils import rows_by_verses_by_chapters_for_book
-
 from reader import fs, templates, morphgnt
 
 
@@ -18,7 +16,7 @@ if __name__ == "__main__":
     book_name = "John"
     book_num = 4
 
-    chapters = rows_by_verses_by_chapters_for_book(book_num)
+    chapters = morphgnt.rows_by_verses_by_chapters_for_book(book_num)
 
     chapter_num, verses = chapters[2]
 
