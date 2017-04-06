@@ -4,27 +4,12 @@ import os
 
 from utils import rows_by_verses_by_chapters_for_book
 
-from reader import fs, templates
+from reader import fs, templates, morphgnt
 
 
 OUTPUT_DIR = "output"
 
 template = templates.load("template.html")
-
-
-def pos(row):
-    return row["ccat-pos"].strip("-")
-
-
-def parse(row):
-    if row["ccat-parse"][3] == "-":
-        return row["ccat-parse"][4:].strip("-")
-    elif row["ccat-parse"][3] == "N":
-        return row["ccat-parse"][1:4]
-    elif row["ccat-parse"][3] == "P":
-        return row["ccat-parse"][1:4] + "." + row["ccat-parse"][4:7]
-    elif row["ccat-parse"][3] in "DISO":
-        return row["ccat-parse"][1:4] + "." + row["ccat-parse"][0] + row["ccat-parse"][5]
 
 
 if __name__ == "__main__":
@@ -55,7 +40,7 @@ if __name__ == "__main__":
             print(template.render(
                 title=f"{book_name} {chapter_num}.{verse_num}",
                 rows=[
-                    {**row, "pos": pos(row), "parse": parse(row)}
+                    {**row, "pos": morphgnt.pos(row), "parse": morphgnt.parse(row)}
                     for row in rows
                 ],
                 prev_file=prev_file,
