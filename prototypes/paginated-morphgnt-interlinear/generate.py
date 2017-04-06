@@ -15,13 +15,11 @@ if __name__ == "__main__":
 
     book_name = "John"
     book_num = 4
+    chapter_num = 3
 
-    chapters = morphgnt.rows_by_verses_by_chapters_for_book(book_num)
+    verses = morphgnt.rows_by_verses_for_chapter(book_num, chapter_num)
 
-    chapter_num, verses = chapters[2]
-
-    for i in range(len(verses)):
-        verse_num, rows = verses[i]
+    for i, (verse_num, rows) in enumerate(verses):
         output_filename = os.path.join(OUTPUT_DIR, f"{verse_num}.html")
 
         if i > 0:
