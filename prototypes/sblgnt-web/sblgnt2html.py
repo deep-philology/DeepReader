@@ -2,18 +2,13 @@
 
 import os
 
-from jinja2 import Environment, FileSystemLoader
-
-from reader import fs
+from reader import fs, templates
 
 from render_parse_codes import render_pos, render_parse
 from utils import rows_by_verses_by_chapters_for_book
 
 
-env = Environment(
-    loader=FileSystemLoader("."),
-)
-book_template = env.get_template("template.html")
+book_template = templates.load("template.html")
 
 
 def generate(book_title, book_num, output_filename):
@@ -50,4 +45,3 @@ if __name__ == "__main__":
         print(f"wrote {output_filename}")
 
     fs.copy_files(["sblgnt.css", "sblgnt.js", "index.html"], os.curdir, OUTPUT_DIR)
-

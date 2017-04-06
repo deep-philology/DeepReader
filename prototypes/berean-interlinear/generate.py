@@ -2,22 +2,14 @@
 
 import os
 
-from jinja2 import Environment, ChoiceLoader, FileSystemLoader
-
 from reader.berean import BereanInterlinear
-from reader import fs
+from reader import fs, templates
 
 
 OUTPUT_DIR = "output"
 
 templates = {
-    name: Environment(
-        loader=ChoiceLoader([
-            FileSystemLoader(os.path.join("templates", name)),
-            FileSystemLoader(os.path.join("templates")),
-            FileSystemLoader(os.path.join(fs.COMMONS_DIR, "templates")),
-        ])
-    ).get_template("template.html")
+    name: templates.load("template.html", extra_dirs=[os.path.join("templates", name)])
     for name in ["plain", "hover", "toggle", "frequency"]
 }
 

@@ -2,20 +2,14 @@
 
 import os
 
-from jinja2 import Environment, FileSystemLoader
-
-from reader import fs
+from reader import fs, templates
 
 from parse_tei2 import tei_chapters
 
 
-env = Environment(
-    loader=FileSystemLoader("."),
-)
-template = env.get_template("chapter.html")
-
-
 OUTPUT_DIR = "output"
+
+template = templates.load("chapter.html")
 
 
 if __name__ == "__main__":

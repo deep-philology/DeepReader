@@ -2,21 +2,14 @@
 
 import os
 
-from jinja2 import Environment, ChoiceLoader, FileSystemLoader
 from pysblgnt import morphgnt_rows
 
-from reader import fs
+from reader import fs, templates
 
 
 OUTPUT_DIR = "output"
 
-env = Environment(
-    loader=ChoiceLoader([
-        FileSystemLoader("templates"),
-        FileSystemLoader(os.path.join(fs.COMMONS_DIR, "templates")),
-    ])
-)
-template = env.get_template("template.html")
+template = templates.load("template.html")
 
 
 def pos(row):

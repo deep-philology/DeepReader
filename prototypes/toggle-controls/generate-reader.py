@@ -2,17 +2,14 @@
 
 import os
 
-from jinja2 import Environment, FileSystemLoader
-
-from reader import fs
+from reader import fs, templates
 
 from utils import rows_by_verses_by_chapters_for_book
 
 
-env = Environment(
-    loader=FileSystemLoader("."),
-)
-template = env.get_template("template.html")
+OUTPUT_DIR = "output"
+
+template = templates.load("template.html")
 
 
 def before(row):
@@ -38,9 +35,6 @@ def generate(book_num, chapter_num, output_filename):
             before=before,
             after=after,
         ), file=output)
-
-
-OUTPUT_DIR = "output"
 
 
 if __name__ == "__main__":
