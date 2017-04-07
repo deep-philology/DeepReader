@@ -17,8 +17,7 @@ if __name__ == "__main__":
 
     chapters = list(tei_chapters(os.path.join("data", "histories2.xml")))
 
-    for i in range(len(chapters)):
-        chapter_num, chapter_content = chapters[i]
+    for i, (chapter_num, chapter_content) in enumerate(chapters):
         output_filename = os.path.join(OUTPUT_DIR, f"{chapter_num}.html")
 
         if i > 0:
