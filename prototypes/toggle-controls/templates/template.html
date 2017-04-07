@@ -36,7 +36,7 @@
           <div class="text">
             {% for v, rows in verses %}
             <span class="verse">{{ v }}</span>&nbsp;{% for row in rows -%}
-              <span>{{ before(row) }}<span class="pos-{{row['ccat-pos']}} mood-{{row['ccat-parse'][3]}} case-{{row['ccat-parse'][4]}}">{{ row["word"] }}</span>{{ after(row) }}</span>
+              <span>{{ row["before"] }}<span class="pos-{{row['ccat-pos']}} mood-{{row['ccat-parse'][3]}} case-{{row['ccat-parse'][4]}}">{{ row["word"] }}</span>{{ row["after"] }}</span>
             {% endfor -%}
             {%- endfor %}
           </div>

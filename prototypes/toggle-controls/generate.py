@@ -28,9 +28,13 @@ def generate(book_num, chapter_num, output_filename):
 
     with open(output_filename, "w") as output:
         print(template.render(
-            verses=verses,
-            before=before,
-            after=after,
+            verses=[
+                (v, [
+                    {**row, "before": before(row), "after": after(row)}
+                    for row in rows
+                ])
+                for (v, rows) in verses
+            ],
         ), file=output)
 
 
