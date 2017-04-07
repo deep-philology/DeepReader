@@ -15,7 +15,7 @@ template = templates.load("chapter.html")
 if __name__ == "__main__":
     fs.create_dir(OUTPUT_DIR)
 
-    chapters = list(tei_chapters("histories2.xml"))
+    chapters = list(tei_chapters(os.path.join("data", "histories2.xml")))
 
     for i in range(len(chapters)):
         chapter_num, chapter_content = chapters[i]
@@ -40,4 +40,4 @@ if __name__ == "__main__":
             ), file=output)
         print(f"wrote {output_filename}")
 
-    fs.copy_files(["reader.css"], os.curdir, OUTPUT_DIR)
+    fs.copy_files(["reader.css"], "css", OUTPUT_DIR)
