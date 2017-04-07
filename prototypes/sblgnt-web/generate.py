@@ -4,8 +4,6 @@ import os
 
 from reader import fs, templates, morphgnt
 
-from render_parse_codes import render_pos, render_parse
-
 
 book_template = templates.load("template.html")
 
@@ -18,8 +16,8 @@ def generate(book_title, book_num, output_filename):
         print(book_template.render(
             book_title=book_title,
             book_content=book_content,
-            render_pos=render_pos,
-            render_parse=render_parse,
+            render_pos=morphgnt.render_pos,
+            render_parse=morphgnt.render_parse,
         ), file=output)
 
 
