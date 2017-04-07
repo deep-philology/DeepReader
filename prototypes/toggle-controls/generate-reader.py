@@ -1,17 +1,13 @@
 #!/usr/bin/env python
 
 import os
-import shutil
 
-from jinja2 import Environment, FileSystemLoader
-
-from utils import rows_by_verses_by_chapters_for_book
+from reader import fs, templates, morphgnt
 
 
-env = Environment(
-    loader=FileSystemLoader("."),
-)
-template = env.get_template("template.html")
+OUTPUT_DIR = "output"
+
+template = templates.load("template.html")
 
 
 def before(row):
@@ -28,8 +24,7 @@ def after(row):
 
 def generate(book_num, chapter_num, output_filename):
 
-    book_content = rows_by_verses_by_chapters_for_book(book_num)
-    verses = book_content[chapter_num - 1][1]
+    verses = morphgnt.rows_by_verses_for_chapter(book_num, chapter_num)
 
     with open(output_filename, "w") as output:
         print(template.render(
@@ -39,13 +34,8 @@ def generate(book_num, chapter_num, output_filename):
         ), file=output)
 
 
-OUTPUT_DIR = "output"
-
-
 if __name__ == "__main__":
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
-        print(f"created {OUTPUT_DIR}")
+    fs.create_dir(OUTPUT_DIR)
 
     book_name = "2 John"
     book_num = 24
@@ -56,7 +46,5 @@ if __name__ == "__main__":
     generate(book_num, chapter_num, output_filename)
     print(f"wrote {output_filename}")
 
-    for filename in ["skolar.css", "reader.css", "reader.js"]:
-        output_filename = os.path.join(OUTPUT_DIR, filename)
-        shutil.copy(filename, output_filename)
-        print(f"copied {output_filename}")
+    fs.copy_css(["skolar.css"], OUTPUT_DIR)
+    fs.copy_files(["reader.css", "reader.js"], os.curdir, OUTPUT_DIR)

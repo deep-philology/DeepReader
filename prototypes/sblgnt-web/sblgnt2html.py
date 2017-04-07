@@ -1,23 +1,18 @@
 #!/usr/bin/env python
 
 import os
-import shutil
 
-from jinja2 import Environment, FileSystemLoader
+from reader import fs, templates, morphgnt
 
 from render_parse_codes import render_pos, render_parse
-from utils import rows_by_verses_by_chapters_for_book
 
 
-env = Environment(
-    loader=FileSystemLoader("."),
-)
-book_template = env.get_template("template.html")
+book_template = templates.load("template.html")
 
 
 def generate(book_title, book_num, output_filename):
 
-    book_content = rows_by_verses_by_chapters_for_book(book_num)
+    book_content = morphgnt.rows_by_verses_by_chapters_for_book(book_num)
 
     with open(output_filename, "w") as output:
         print(book_template.render(
@@ -40,9 +35,7 @@ BOOK_NAMES = [
 
 
 if __name__ == "__main__":
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
-        print(f"created {OUTPUT_DIR}")
+    fs.create_dir(OUTPUT_DIR)
 
     for i, book_name in enumerate(BOOK_NAMES):
         output_filename = os.path.join(
@@ -50,7 +43,4 @@ if __name__ == "__main__":
         generate(book_name, i + 1, output_filename)
         print(f"wrote {output_filename}")
 
-    for filename in ["sblgnt.css", "sblgnt.js", "index.html"]:
-        output_filename = os.path.join(OUTPUT_DIR, filename)
-        shutil.copy(filename, output_filename)
-        print(f"copied {output_filename}")
+    fs.copy_files(["sblgnt.css", "sblgnt.js", "index.html"], os.curdir, OUTPUT_DIR)

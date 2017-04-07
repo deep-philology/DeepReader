@@ -1,25 +1,19 @@
 #!/usr/bin/env python3
 
 import os
-import shutil
 
-from jinja2 import Environment, FileSystemLoader
+from reader import fs, templates
 
 from parse_tei2 import tei_chapters
-
-env = Environment(
-    loader=FileSystemLoader("."),
-)
-template = env.get_template("chapter.html")
 
 
 OUTPUT_DIR = "output"
 
+template = templates.load("chapter.html")
+
 
 if __name__ == "__main__":
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
-        print(f"created {OUTPUT_DIR}")
+    fs.create_dir(OUTPUT_DIR)
 
     chapters = list(tei_chapters("histories2.xml"))
 
@@ -46,7 +40,4 @@ if __name__ == "__main__":
             ), file=output)
         print(f"wrote {output_filename}")
 
-    for filename in ["reader.css"]:
-        output_filename = os.path.join(OUTPUT_DIR, filename)
-        shutil.copy(filename, output_filename)
-        print(f"copied {output_filename}")
+    fs.copy_files(["reader.css"], os.curdir, OUTPUT_DIR)

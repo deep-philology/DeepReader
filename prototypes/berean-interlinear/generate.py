@@ -1,19 +1,15 @@
 #!/usr/bin/env python3
 
 import os
-import shutil
 
-from jinja2 import Environment, FileSystemLoader
-
-from berean import BereanInterlinear
+from reader.berean import BereanInterlinear
+from reader import fs, templates
 
 
-env = Environment(
-    loader=FileSystemLoader("templates"),
-)
+OUTPUT_DIR = "output"
 
 templates = {
-    name: env.get_template(f"{name}.html")
+    name: templates.load("template.html", extra_dirs=[os.path.join("templates", name)])
     for name in ["plain", "hover", "toggle", "frequency"]
 }
 
@@ -27,13 +23,8 @@ def generate(title, rows, template_type, output_filename):
         ), file=output)
 
 
-OUTPUT_DIR = "output"
-
-
 if __name__ == "__main__":
-    if not os.path.exists(OUTPUT_DIR):
-        os.makedirs(OUTPUT_DIR)
-        print(f"created {OUTPUT_DIR}")
+    fs.create_dir(OUTPUT_DIR)
 
     book_name = "John"
     book_num = 4
@@ -43,7 +34,7 @@ if __name__ == "__main__":
     title = f"{book_name} {chapter_num}.{verse_num}"
     bcv = f"{book_num:02d}{chapter_num:02d}{verse_num:02d}"
 
-    interlinear = BereanInterlinear()
+    interlinear = BereanInterlinear(os.path.join("data", "berean_tables.csv"))
     interlinear.load()
 
     rows = interlinear.get_verse(bcv)
@@ -53,14 +44,5 @@ if __name__ == "__main__":
         generate(title, rows, template_type, output_filename)
         print(f"wrote {output_filename}")
 
-    for filename in ["interlinear.css", "skolar.css"]:
-        input_filename = os.path.join("css", filename)
-        output_filename = os.path.join(OUTPUT_DIR, filename)
-        shutil.copy(input_filename, output_filename)
-        print(f"copied {output_filename}")
-
-    for filename in ["toggle.js", "frequency.js"]:
-        input_filename = os.path.join("js", filename)
-        output_filename = os.path.join(OUTPUT_DIR, filename)
-        shutil.copy(input_filename, output_filename)
-        print(f"copied {output_filename}")
+    fs.copy_css(["interlinear.css", "skolar.css"], OUTPUT_DIR)
+    fs.copy_js(["toggle.js", "frequency.js"], OUTPUT_DIR)

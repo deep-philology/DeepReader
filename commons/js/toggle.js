@@ -1,5 +1,5 @@
 $(function() {
   $(".unit").on("click", function() {
-    $(this).children("p.gls").toggleClass("show");
+    $(this).children(".gls").toggleClass("show");
   });
 });
