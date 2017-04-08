@@ -19,11 +19,12 @@ def verse_filename(verse_rows):
 
 def generate(item, prev, nxt, output_filename):
     with open(output_filename, "w") as output:
+        verse, rows = item
         print(template.render(
-            title=item[0].title,
+            title=verse.title,
             rows=[
                 {**row, "pos": morphgnt.pos(row), "parse": morphgnt.parse(row)}
-                for row in item[1]
+                for row in rows
             ],
             prev_file=verse_filename(prev),
             next_file=verse_filename(nxt),
