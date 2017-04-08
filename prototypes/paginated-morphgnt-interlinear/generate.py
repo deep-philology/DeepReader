@@ -3,6 +3,7 @@
 import os
 
 from reader import fs, templates, morphgnt, ref
+from reader.pagination import paginate
 
 
 OUTPUT_DIR = "output"
@@ -10,21 +11,22 @@ OUTPUT_DIR = "output"
 template = templates.load("template.html")
 
 
-def verse_filename(verse):
-    if verse:
-        return os.path.join(OUTPUT_DIR, f"{verse.verse_num}.html")
+def verse_filename(verse_rows):
+    "takes tuple of (verse, rows)"
+    if verse_rows:
+        return os.path.join(OUTPUT_DIR, f"{verse_rows[0].verse_num}.html")
 
 
-def generate(verse, rows, prev_verse, next_verse, output_filename):
+def generate(item, prev, nxt, output_filename):
     with open(output_filename, "w") as output:
         print(template.render(
-            title=verse.title,
+            title=item[0].title,
             rows=[
                 {**row, "pos": morphgnt.pos(row), "parse": morphgnt.parse(row)}
-                for row in rows
+                for row in item[1]
             ],
-            prev_file=verse_filename(prev_verse),
-            next_file=verse_filename(next_verse),
+            prev_file=verse_filename(prev),
+            next_file=verse_filename(nxt),
         ), file=output)
 
 
@@ -35,13 +37,9 @@ if __name__ == "__main__":
 
     verses = morphgnt.rows_by_verses_for_chapter(chapter)
 
-    for i, (verse, rows) in enumerate(verses):
-
-        prev_verse = verses[i - 1][0] if i > 0 else None
-        next_verse = verses[i + 1][0] if i < len(verses) - 1 else None
-
-        output_filename = verse_filename(verse)
-        generate(verse, rows, prev_verse, next_verse, output_filename)
+    for prev, item, nxt in paginate(verses):
+        output_filename = verse_filename(item)
+        generate(item, prev, nxt, output_filename)
         print(f"wrote {output_filename}")
 
     fs.copy_css(["interlinear.css", "pagination.css", "skolar.css"], OUTPUT_DIR)
