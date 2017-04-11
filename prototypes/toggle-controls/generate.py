@@ -28,9 +28,13 @@ def generate(book_num, chapter_num, output_filename):
 
     with open(output_filename, "w") as output:
         print(template.render(
-            verses=verses,
-            before=before,
-            after=after,
+            verses=[
+                (v, [
+                    {**row, "before": before(row), "after": after(row)}
+                    for row in rows
+                ])
+                for (v, rows) in verses
+            ],
         ), file=output)
 
 
@@ -47,4 +51,5 @@ if __name__ == "__main__":
     print(f"wrote {output_filename}")
 
     fs.copy_css(["skolar.css"], OUTPUT_DIR)
-    fs.copy_files(["reader.css", "reader.js"], os.curdir, OUTPUT_DIR)
+    fs.copy_files(["reader.css"], "css", OUTPUT_DIR)
+    fs.copy_files(["reader.js"], "js", OUTPUT_DIR)

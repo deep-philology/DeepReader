@@ -4,8 +4,6 @@ import os
 
 from reader import fs, templates, morphgnt
 
-from render_parse_codes import render_pos, render_parse
-
 
 book_template = templates.load("template.html")
 
@@ -18,8 +16,8 @@ def generate(book_title, book_num, output_filename):
         print(book_template.render(
             book_title=book_title,
             book_content=book_content,
-            render_pos=render_pos,
-            render_parse=render_parse,
+            render_pos=morphgnt.render_pos,
+            render_parse=morphgnt.render_parse,
         ), file=output)
 
 
@@ -43,4 +41,6 @@ if __name__ == "__main__":
         generate(book_name, i + 1, output_filename)
         print(f"wrote {output_filename}")
 
-    fs.copy_files(["sblgnt.css", "sblgnt.js", "index.html"], os.curdir, OUTPUT_DIR)
+    fs.copy_files(["sblgnt.css"], "css", OUTPUT_DIR)
+    fs.copy_files(["sblgnt.js"], "js", OUTPUT_DIR)
+    fs.copy_files(["index.html"], "templates", OUTPUT_DIR)
