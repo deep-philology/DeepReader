@@ -81,6 +81,18 @@ def rows_by_verses_by_chapters_for_book(book_num):
     return chapters
 
 
+def before(row):
+    word = row["word"]
+    text = row["text"]
+    return text[:text.index(word)]
+
+
+def after(row):
+    word = row["word"]
+    text = row["text"]
+    return text[text.index(word) + len(word):]
+
+
 def pos(row):
     return row["ccat-pos"].strip("-")
 

@@ -10,18 +10,6 @@ OUTPUT_DIR = "output"
 template = templates.load("template.html")
 
 
-def before(row):
-    word = row["word"]
-    text = row["text"]
-    return text[:text.index(word)]
-
-
-def after(row):
-    word = row["word"]
-    text = row["text"]
-    return text[text.index(word) + len(word):]
-
-
 def generate(chapter, output_filename):
 
     verses = morphgnt.rows_by_verses_for_chapter(chapter)
@@ -30,12 +18,13 @@ def generate(chapter, output_filename):
         print(template.render(
             verses=[
                 (v, [
-                    {**row, "before": before(row), "after": after(row)}
-                    for row in rows
-                ])
-                for (v, rows) in verses
-            ],
-        ), file=output)
+                    {
+                        **row,
+                        "before": morphgnt.before(row),
+                        "after": morphgnt.after(row)
+                    } for row in rows
+                ]) for (v, rows) in verses
+            ]), file=output)
 
 
 if __name__ == "__main__":

@@ -3,11 +3,32 @@
 import os
 
 from reader import fs, templates, morphgnt, ref
+from reader.pagination import paginate
 
 
 OUTPUT_DIR = "output"
 
 template = templates.load("template.html")
+
+
+def verse_filename(verse_rows):
+    "takes tuple of (verse, rows)"
+    if verse_rows:
+        return os.path.join(OUTPUT_DIR, f"{verse_rows[0].verse_num}.html")
+
+
+def generate(item, prev, nxt, output_filename):
+    with open(output_filename, "w") as output:
+        verse, rows = item
+        print(template.render(
+            title=verse.title,
+            rows=[
+                {**row, "pos": morphgnt.pos(row), "parse": morphgnt.parse(row)}
+                for row in rows
+            ],
+            prev_file=verse_filename(prev),
+            next_file=verse_filename(nxt),
+        ), file=output)
 
 
 if __name__ == "__main__":
@@ -17,29 +38,9 @@ if __name__ == "__main__":
 
     verses = morphgnt.rows_by_verses_for_chapter(chapter)
 
-    for i, (verse, rows) in enumerate(verses):
-        output_filename = os.path.join(OUTPUT_DIR, f"{verse.verse_num}.html")
-
-        if i > 0:
-            prev_file = os.path.join(OUTPUT_DIR, f"{verses[i - 1][0].verse_num}.html")
-        else:
-            prev_file = None
-
-        if i < len(verses) - 1:
-            next_file = os.path.join(OUTPUT_DIR, f"{verses[i + 1][0].verse_num}.html")
-        else:
-            next_file = None
-
-        with open(output_filename, "w") as output:
-            print(template.render(
-                title=verse.title,
-                rows=[
-                    {**row, "pos": morphgnt.pos(row), "parse": morphgnt.parse(row)}
-                    for row in rows
-                ],
-                prev_file=prev_file,
-                next_file=next_file,
-            ), file=output)
+    for prev, item, nxt in paginate(verses):
+        output_filename = verse_filename(item)
+        generate(item, prev, nxt, output_filename)
         print(f"wrote {output_filename}")
 
     fs.copy_css(["interlinear.css", "pagination.css", "skolar.css"], OUTPUT_DIR)
