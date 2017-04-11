@@ -70,7 +70,8 @@ class BereanInterlinear:
                     })
                     self.strongs_count[int(row[19])] += 1
 
-    def get_verse(self, bcv):
+    def get_verse(self, verse):
+        bcv = verse.bcv
         return sorted(
             [
                 {**entry, "frequency": self.strongs_count[entry["strongs"]]}
