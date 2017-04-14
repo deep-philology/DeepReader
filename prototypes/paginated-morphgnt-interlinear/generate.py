@@ -14,7 +14,7 @@ template = templates.load("template.html")
 def verse_filename(verse_rows):
     "takes tuple of (verse, rows)"
     if verse_rows:
-        return os.path.join(".", f"{verse_rows[0].verse_num}.html")
+        return f"{verse_rows[0].verse_num}.html"
 
 
 def generate(item, prev, nxt, output_filename):
