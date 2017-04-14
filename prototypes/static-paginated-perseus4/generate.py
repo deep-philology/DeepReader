@@ -40,4 +40,5 @@ if __name__ == "__main__":
         generate(item, prev, nxt, output_filename)
         print(f"wrote {output_filename}")
 
+    fs.copy_css(["skolar.css"], OUTPUT_DIR)
     fs.copy_files(["reader.css"], "css", OUTPUT_DIR)
