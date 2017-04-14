@@ -42,33 +42,9 @@
     </p>
 
     <ul class="book_list">
-      <li><a href="matthew.html">Matthew</a>
-      <li><a href="mark.html">Mark</a>
-      <li><a href="luke.html">Luke</a>
-      <li><a href="john.html">John</a>
-      <li><a href="acts.html">Acts</a>
-      <li><a href="romans.html">Romans</a>
-      <li><a href="1corinthians.html">1 Corinthians</a>
-      <li><a href="2corinthians.html">2 Corinthians</a>
-      <li><a href="galatians.html">Galatians</a>
-      <li><a href="ephesians.html">Ephesians</a>
-      <li><a href="philippians.html">Philippians</a>
-      <li><a href="colossians.html">Colossians</a>
-      <li><a href="1thessalonians.html">1 Thessalonians</a>
-      <li><a href="2thessalonians.html">2 Thessalonians</a>
-      <li><a href="1timothy.html">1 Timothy</a>
-      <li><a href="2timothy.html">2 Timothy</a>
-      <li><a href="titus.html">Titus</a>
-      <li><a href="philemon.html">Philemon</a>
-      <li><a href="hebrews.html">Hebrews</a>
-      <li><a href="james.html">James</a>
-      <li><a href="1peter.html">1 Peter</a>
-      <li><a href="2peter.html">2 Peter</a>
-      <li><a href="1john.html">1 John</a>
-      <li><a href="2john.html">2 John</a>
-      <li><a href="3john.html">3 John</a>
-      <li><a href="jude.html">Jude</a>
-      <li><a href="revelation.html">Revelation</a>
+      {% for book in books -%}
+      <li><a href="{{book.filename}}.html">{{ book.title }}</a>
+      {% endfor %}
     </ul>
   </body>
 </html>

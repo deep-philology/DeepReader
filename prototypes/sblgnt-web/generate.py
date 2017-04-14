@@ -7,6 +7,7 @@ from reader import fs, templates, morphgnt, ref
 
 OUTPUT_DIR = "output"
 
+index_template = templates.load("index.html")
 book_template = templates.load("template.html")
 
 
@@ -26,6 +27,11 @@ def generate(book, output_filename):
 if __name__ == "__main__":
     fs.create_dir(OUTPUT_DIR)
 
+    index_filename = os.path.join(OUTPUT_DIR, "index.html")
+    with open(index_filename, "w") as output:
+        print(index_template.render(books=ref.NT_BOOKS), file=output)
+    print(f"wrote {index_filename}")
+
     for book in ref.NT_BOOKS:
         output_filename = os.path.join(OUTPUT_DIR, f"{book.filename}.html")
         generate(book, output_filename)
@@ -33,4 +39,3 @@ if __name__ == "__main__":
 
     fs.copy_files(["sblgnt.css"], "css", OUTPUT_DIR)
     fs.copy_files(["sblgnt.js"], "js", OUTPUT_DIR)
-    fs.copy_files(["index.html"], "templates", OUTPUT_DIR)
