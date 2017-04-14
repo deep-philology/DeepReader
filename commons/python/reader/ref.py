@@ -4,7 +4,7 @@ BOOK_NAMES = [
     # sblgnt file, paratext, osis, full
     ("Mt", "MAT", "Matt", "Matthew"),
     ("Mk", "MRK", "Mark", "Mark"),
-    ("Lk", "LUK", "Mark", "Mark"),
+    ("Lk", "LUK", "Luke", "Luke"),
     ("Jn", "JHN", "John", "John"),
     ("Ac", "ACT", "Acts", "Acts"),
     ("Ro", "ROM", "Rom", "Romans"),

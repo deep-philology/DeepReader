@@ -14,7 +14,7 @@ template = templates.load("template.html")
 def verse_filename(verse_rows):
     "takes tuple of (verse, rows)"
     if verse_rows:
-        return os.path.join(OUTPUT_DIR, f"{verse_rows[0].verse_num}.html")
+        return f"{verse_rows[0].verse_num}.html"
 
 
 def generate(item, prev, nxt, output_filename):
@@ -39,7 +39,7 @@ if __name__ == "__main__":
     verses = morphgnt.rows_by_verses_for_chapter(chapter)
 
     for prev, item, nxt in paginate(verses):
-        output_filename = verse_filename(item)
+        output_filename = os.path.join(OUTPUT_DIR, verse_filename(item))
         generate(item, prev, nxt, output_filename)
         print(f"wrote {output_filename}")
 

@@ -16,7 +16,7 @@ template = templates.load("chapter.html")
 def chapter_filename(num_content):
     "takes tuple of (chapter_num, chapter_content)"
     if num_content:
-        return os.path.join(OUTPUT_DIR, f"{num_content[0]}.html")
+        return f"{num_content[0]}.html"
 
 
 def generate(chapter, prev, nxt, output_filename):
@@ -36,8 +36,9 @@ if __name__ == "__main__":
     chapters = tei_chapters(os.path.join("data", "histories2.xml"))
 
     for prev, item, nxt in paginate(chapters):
-        output_filename = chapter_filename(item)
+        output_filename = os.path.join(OUTPUT_DIR, chapter_filename(item))
         generate(item, prev, nxt, output_filename)
         print(f"wrote {output_filename}")
 
+    fs.copy_css(["skolar.css"], OUTPUT_DIR)
     fs.copy_files(["reader.css"], "css", OUTPUT_DIR)
