@@ -7,10 +7,10 @@
 {% block post_text %}
   <div class="page-nav-1">
   {% if prev_file %}
-    <a class="prev" href="../{{ prev_file }}">&lt;</a>
+    <a class="prev" href="{{ prev_file }}">&lt;</a>
   {% endif %}
   {% if next_file %}
-    <a class="next" href="../{{ next_file }}">&gt;</a>
+    <a class="next" href="{{ next_file }}">&gt;</a>
   {% endif %}
   </div>
 {% endblock %}
