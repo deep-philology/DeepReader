@@ -51,8 +51,8 @@
       </div>
     </div>
 
-    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.2/mustache.min.js"></script>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.1.2/mustache.min.js"></script>
     <script id="template_root" type="x-tmpl-mustache">
       <ul>
         {{#books}}
@@ -81,18 +81,18 @@
           $.getJSON(paragraph_link, function(view) {
             $("#load").html(Mustache.to_html(template_paragraph, view));
             $(".paragraph-link").on("click", function() {
-              paragraph_link = "http://api.morphgnt.org" + $(this).data("link");
+              paragraph_link = "https://api.morphgnt.org" + $(this).data("link");
               load_paragraph(paragraph_link);
             });
           });
         }
 
-        $.getJSON("http://api.morphgnt.org/v0/root.json", function(view) {
+        $.getJSON("https://api.morphgnt.org/v0/root.json", function(view) {
           $("#load").html(Mustache.to_html(template_root, view));
           $(".book-link").on("click", function() {
-            var book_link = "http://api.morphgnt.org" + $(this).data("link");
+            var book_link = "https://api.morphgnt.org" + $(this).data("link");
             $.getJSON(book_link, function(view) {
-              paragraph_link = "http://api.morphgnt.org" + view.first_paragraph;
+              paragraph_link = "https://api.morphgnt.org" + view.first_paragraph;
               load_paragraph(paragraph_link);
             });
           });
