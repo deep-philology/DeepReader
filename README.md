@@ -1,5 +1,14 @@
 # online-reader
 
+At the moment, this is mostly an attempt to generalise one-off prototypes of Greek New Testament reading environments I've previously built over the last 11 years or so into code for generating those prototypes with arbitrary text (appropriately annotated).
+
+There are, however, also early experiments with vue.js for more dynamic, modular readers.
+
+The best place to start is the various prototypes that statically generate HTML, demos of which are linked to below.
+
+The goal is for this project to be the basis for lots of different types of online and mobile reading environments with multiple technology architectures. This ranges in feature scope from basic ebook-style reading to a rich, modular platform for parallel texts, linguistic annotation, and integrated language learning tools.
+
+I'm working, in particular, with texts and annotations from https://github.com/biblicalhumanities and https://github.com/perseusdl but this project is potentially much more general than that, and I'm interested in collaborating with anyone interested in online reading environments.
 
 ## Statically-generated prototypes
 
