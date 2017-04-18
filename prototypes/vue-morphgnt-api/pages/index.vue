@@ -7,8 +7,10 @@
       <div class="left"></div>
       <div class="main">
         <div id="text">
-          <p><span v-for="word in words">{{ word.text }} </span></p>
+          <p><span v-for="word in paragraph.words">{{ word.text }} </span></p>
         </div>
+        <a v-if="paragraph.prev" v-on:click="displayParagraph(paragraph.prev)">prev</a> |
+        <a v-if="paragraph.next" v-on:click="displayParagraph(paragraph.next)">next</a>
       </div>
       <div class="right"></div>
     </div>
@@ -18,11 +20,27 @@
 <script>
 import axios from 'axios'
 
+async function loadParagraph (path) {
+  let { data: paragraph } = await axios.get('http://api.morphgnt.org' + path)
+  return { paragraph }
+}
+
 export default {
+  data () {
+    return {
+      paragraph: {}
+    }
+  },
   async asyncData () {
-    let { data: book } = await axios.get('http://api.morphgnt.org/v0/book/Luke.json')
-    let { data: paragraph } = await axios.get('http://api.morphgnt.org' + book.first_paragraph)
-    return { words: paragraph.words }
+    let { data: book } = await axios.get('http://api.morphgnt.org/v0/book/Matt.json')
+    return loadParagraph(book.first_paragraph)
+  },
+  methods: {
+    displayParagraph (path) {
+      loadParagraph(path).then(({ paragraph }) => {
+        this.paragraph = paragraph
+      })
+    }
   }
 }
 </script>
