@@ -28,17 +28,14 @@ export default {
 </script>
 
 <style lang="scss">
-  .root > header {
-    background: #DDD;
-    padding: 10px 20px;
-  }
-  .root > header > h1 {
-    font-size: 24pt;
-    font-family: "PT Serif";
-    margin: 0;
-    font-weight: normal;
-    color: #444;
-  }
+
+  /* variables */
+
+  $main-font-family: "PT Serif";
+  $widget-font-family: "PT Sans";
+
+  /* hover opacity */
+
   .widget, .root > header {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
@@ -46,44 +43,68 @@ export default {
   body:hover .widget, body:hover .root > header {
     opacity: 1;
   }
+
+  /* grid */
+
   .grid-wrapper {
     display: grid;
     grid-template-columns: 2fr 6fr 4fr;
     grid-column-gap: 10px;
     margin: 10px;
+    > * {
+      min-width: 200px;
+    }
   }
-  .grid-wrapper > * {
-    min-width: 200px;
+
+  /* header */
+
+  .root > header {
+    background: #DDD;
+    padding: 10px 20px;
+    > h1 {
+      font-size: 24pt;
+      font-family: $main-font-family;
+      margin: 0;
+      font-weight: normal;
+      color: #444;
+    }
   }
+
+  /* main column */
+
   .main {
-    font-family: "PT Serif";
+    font-family: $main-font-family;
     height: 500px;
     margin: 20px 50px;
+    > p:first-of-type {
+      margin-top: 0;
+    }
   }
-  .main > p:first-of-type {
-    margin-top: 0;
-  }
-  .left, .right {
-  }
-  .widget {
-    margin-bottom: 10px;
-    font-family: "PT Sans";
-    color: #666;
-    background: #F7F7F7;
-    font-size: 9pt;
-  }
-  .widget > header {
-    background: #EEE;
-    padding: 5px 10px;
-    font-weight: bold;
-  }
-  .widget > section {
-    padding: 10px 10px;
-  }
+
+  /* text */
+
   #text {
     font-size: 16pt;
     line-height: 1.5;
     word-spacing: normal;
     color: #333;
+  }
+
+  /* widgets */
+
+  .widget {
+    margin-bottom: 10px;
+    font-family: $widget-font-family;
+    color: #666;
+    background: #F7F7F7;
+    font-size: 9pt;
+    > header {
+      background: #EEE;
+      padding: 5px 10px;
+      font-weight: bold;
+    }
+    > section {
+      padding: 10px 10px;
+    }
   }
 </style>
