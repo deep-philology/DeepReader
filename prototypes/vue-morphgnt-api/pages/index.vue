@@ -7,7 +7,7 @@
       <div class="left"></div>
       <div class="main">
         <div id="text">
-          <p><span v-for="word in words">{{ word.text }}&nbsp;</span></p>
+          <p><span v-for="word in words">{{ word.text }} </span></p>
         </div>
       </div>
       <div class="right"></div>
