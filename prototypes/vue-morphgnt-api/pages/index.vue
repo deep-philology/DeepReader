@@ -60,7 +60,7 @@ export default {
 
   /* variables */
 
-  $main-font-family: "PT Serif";
+  $main-font-family: "Skolar PE";
   $widget-font-family: "PT Sans";
 
   /* hover opacity */
@@ -116,9 +116,9 @@ export default {
   /* text */
 
   #text {
-    font-size: 16pt;
-    line-height: 1.5;
-    word-spacing: normal;
+    font-size: 20pt;
+    line-height: 1.6;
+    word-spacing: 0.3em;
     color: #333;
   }
 
