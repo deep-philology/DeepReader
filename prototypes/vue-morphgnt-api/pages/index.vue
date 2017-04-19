@@ -9,8 +9,12 @@
         <div id="text">
           <p><span v-for="word in paragraph.words">{{ word.text }} </span></p>
         </div>
-        <a v-if="paragraph.prev" v-on:click="renderParagraph(paragraph.prev)">prev</a> |
-        <a v-if="paragraph.next" v-on:click="renderParagraph(paragraph.next)">next</a>
+
+        <div class="page-nav-1">
+          <a class="prev" v-if="paragraph.prev" v-on:click="renderParagraph(paragraph.prev)">&lt;</a>
+          <a class="next" v-if="paragraph.next" v-on:click="renderParagraph(paragraph.next)">&gt;</a>
+        </div>
+
       </div>
       <div class="right"></div>
     </div>
@@ -61,12 +65,15 @@ export default {
 
   /* hover opacity */
 
-  .widget, .root > header {
+  .widget, .root > header, .page-nav-1 {
     opacity: 0;
     transition: opacity 0.5s ease-in-out;
   }
-  body:hover .widget, body:hover .root > header {
-    opacity: 1;
+
+  body:hover {
+    .widget, .root > header, .page-nav-1 {
+      opacity: 1;
+    }
   }
 
   /* grid */
@@ -130,6 +137,33 @@ export default {
     }
     > section {
       padding: 10px 10px;
+    }
+  }
+
+  /* pagination */
+
+  div.page-nav-1 {
+    margin-top: 20px;
+    font-family: $widget-font-family;
+
+    a {
+      font-weight: bold;
+      text-decoration: none;
+      padding: 5px 10px;
+      background: #EEE;
+      color: #666;
+      cursor: pointer;
+
+      &.prev {
+        float: left;
+      }
+      &.next {
+        float: right;
+      }
+    }
+
+    a:hover {
+      background: #CCC;
     }
   }
 </style>
