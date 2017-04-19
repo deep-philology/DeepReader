@@ -25,7 +25,7 @@
 import axios from 'axios'
 
 let morphgnt = {
-  apiRoot: 'http://api.morphgnt.org',
+  apiRoot: 'https://api.morphgnt.org',
   async book (name) {
     let { data: book } = await axios.get(`${this.apiRoot}/v0/book/${name}.json`)
     return book
