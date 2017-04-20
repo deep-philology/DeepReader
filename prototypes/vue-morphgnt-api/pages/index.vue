@@ -7,12 +7,12 @@
       <div class="left"></div>
       <div class="main">
         <div id="text">
-          <p><span v-for="word in paragraph.words">{{ word.text }} </span></p>
+          <p><span v-for="word in text.words">{{ word.text }} </span></p>
         </div>
 
         <div class="page-nav-1">
-          <a class="prev" v-if="paragraph.prev" v-on:click="renderParagraph(paragraph.prev)">&lt;</a>
-          <a class="next" v-if="paragraph.next" v-on:click="renderParagraph(paragraph.next)">&gt;</a>
+          <a class="prev" v-if="text.prev" v-on:click="renderText(text.prev)">&lt;</a>
+          <a class="next" v-if="text.next" v-on:click="renderText(text.next)">&gt;</a>
         </div>
 
       </div>
@@ -30,26 +30,26 @@ let morphgnt = {
     let { data: book } = await axios.get(`${this.apiRoot}/v0/book/${name}.json`)
     return book
   },
-  async paragraph (path) {
-    let { data: paragraph } = await axios.get(`${this.apiRoot}${path}`)
-    return paragraph
+  async resource (path) {
+    let { data: resource } = await axios.get(`${this.apiRoot}${path}`)
+    return resource
   }
 }
 
 export default {
   data () {
     return {
-      paragraph: {}
+      text: {}
     }
   },
   async asyncData () {
     let book = await morphgnt.book('Matt')
-    return { paragraph: await morphgnt.paragraph(book.first_paragraph) }
+    return { text: await morphgnt.resource(book.first_paragraph) }
   },
   methods: {
-    renderParagraph (path) {
-      morphgnt.paragraph(path).then((paragraph) => {
-        this.paragraph = paragraph
+    renderText (path) {
+      morphgnt.resource(path).then((resource) => {
+        this.text = resource
       })
     }
   }
