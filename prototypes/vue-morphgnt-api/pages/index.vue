@@ -6,6 +6,12 @@
     <div class="grid-wrapper">
       <div class="left"></div>
       <div class="main">
+
+        <div class="page-nav-1">
+          <a class="prev" v-if="text.prev" v-on:click="renderText(text.prev)">&lt;</a>
+          <a class="next" v-if="text.next" v-on:click="renderText(text.next)">&gt;</a>
+        </div>
+
         <div id="text">
           <p><span v-for="word in text.words">{{ word.text }} </span></p>
         </div>
@@ -116,6 +122,7 @@ export default {
   /* text */
 
   #text {
+    clear: both;
     font-size: 20pt;
     line-height: 1.6;
     word-spacing: 0.3em;
@@ -143,7 +150,9 @@ export default {
   /* pagination */
 
   div.page-nav-1 {
-    margin-top: 20px;
+    margin: 20px 0;
+    overflow: auto;
+
     font-family: $widget-font-family;
 
     a {
