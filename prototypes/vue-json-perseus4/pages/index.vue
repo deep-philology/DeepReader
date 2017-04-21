@@ -103,7 +103,6 @@ export default {
 
   .main {
     font-family: $main-font-family;
-    height: 500px;
     margin: 20px 50px;
     > p:first-of-type {
       margin-top: 0;
@@ -120,8 +119,8 @@ export default {
     color: #333;
 
     span.section {
-      font-family: "Skolar";
-      color: #933;
+      font-family: $main-font-family;
+      color: #BBB;
       font-weight: normal;
       font-variant: small-caps;
     }
@@ -152,39 +151,39 @@ export default {
     display: flex;
     justify-content: space-between;
 
-    margin: 20px 0;
+    margin: 40px 0;
     overflow: auto;
 
     font-family: $widget-font-family;
 
-    > div.prev, > div.next {
-      width: 50px;  // fix width so takes up space even without link
+    > div {
+      &.prev {
+        width: 30px;  // fix width so takes up space even without link
+        float: left;
+        text-align: left;
+      }
+      &.next {
+        width: 30px;  // fix width so takes up space even without link
+        float: right;
+        text-align: right;
+      }
+      line-height: 20pt;
     }
 
     .title {
-      padding: 5px 10px;
       text-align: center;
     }
 
     a {
-      display: inline-block;
-      padding: 5px 10px;
       font-weight: bold;
+      font-size: 20pt;
       text-decoration: none;
-      background: #EEE;
-      color: #666;
+      color: #999;
       cursor: pointer;
-
-      &.prev {
-        float: left;
-      }
-      &.next {
-        float: right;
-      }
     }
 
     a:hover {
-      background: #CCC;
+      color: #000;
     }
   }
 </style>
