@@ -7,11 +7,11 @@
       <div class="left"></div>
       <div class="main">
 
-        <pagination :prev="text.prev" :next="text.next" v-on:page-change="renderText"></pagination>
+        <pagination :prev="text.prev" :next="text.next" :title="text.title" v-on:page-change="renderText"></pagination>
 
         <div id="text" v-html="text.content"></div>
 
-        <pagination :prev="text.prev" :next="text.next" v-on:page-change="renderText"></pagination>
+        <pagination :prev="text.prev" :next="text.next" :title="text.title" v-on:page-change="renderText"></pagination>
 
       </div>
       <div class="right"></div>
@@ -118,6 +118,13 @@ export default {
     line-height: 1.6;
     word-spacing: 0.3em;
     color: #333;
+
+    span.section {
+      font-family: "Skolar";
+      color: #933;
+      font-weight: normal;
+      font-variant: small-caps;
+    }
   }
 
   /* widgets */
@@ -141,15 +148,29 @@ export default {
   /* pagination */
 
   div.page-nav-1 {
+
+    display: flex;
+    justify-content: space-between;
+
     margin: 20px 0;
     overflow: auto;
 
     font-family: $widget-font-family;
 
+    > div.prev, > div.next {
+      width: 50px;  // fix width so takes up space even without link
+    }
+
+    .title {
+      padding: 5px 10px;
+      text-align: center;
+    }
+
     a {
+      display: inline-block;
+      padding: 5px 10px;
       font-weight: bold;
       text-decoration: none;
-      padding: 5px 10px;
       background: #EEE;
       color: #666;
       cursor: pointer;
