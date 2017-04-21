@@ -24,8 +24,8 @@ def generate(chapter, prev, nxt, output_filename):
         json.dump(dict(
             title=f"Histories 2.{chapter_num}",
             content=chapter_contents,
-            prev_file=chapter_filename(prev),
-            next_file=chapter_filename(nxt),
+            prev=chapter_filename(prev),
+            next=chapter_filename(nxt),
         ), output)
 
 
