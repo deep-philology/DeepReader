@@ -7,19 +7,13 @@
       <div class="left"></div>
       <div class="main">
 
-        <div class="page-nav-1">
-          <a class="prev" v-if="text.prev" v-on:click="renderText(text.prev)">&lt;</a>
-          <a class="next" v-if="text.next" v-on:click="renderText(text.next)">&gt;</a>
-        </div>
+        <pagination :prev="text.prev" :next="text.next" v-on:page-change="renderText"></pagination>
 
         <div id="text">
           <p><span v-for="word in text.words">{{ word.text }} </span></p>
         </div>
 
-        <div class="page-nav-1">
-          <a class="prev" v-if="text.prev" v-on:click="renderText(text.prev)">&lt;</a>
-          <a class="next" v-if="text.next" v-on:click="renderText(text.next)">&gt;</a>
-        </div>
+        <pagination :prev="text.prev" :next="text.next" v-on:page-change="renderText"></pagination>
 
       </div>
       <div class="right"></div>
@@ -29,6 +23,7 @@
 
 <script>
 import axios from 'axios'
+import Pagination from '~components/Pagination.vue'
 
 let morphgnt = {
   apiRoot: 'https://api.morphgnt.org',
@@ -58,6 +53,9 @@ export default {
         this.text = resource
       })
     }
+  },
+  components: {
+    Pagination
   }
 }
 </script>
