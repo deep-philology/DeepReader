@@ -117,12 +117,16 @@ export default {
     line-height: 1.6;
     word-spacing: 0.3em;
     color: #333;
+    position: relative;
 
     span.section {
-      font-family: $main-font-family;
+      font-family: $widget-font-family;
       color: #BBB;
       font-weight: normal;
-      font-variant: small-caps;
+      vertical-align: super;
+      font-size: 70%;
+      // position: absolute;
+      // left: -30px;
     }
   }
 
