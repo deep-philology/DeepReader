@@ -1,7 +1,8 @@
 <template>
   <div class="page-nav-1">
-    <a class="prev" v-if="prev" v-on:click="$emit('page-change', prev)">&lt;</a>
-    <a class="next" v-if="next" v-on:click="$emit('page-change', next)">&gt;</a>
+    <div class="prev"><a v-if="prev" v-on:click="$emit('page-change', prev)">&lt;</a></div>
+    <div class="title">{{ title }}</div>
+    <div class="next"><a v-if="next" v-on:click="$emit('page-change', next)">&gt;</a></div>
   </div>
 </template>
 
@@ -9,7 +10,8 @@
 export default {
   props: [
     'prev',
-    'next'
+    'next',
+    'title'
   ]
 }
 </script>
