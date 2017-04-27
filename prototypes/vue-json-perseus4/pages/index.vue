@@ -7,11 +7,11 @@
       <div class="left"></div>
       <div class="main">
 
-        <pagination :prev="text.prev" :next="text.next" :title="text.title" v-on:page-change="renderText"></pagination>
+        <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="text.title"></pagination>
 
         <div id="text" v-html="text.content"></div>
 
-        <pagination :prev="text.prev" :next="text.next" :title="text.title" v-on:page-change="renderText"></pagination>
+        <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="text.title"></pagination>
 
       </div>
       <div class="right"></div>
@@ -32,19 +32,54 @@ let perseus = {
 }
 
 export default {
+  created () {
+    if (process.BROWSER_BUILD) {
+      window.addEventListener('keyup', this.handleKeyUp)
+    }
+  },
+  beforeDestroy () {
+    if (process.BROWSER_BUILD) {
+      window.removeEventListener('keyup', this.handleKeyUp)
+    }
+  },
   data () {
     return {
+      query: {},
       text: {}
     }
   },
-  async asyncData () {
-    return { text: await perseus.resource('1.json') }
+  async asyncData ({ query }) {
+    var text = {}
+    if (query.resource) {
+      text = await perseus.resource(query.resource)
+    } else {
+      text = await perseus.resource('1.json')
+    }
+    return { query, text }
   },
   methods: {
     renderText (path) {
       perseus.resource(path).then((resource) => {
         this.text = resource
       })
+    },
+    resourceLink (query, resource) {
+      if (resource) {
+        return {
+          query: Object.assign({}, query, { resource })
+        }
+      }
+    },
+    handleKeyUp (e) {
+      if (e.key === 'ArrowLeft') {
+        if (this.text.prev) {
+          this.$router.push(this.resourceLink(this.query, this.text.prev))
+        }
+      } else if (e.key === 'ArrowRight') {
+        if (this.text.next) {
+          this.$router.push(this.resourceLink(this.query, this.text.next))
+        }
+      }
     }
   },
   components: {
