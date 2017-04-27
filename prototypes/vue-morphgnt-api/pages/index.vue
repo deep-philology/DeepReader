@@ -42,6 +42,16 @@ let morphgnt = {
 }
 
 export default {
+  created () {
+    if (process.BROWSER_BUILD) {
+      window.addEventListener('keyup', this.handleKeyUp)
+    }
+  },
+  beforeDestroy () {
+    if (process.BROWSER_BUILD) {
+      window.removeEventListener('keyup', this.handleKeyUp)
+    }
+  },
   data () {
     return {
       query: {},
@@ -74,6 +84,17 @@ export default {
       if (resource) {
         return {
           query: Object.assign({}, query, { resource })
+        }
+      }
+    },
+    handleKeyUp (e) {
+      if (e.key === 'ArrowLeft') {
+        if (this.text.prev) {
+          this.$router.push(this.resourceLink(this.query, this.text.prev))
+        }
+      } else if (e.key === 'ArrowRight') {
+        if (this.text.next) {
+          this.$router.push(this.resourceLink(this.query, this.text.next))
         }
       }
     }
