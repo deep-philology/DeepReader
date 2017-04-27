@@ -27,13 +27,12 @@ import Pagination from '~components/Pagination.vue'
 
 let morphgnt = {
   apiRoot: 'https://api.morphgnt.org',
-  async book (name) {
-    let { data: book } = await axios.get(`${this.apiRoot}/v0/book/${name}.json`)
-    return book
-  },
   async resource (path) {
     let { data: resource } = await axios.get(`${this.apiRoot}${path}`)
     return resource
+  },
+  async book (name) {
+    return await this.resource(`/v0/book/${name}.json`)
   }
 }
 
