@@ -7,13 +7,13 @@
       <div class="left"></div>
       <div class="main">
 
-        <pagination :prev="text.prev" :next="text.next" v-on:page-change="renderText"></pagination>
+        <pagination :prev="text.prev" :next="text.next" title="Matt" v-on:page-change="renderText"></pagination>
 
         <div id="text">
           <p><span v-for="word in text.words">{{ word.text }} </span></p>
         </div>
 
-        <pagination :prev="text.prev" :next="text.next" v-on:page-change="renderText"></pagination>
+        <pagination :prev="text.prev" :next="text.next" title="Matt" v-on:page-change="renderText"></pagination>
 
       </div>
       <div class="right"></div>
