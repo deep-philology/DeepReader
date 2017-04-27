@@ -110,7 +110,7 @@ export default {
 
   /* variables */
 
-  $main-font-family: "Skolar PE";
+  $main-font-family: "Skolar";
   $widget-font-family: "PT Sans";
 
   /* hover opacity */
