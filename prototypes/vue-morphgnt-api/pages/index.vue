@@ -147,29 +147,43 @@ export default {
   /* pagination */
 
   div.page-nav-1 {
-    margin: 20px 0;
+
+    display: flex;
+    justify-content: space-between;
+
+    margin: 40px 0;
     overflow: auto;
 
     font-family: $widget-font-family;
 
-    a {
-      font-weight: bold;
-      text-decoration: none;
-      padding: 5px 10px;
-      background: #EEE;
-      color: #666;
-      cursor: pointer;
-
+    > div {
       &.prev {
+        width: 30px;  // fix width so takes up space even without link
         float: left;
+        text-align: left;
       }
       &.next {
+        width: 30px;  // fix width so takes up space even without link
         float: right;
+        text-align: right;
       }
+      line-height: 20pt;
+    }
+
+    .title {
+      text-align: center;
+    }
+
+    a {
+      font-weight: bold;
+      font-size: 20pt;
+      text-decoration: none;
+      color: #999;
+      cursor: pointer;
     }
 
     a:hover {
-      background: #CCC;
+      color: #000;
     }
   }
 </style>
