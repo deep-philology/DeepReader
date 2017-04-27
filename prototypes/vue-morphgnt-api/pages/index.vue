@@ -5,18 +5,18 @@
     </header>
     <div class="grid-wrapper">
       <div class="left">
-        <book-select></book-select>
+        <book-select :books="books"></book-select>
       </div>
 
       <div class="main">
 
-        <pagination :prev="text.prev" :next="text.next" title="Matt" v-on:page-change="renderText"></pagination>
+        <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="book.name"></pagination>
 
         <div id="text">
           <p><span v-for="word in text.words">{{ word.text }} </span></p>
         </div>
 
-        <pagination :prev="text.prev" :next="text.next" title="Matt" v-on:page-change="renderText"></pagination>
+        <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="book.name"></pagination>
 
       </div>
       <div class="right"></div>
@@ -35,26 +35,47 @@ let morphgnt = {
     let { data: resource } = await axios.get(`${this.apiRoot}${path}`)
     return resource
   },
-  async book (name) {
-    return await this.resource(`/v0/book/${name}.json`)
+  async books () {
+    let { books } = await this.resource('/v0/root.json')
+    return books
   }
 }
 
 export default {
   data () {
     return {
+      query: {},
+      books: [],
+      book: {},
       text: {}
     }
   },
-  async asyncData () {
-    let book = await morphgnt.book('Matt')
-    return { text: await morphgnt.resource(book.first_paragraph) }
+  async asyncData ({ query }) {
+    let books = await morphgnt.books()
+    if (query.book) {
+      let book = await morphgnt.resource(query.book)
+      var text = {}
+      if (query.resource) {
+        text = await morphgnt.resource(query.resource)
+      } else {
+        text = await morphgnt.resource(book.first_paragraph)
+      }
+      return { query, books, book, text }
+    }
+    return { query, books, text: {} }
   },
   methods: {
     renderText (path) {
       morphgnt.resource(path).then((resource) => {
         this.text = resource
       })
+    },
+    resourceLink (query, resource) {
+      if (resource) {
+        return {
+          query: Object.assign({}, query, { resource })
+        }
+      }
     }
   },
   components: {

@@ -3,15 +3,18 @@
     <header>Book</header>
     <section>
       <ul>
-        <li><a href="#">Matthew</a></li>
-        <li><a href="#">Mark</a></li>
-        <li><a href="#">...</a></li>
+        <li v-for="book in books"><nuxt-link :to="{ query: {book: book['@id']} }">{{ book.name }}</nuxt-link></li>
       </ul>
     </section>
   </div>
 </template>
 
 <script>
+export default {
+  props: [
+    'books'
+  ]
+}
 </script>
 
 <style lang="scss" scoped>

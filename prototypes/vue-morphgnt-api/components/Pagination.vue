@@ -1,8 +1,8 @@
 <template>
   <div class="page-nav-1">
-    <div class="prev"><a v-if="prev" v-on:click="$emit('page-change', prev)">&lt;</a></div>
+    <div class="prev"><nuxt-link v-if="prev" :to="prev">&lt;</nuxt-link></div>
     <div class="title">{{ title }}</div>
-    <div class="next"><a v-if="next" v-on:click="$emit('page-change', next)">&gt;</a></div>
+    <div class="next"><nuxt-link v-if="next" :to="next">&gt;</nuxt-link></div>
   </div>
 </template>
 
