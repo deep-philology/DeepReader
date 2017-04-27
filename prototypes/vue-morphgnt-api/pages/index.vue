@@ -4,7 +4,10 @@
       <h1>Header Text</h1>
     </header>
     <div class="grid-wrapper">
-      <div class="left"></div>
+      <div class="left">
+        <book-select></book-select>
+      </div>
+
       <div class="main">
 
         <pagination :prev="text.prev" :next="text.next" title="Matt" v-on:page-change="renderText"></pagination>
@@ -24,6 +27,7 @@
 <script>
 import axios from 'axios'
 import Pagination from '~components/Pagination.vue'
+import BookSelect from '~components/BookSelect.vue'
 
 let morphgnt = {
   apiRoot: 'https://api.morphgnt.org',
@@ -54,7 +58,8 @@ export default {
     }
   },
   components: {
-    Pagination
+    Pagination,
+    BookSelect
   }
 }
 </script>
@@ -141,6 +146,17 @@ export default {
     }
     > section {
       padding: 10px 10px;
+      ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
+    &:hover {
+      color: #000;
+      > header {
+        background: #DDD;
+      }
     }
   }
 
