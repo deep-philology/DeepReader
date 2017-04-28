@@ -1,6 +1,6 @@
 <template>
   <div class="widget">
-    <header @click.prevent="toggle"><span class="word-count" v-if="!open">[{{ words.length }}]</span> Word Info List</header>
+    <header @click.prevent="toggle"><span class="summary" v-if="!open">[{{ words.length }}]</span> Word Info List</header>
     <section v-if="open">
       <div v-for="word in words" class="word">
         <span class="remove" @click="removeWord(word)">remove</span>
@@ -46,8 +46,9 @@ export default {
 <style lang="scss" scoped>
   header {
     cursor: pointer;
-    .word-count {
+    .summary {
       float: right;
+      font-weight: normal;
     }
   }
   .word {

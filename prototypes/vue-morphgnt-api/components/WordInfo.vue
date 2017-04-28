@@ -1,6 +1,14 @@
 <template>
   <div class="widget">
-    <header @click.prevent="toggle">Word Info</header>
+    <header @click.prevent="toggle"><span class="summary" v-if="!open"><span class="norm">{{ word.norm }}</span>
+    &nbsp;
+    <span class="pos">{{ word.pos }}</span>
+    <span v-if="word.mood">.</span>
+    {{ word.tense }}{{ word.voice }}{{ word.mood }}
+    <span v-if="word.number">.</span>
+    {{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}
+    &nbsp;
+    <span class="lemma">{{ word.lemma }}</span></span> Word Info</header>
     <section v-if="open">
       <div class="norm">{{ word.norm }}</div>
 
@@ -39,6 +47,10 @@ export default {
 <style lang="scss" scoped>
   header {
     cursor: pointer;
+    .summary {
+      float: right;
+      font-weight: normal;
+    }
   }
   section {
     .norm {
