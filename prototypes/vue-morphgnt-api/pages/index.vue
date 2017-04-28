@@ -224,7 +224,6 @@ export default {
     display: flex;
     justify-content: space-between;
 
-    margin: 40px 0;
     overflow: auto;
 
     font-family: $widget-font-family;

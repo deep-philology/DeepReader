@@ -4,7 +4,6 @@
     <section v-if="open">
       <div v-for="word in words" class="word">
         <span class="remove" @click="removeWord(word)">remove</span>
-        &nbsp;
         <span class="norm">{{ word.norm }}</span>
         &nbsp;
         <span class="pos">{{ word.pos }}</span>
