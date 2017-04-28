@@ -13,13 +13,16 @@
         <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="book.name"></pagination>
 
         <div id="text">
-          <p><span v-for="word in text.words">{{ word.text }} </span></p>
+          <p><span class="word" v-for="word in text.words" @click="handleWordSelect(word)">{{ word.text }} </span></p>
         </div>
 
         <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="book.name"></pagination>
 
       </div>
-      <div class="right"></div>
+      <div class="right">
+        <word-info></word-info>
+        <word-info-list></word-info-list>
+      </div>
     </div>
   </div>
 </template>
@@ -28,6 +31,8 @@
 import axios from 'axios'
 import Pagination from '~components/Pagination.vue'
 import BookSelect from '~components/BookSelect.vue'
+import WordInfo from '~components/WordInfo.vue'
+import WordInfoList from '~components/WordInfoList.vue'
 
 let morphgnt = {
   apiRoot: 'https://api.morphgnt.org',
@@ -97,11 +102,16 @@ export default {
           this.$router.push(this.resourceLink(this.query, this.text.next))
         }
       }
+    },
+    handleWordSelect (word) {
+      this.$emit('word-select', word)
     }
   },
   components: {
     Pagination,
-    BookSelect
+    BookSelect,
+    WordInfo,
+    WordInfoList
   }
 }
 </script>
@@ -171,6 +181,9 @@ export default {
     line-height: 1.6;
     word-spacing: 0.3em;
     color: #333;
+    .word {
+      cursor: pointer;
+    }
   }
 
   /* widgets */
