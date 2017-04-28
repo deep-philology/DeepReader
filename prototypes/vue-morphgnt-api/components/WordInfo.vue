@@ -46,5 +46,9 @@ export default {
       font-family: "Skolar";
       font-weight: bold;
     }
+    .lemma {
+      font-size: 120%;
+      font-family: "Skolar";
+    }
   }
 </style>
