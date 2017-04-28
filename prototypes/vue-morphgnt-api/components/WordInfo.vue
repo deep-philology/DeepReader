@@ -2,7 +2,15 @@
   <div class="widget">
     <header @click.prevent="toggle">Word Info</header>
     <section v-if="open">
-      {{ word }}
+      <div class="norm">{{ word.norm }}</div>
+
+      <span class="pos">{{ word.pos }}</span>
+      <span v-if="word.mood">.</span>
+      {{ word.tense }}{{ word.voice }}{{ word.mood }}
+      <span v-if="word.number">.</span>
+      {{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}
+
+      <div class="lemma">{{ word.lemma }}</div>
     </section>
   </div>
 </template>
@@ -32,13 +40,11 @@ export default {
   header {
     cursor: pointer;
   }
-  a {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-    padding: 2px 5px;
-    &:hover {
-      background: #DDD;
+  section {
+    .norm {
+      font-size: 150%;
+      font-family: "Skolar";
+      font-weight: bold;
     }
   }
 </style>
