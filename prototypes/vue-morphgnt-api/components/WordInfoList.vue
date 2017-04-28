@@ -2,8 +2,8 @@
   <div class="widget">
     <header @click.prevent="toggle"><span class="summary" v-if="!open">[{{ words.length }}]</span> Word Info List</header>
     <section v-if="open">
-      <div v-for="word in words" class="word">
-        <span class="remove" @click="removeWord(word)">remove</span>
+      <div v-for="(word, index) in words" class="word">
+        <span class="remove" @click="removeWord(index)">remove</span>
         <span class="norm">{{ word.norm }}</span>
         &nbsp;
         <span class="pos">{{ word.pos }}</span>
@@ -35,8 +35,8 @@ export default {
     toggle () {
       this.open = !this.open
     },
-    removeWord (word) {
-      this.words.splice(this.words.indexOf(word), 1)
+    removeWord (index) {
+      this.words.splice(index, 1)
     }
   }
 }
