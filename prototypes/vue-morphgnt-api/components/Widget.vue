@@ -11,16 +11,16 @@
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      open: true
-    }
-  },
-  methods: {
-    toggle () {
-      this.open = !this.open
+  export default {
+    data () {
+      return {
+        open: true
+      }
+    },
+    methods: {
+      toggle () {
+        this.open = !this.open
+      }
     }
   }
-}
 </script>

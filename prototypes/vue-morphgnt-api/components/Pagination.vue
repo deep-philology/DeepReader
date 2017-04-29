@@ -7,11 +7,11 @@
 </template>
 
 <script>
-export default {
-  props: [
-    'prev',
-    'next',
-    'title'
-  ]
-}
+  export default {
+    props: [
+      'prev',
+      'next',
+      'title'
+    ]
+  }
 </script>
