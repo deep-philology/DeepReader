@@ -1,15 +1,18 @@
 <template>
-  <div class="widget">
-    <header @click.prevent="toggle"><span class="summary" v-if="!open"><span class="norm">{{ word.norm }}</span>
-    &nbsp;
-    <span class="pos">{{ word.pos }}</span>
-    <span v-if="word.mood">.</span>
-    {{ word.tense }}{{ word.voice }}{{ word.mood }}
-    <span v-if="word.number">.</span>
-    {{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}
-    &nbsp;
-    <span class="lemma">{{ word.lemma }}</span></span> Word Info</header>
-    <section v-if="open">
+  <widget>
+    <span slot="header">Word Info</span>
+    <span slot="summary">
+      <span class="norm">{{ word.norm }}</span>
+      &nbsp;
+      <span class="pos">{{ word.pos }}</span>
+      <span v-if="word.mood">.</span>
+      {{ word.tense }}{{ word.voice }}{{ word.mood }}
+      <span v-if="word.number">.</span>
+      {{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}
+      &nbsp;
+      <span class="lemma">{{ word.lemma }}</span></span>
+    </span>
+    <div slot="body">
       <div class="norm">{{ word.norm }}</div>
 
       <span class="pos">{{ word.pos }}</span>
@@ -19,39 +22,31 @@
       {{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}
 
       <div class="lemma">{{ word.lemma }}</div>
-    </section>
-  </div>
+    </div>
+  </widget>
 </template>
 
 <script>
-export default {
-  created () {
-    this.$parent.$on('word-select', (word) => {
-      this.word = word
-    })
-  },
-  data () {
-    return {
-      open: true,
-      word: {}
-    }
-  },
-  methods: {
-    toggle () {
-      this.open = !this.open
+  import Widget from '~components/Widget.vue'
+
+  export default {
+    created () {
+      this.$parent.$on('word-select', (word) => {
+        this.word = word
+      })
+    },
+    data () {
+      return {
+        word: {}
+      }
+    },
+    components: {
+      Widget
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-  header {
-    cursor: pointer;
-    .summary {
-      float: right;
-      font-weight: normal;
-    }
-  }
   section {
     .norm {
       font-size: 150%;

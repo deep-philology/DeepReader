@@ -1,36 +1,28 @@
 <template>
-  <div class="widget">
-    <header @click.prevent="toggle">Book</header>
-    <section v-if="open">
+  <widget>
+    <span slot="header">Book Select</span>
+    <div slot="body">
       <ul>
         <li v-for="book in books"><nuxt-link :to="{ query: {book: book['@id']} }">{{ book.name }}</nuxt-link></li>
       </ul>
-    </section>
-  </div>
+    </div>
+  </widget>
 </template>
 
 <script>
-export default {
-  data () {
-    return {
-      open: true
-    }
-  },
-  props: [
-    'books'
-  ],
-  methods: {
-    toggle () {
-      this.open = !this.open
+  import Widget from '~components/Widget.vue'
+
+  export default {
+    props: [
+      'books'
+    ],
+    components: {
+      Widget
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-  header {
-    cursor: pointer;
-  }
   a {
     display: block;
     color: inherit;

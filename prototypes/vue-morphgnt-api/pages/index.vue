@@ -196,10 +196,15 @@ export default {
     background: #F7F7F7;
     font-size: 9pt;
     > header {
+      cursor: pointer;
       background: #EEE;
       transition: background 0.2s ease-in-out, opacity 0.5s ease-in-out;
       padding: 5px 10px;
       font-weight: bold;
+      .summary {
+        float: right;
+        font-weight: normal;
+      }
     }
     > section {
       padding: 10px 10px;

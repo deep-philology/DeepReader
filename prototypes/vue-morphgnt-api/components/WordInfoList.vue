@@ -1,7 +1,8 @@
 <template>
-  <div class="widget">
-    <header @click.prevent="toggle"><span class="summary" v-if="!open">[{{ words.length }}]</span> Word Info List</header>
-    <section v-if="open">
+  <widget>
+    <span slot="header">Word Info List</span>
+    <span slot="summary">[{{ words.length }}]</span>
+    <div slot="body">
       <div v-for="(word, index) in words" class="word">
         <span class="remove" @click="removeWord(index)">remove</span>
         <span class="norm">{{ word.norm }}</span>
@@ -14,42 +15,36 @@
         &nbsp;
         <span class="lemma">{{ word.lemma }}</span>
       </div>
-    </section>
-  </div>
+    </div>
+  </widget>
 </template>
 
 <script>
-export default {
-  created () {
-    this.$parent.$on('word-select', (word) => {
-      this.words.push(word)
-    })
-  },
-  data () {
-    return {
-      open: true,
-      words: []
-    }
-  },
-  methods: {
-    toggle () {
-      this.open = !this.open
+  import Widget from '~components/Widget.vue'
+
+  export default {
+    created () {
+      this.$parent.$on('word-select', (word) => {
+        this.words.push(word)
+      })
     },
-    removeWord (index) {
-      this.words.splice(index, 1)
+    data () {
+      return {
+        words: []
+      }
+    },
+    methods: {
+      removeWord (index) {
+        this.words.splice(index, 1)
+      }
+    },
+    components: {
+      Widget
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-  header {
-    cursor: pointer;
-    .summary {
-      float: right;
-      font-weight: normal;
-    }
-  }
   .word {
     padding: 2px 5px 2px 0;
     .remove {
