@@ -6,6 +6,7 @@
     <div class="grid-wrapper">
       <div class="left">
         <book-select :books="books"></book-select>
+        <book-info></book-info>
       </div>
 
       <div class="main">
@@ -33,6 +34,7 @@ import Pagination from '~components/Pagination.vue'
 import BookSelect from '~components/BookSelect.vue'
 import WordInfo from '~components/WordInfo.vue'
 import WordInfoList from '~components/WordInfoList.vue'
+import BookInfo from '~components/BookInfo.vue'
 
 let morphgnt = {
   apiRoot: 'https://api.morphgnt.org',
@@ -111,7 +113,8 @@ export default {
     Pagination,
     BookSelect,
     WordInfo,
-    WordInfoList
+    WordInfoList,
+    BookInfo
   }
 }
 </script>
