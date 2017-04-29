@@ -1,33 +1,18 @@
 <template>
   <widget>
     <span slot="header">Word Info</span>
-    <span slot="summary">
-      <span class="norm">{{ word.norm }}</span>
-      &nbsp;
-      <span class="pos">{{ word.pos }}</span>
-      <span v-if="word.mood">.</span>
-      {{ word.tense }}{{ word.voice }}{{ word.mood }}
-      <span v-if="word.number">.</span>
-      {{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}
-      &nbsp;
-      <span class="lemma">{{ word.lemma }}</span></span>
+    <span slot="summary" class="word-info-summary">
+      <word-analysis :word="word"></word-analysis>
     </span>
-    <div slot="body">
-      <div class="norm">{{ word.norm }}</div>
-
-      <span class="pos">{{ word.pos }}</span>
-      <span v-if="word.mood">.</span>
-      {{ word.tense }}{{ word.voice }}{{ word.mood }}
-      <span v-if="word.number">.</span>
-      {{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}
-
-      <div class="lemma">{{ word.lemma }}</div>
+    <div slot="body" class="word-info-body">
+      <word-analysis :word="word"></word-analysis>
     </div>
   </widget>
 </template>
 
 <script>
   import Widget from '~components/Widget.vue'
+  import WordAnalysis from '~components/WordAnalysis.vue'
 
   export default {
     created () {
@@ -41,16 +26,27 @@
       }
     },
     components: {
-      Widget
+      Widget,
+      WordAnalysis
     }
   }
 </script>
 
-<style lang="scss" scoped>
-  section {
-    .norm {
-      font-size: 150%;
+<style lang="scss">
+  .word-info-summary {
+    .norm, .lemma {
       font-family: "Skolar";
+      font-size: 120%;
+    }
+    .norm, .lemma, .analysis {
+      display: inline;
+      padding-left: 0.5em;
+    }
+  }
+  .word-info-body {
+    .norm {
+      font-family: "Skolar";
+      font-size: 150%;
       font-weight: bold;
     }
     .lemma {
