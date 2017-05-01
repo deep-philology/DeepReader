@@ -26,6 +26,7 @@
       <div class="right">
         <word-info></word-info>
         <word-info-list></word-info-list>
+        <morpheus></morpheus>
       </div>
     </div>
   </div>
@@ -38,6 +39,7 @@ import BookSelect from '~components/BookSelect.vue'
 import WordInfo from '~components/WordInfo.vue'
 import WordInfoList from '~components/WordInfoList.vue'
 import BookInfo from '~components/BookInfo.vue'
+import Morpheus from '~components/Morpheus.vue'
 
 let morphgnt = {
   apiRoot: 'https://api.morphgnt.org',
@@ -117,7 +119,8 @@ export default {
     BookSelect,
     WordInfo,
     WordInfoList,
-    BookInfo
+    BookInfo,
+    Morpheus
   }
 }
 </script>
