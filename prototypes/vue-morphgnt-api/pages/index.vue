@@ -6,18 +6,21 @@
     <div class="grid-wrapper">
       <div class="left">
         <book-select :books="books"></book-select>
-        <book-info></book-info>
+        <book-info v-if="book"></book-info>
       </div>
 
       <div class="main">
+        <template v-if="book">
 
-        <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="book.name"></pagination>
+          <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="book.name"></pagination>
 
-        <div id="text">
-          <p><span class="word" v-for="word in text.words" @click="handleWordSelect(word)">{{ word.text }} </span></p>
-        </div>
+          <div id="text">
+            <p><span class="word" v-for="word in text.words" @click="handleWordSelect(word)">{{ word.text }} </span></p>
+          </div>
 
-        <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="book.name"></pagination>
+          <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="book.name"></pagination>
+
+        </template>
 
       </div>
       <div class="right">
@@ -63,7 +66,7 @@ export default {
     return {
       query: {},
       books: [],
-      book: {},
+      book: null,
       text: {}
     }
   },
