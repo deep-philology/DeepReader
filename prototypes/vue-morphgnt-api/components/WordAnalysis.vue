@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="norm">{{ word.norm }}&nbsp;</div>
+    <div class="norm" @click="handleNormSelect(word)">{{ word.norm }}&nbsp;</div>
     <div class="analysis">
       <span class="pos">{{ word.pos }}</span>
       <span v-if="word.mood">.{{ word.tense }}{{ word.voice }}{{ word.mood }}</span>
@@ -14,6 +14,17 @@
   export default {
     props: [
       'word'
-    ]
+    ],
+    methods: {
+      handleNormSelect (word) {
+        this.$parent.$parent.$parent.$emit('word-select', word)
+      }
+    }
   }
 </script>
+
+<style lang="scss" scoped>
+  .norm {
+    cursor: pointer;
+  }
+</style>

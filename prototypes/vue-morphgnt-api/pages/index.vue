@@ -112,6 +112,7 @@ export default {
     },
     handleWordSelect (word) {
       this.$emit('word-select', word)
+      this.$emit('word-select2', word)
     }
   },
   components: {

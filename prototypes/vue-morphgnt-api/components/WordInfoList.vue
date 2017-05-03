@@ -17,7 +17,7 @@
 
   export default {
     created () {
-      this.$parent.$on('word-select', (word) => {
+      this.$parent.$on('word-select2', (word) => {
         this.words.push(word)
       })
     },
