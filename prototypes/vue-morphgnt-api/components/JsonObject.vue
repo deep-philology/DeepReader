@@ -2,21 +2,23 @@
   <div>
     <div v-for="value,key in obj">
       <b>{{ key }}</b>:
-      <span v-if="typeof(value) === 'string'">{{ value }}</span>
-      <div v-else class="sublist">
-        <div v-for="subvalue,subkey in value">
-          <b>{{ subkey }}</b>: {{ subvalue }}
-        </div>
-      </div>
+      <span v-if="typeof(value) != 'object'">{{ value }}</span>
+      <json-object v-else class="sublist" :obj="value"></json-object>
     </div>
   </div>
 </template>
 
 <script>
+  import JsonObject from '~components/JsonObject.vue'
+
   export default {
+    name: 'JsonObject',
     props: [
       'obj'
-    ]
+    ],
+    components: {
+      JsonObject
+    }
   }
 </script>
 

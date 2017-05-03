@@ -1,15 +1,11 @@
 <template>
   <widget>
-    <span slot="header">Morpheus</span>
+    <span slot="header">Morpheus (Raw Response)</span>
     <span slot="summary">
       {{ word.word }}
     </span>
-    <div slot="body" v-if="morphEntry">
-      <json-object :obj="morphEntry.dict"></json-object>
-      <div v-if="Array.isArray(morphEntry.infl)">
-        <json-object v-for="item,index in morphEntry.infl" class="item" :obj="item"></json-object>
-      </div>
-      <json-object v-else :obj="morphEntry.infl" class="item"></json-object>
+    <div slot="body" v-if="morphBody">
+      <json-object :obj="morphBody"></json-object>
     </div>
   </widget>
 </template>
@@ -25,14 +21,14 @@
         this.word = word
         const url = `http://services.perseids.org/bsp/morphologyservice/analysis/word?word=${word.word}&lang=grc&engine=morpheusgrc`
         axios.get(url).then((response) => {
-          this.morphEntry = response.data.RDF.Annotation.Body.rest.entry
+          this.morphBody = response.data.RDF.Annotation.Body
         })
       })
     },
     data () {
       return {
         word: '',
-        morphEntry: null
+        morphBody: null
       }
     },
     components: {
@@ -41,11 +37,3 @@
     }
   }
 </script>
-
-<style lang="scss" scoped>
-  .item {
-    margin: 10px 0;
-    padding-left: 10px;
-    border-left: 2px solid #CCC;
-  }
-</style>
