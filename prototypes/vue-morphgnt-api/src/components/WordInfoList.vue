@@ -12,30 +12,30 @@
 </template>
 
 <script>
-  import Widget from '~components/Widget.vue'
-  import WordAnalysis from '~components/WordAnalysis.vue'
+  import Widget from '@/components/Widget';
+  import WordAnalysis from '@/components/WordAnalysis';
 
   export default {
-    created () {
+    created() {
       this.$parent.$on('word-select2', (word) => {
-        this.words.push(word)
-      })
+        this.words.push(word);
+      });
     },
-    data () {
+    data() {
       return {
-        words: []
-      }
+        words: [],
+      };
     },
     methods: {
-      removeWord (index) {
-        this.words.splice(index, 1)
-      }
+      removeWord(index) {
+        this.words.splice(index, 1);
+      },
     },
     components: {
       Widget,
-      WordAnalysis
-    }
-  }
+      WordAnalysis,
+    },
+  };
 </script>
 
 <style lang="scss">

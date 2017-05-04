@@ -3,23 +3,23 @@
     <span slot="header">Book Select</span>
     <div slot="body">
       <ul>
-        <li v-for="book in books"><nuxt-link :to="{ query: {book: book['@id']} }">{{ book.name }}</nuxt-link></li>
+        <li v-for="book in books"><router-link :to="{query: {book: book['@id']}}">{{ book.name }}</router-link></li>
       </ul>
     </div>
   </widget>
 </template>
 
 <script>
-  import Widget from '~components/Widget.vue'
+  import Widget from '@/components/Widget';
 
   export default {
     props: [
-      'books'
+      'books',
     ],
     components: {
-      Widget
-    }
-  }
+      Widget,
+    },
+  };
 </script>
 
 <style lang="scss" scoped>

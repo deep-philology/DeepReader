@@ -12,15 +12,15 @@
 
 <script>
   export default {
-    data () {
+    data() {
       return {
-        open: true
-      }
+        open: true,
+      };
     },
     methods: {
-      toggle () {
-        this.open = !this.open
-      }
-    }
-  }
+      toggle() {
+        this.open = !this.open;
+      },
+    },
+  };
 </script>

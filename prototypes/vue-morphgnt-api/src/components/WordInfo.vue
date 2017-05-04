@@ -11,25 +11,25 @@
 </template>
 
 <script>
-  import Widget from '~components/Widget.vue'
-  import WordAnalysis from '~components/WordAnalysis.vue'
+  import Widget from '@/components/Widget';
+  import WordAnalysis from '@/components/WordAnalysis';
 
   export default {
-    created () {
+    created() {
       this.$parent.$on('word-select', (word) => {
-        this.word = word
-      })
+        this.word = word;
+      });
     },
-    data () {
+    data() {
       return {
-        word: {}
-      }
+        word: {},
+      };
     },
     components: {
       Widget,
-      WordAnalysis
-    }
-  }
+      WordAnalysis,
+    },
+  };
 </script>
 
 <style lang="scss">

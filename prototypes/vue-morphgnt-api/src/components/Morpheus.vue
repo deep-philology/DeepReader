@@ -11,29 +11,29 @@
 </template>
 
 <script>
-  import axios from 'axios'
-  import Widget from '~components/Widget.vue'
-  import JsonObject from '~components/JsonObject.vue'
+  import axios from 'axios';
+  import Widget from '@/components/Widget';
+  import JsonObject from '@/components/JsonObject';
 
   export default {
-    mounted () {
+    mounted() {
       this.$parent.$on('word-select', (word) => {
-        this.word = word
-        const url = `http://services.perseids.org/bsp/morphologyservice/analysis/word?word=${word.word}&lang=grc&engine=morpheusgrc`
+        this.word = word;
+        const url = `http://services.perseids.org/bsp/morphologyservice/analysis/word?word=${word.word}&lang=grc&engine=morpheusgrc`;
         axios.get(url).then((response) => {
-          this.morphBody = response.data.RDF.Annotation.Body
-        })
-      })
+          this.morphBody = response.data.RDF.Annotation.Body;
+        });
+      });
     },
-    data () {
+    data() {
       return {
         word: '',
-        morphBody: null
-      }
+        morphBody: null,
+      };
     },
     components: {
       Widget,
-      JsonObject
-    }
-  }
+      JsonObject,
+    },
+  };
 </script>

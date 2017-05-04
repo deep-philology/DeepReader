@@ -9,17 +9,17 @@
 </template>
 
 <script>
-  import JsonObject from '~components/JsonObject.vue'
+  import JsonObject from '@/components/JsonObject';
 
   export default {
     name: 'JsonObject',
     props: [
-      'obj'
+      'obj',
     ],
     components: {
-      JsonObject
-    }
-  }
+      JsonObject,
+    },
+  };
 </script>
 
 <style lang="scss" scoped>

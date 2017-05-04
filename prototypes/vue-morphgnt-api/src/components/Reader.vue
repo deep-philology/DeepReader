@@ -33,87 +33,99 @@
 </template>
 
 <script>
-import axios from 'axios'
-import Pagination from '~components/Pagination.vue'
-import BookSelect from '~components/BookSelect.vue'
-import WordInfo from '~components/WordInfo.vue'
-import WordInfoList from '~components/WordInfoList.vue'
-import BookInfo from '~components/BookInfo.vue'
-import Morpheus from '~components/Morpheus.vue'
+import axios from 'axios';
+import Pagination from '@/components/Pagination';
+import BookSelect from '@/components/BookSelect';
+import WordInfo from '@/components/WordInfo';
+import WordInfoList from '@/components/WordInfoList';
+import BookInfo from '@/components/BookInfo';
+import Morpheus from '@/components/Morpheus';
 
-let morphgnt = {
+const morphgnt = {
   apiRoot: 'https://api.morphgnt.org',
-  async resource (path) {
-    let { data: resource } = await axios.get(`${this.apiRoot}${path}`)
-    return resource
+  async resource(path) {
+    const { data: resource } = await axios.get(`${this.apiRoot}${path}`);
+    return resource;
   },
-  async books () {
-    let { books } = await this.resource('/v0/root.json')
-    return books
-  }
-}
+  async books() {
+    const { books } = await this.resource('/v0/root.json');
+    return books;
+  },
+};
 
 export default {
-  created () {
-    if (process.BROWSER_BUILD) {
-      window.addEventListener('keyup', this.handleKeyUp)
-    }
+  name: 'reader',
+  created() {
+    this.fetchData();
   },
-  beforeDestroy () {
-    if (process.BROWSER_BUILD) {
-      window.removeEventListener('keyup', this.handleKeyUp)
-    }
+  mounted() {
+    window.addEventListener('keyup', this.handleKeyUp);
   },
-  data () {
+  beforeDestroy() {
+    window.removeEventListener('keyup', this.handleKeyUp);
+  },
+  data() {
     return {
       query: {},
       books: [],
       book: null,
-      text: {}
-    }
+      text: {},
+    };
   },
-  async asyncData ({ query }) {
-    let books = await morphgnt.books()
-    if (query.book) {
-      let book = await morphgnt.resource(query.book)
-      var text = {}
-      if (query.resource) {
-        text = await morphgnt.resource(query.resource)
-      } else {
-        text = await morphgnt.resource(book.first_paragraph)
-      }
-      return { query, books, book, text }
-    }
-    return { query, books, text: {} }
+  watch: {
+    $route: 'fetchData',
   },
   methods: {
-    renderText (path) {
-      morphgnt.resource(path).then((resource) => {
-        this.text = resource
-      })
+    fetchData() {
+      this.asyncData({ query: this.$route.query }).then(({ query, books, book, text }) => {
+        this.query = query;
+        this.books = books;
+        this.book = book;
+        this.text = text;
+      });
     },
-    resourceLink (query, resource) {
+    async asyncData({ query }) {
+      let text = {};
+      const books = await morphgnt.books();
+      if (query.book) {
+        const book = await morphgnt.resource(query.book);
+        if (query.resource) {
+          text = await morphgnt.resource(query.resource);
+        } else {
+          text = await morphgnt.resource(book.first_paragraph);
+        }
+        return { query, books, book, text };
+      }
+      return { query, books, text };
+    },
+    renderText(path) {
+      morphgnt.resource(path).then((resource) => {
+        this.text = resource;
+      });
+    },
+    resourceLink(query, resource) {
       if (resource) {
         return {
-          query: Object.assign({}, query, { resource })
-        }
+          query: Object.assign({}, query, { resource }),
+        };
       }
+      return {};
     },
-    handleKeyUp (e) {
+    handleKeyUp(e) {
       if (e.key === 'ArrowLeft') {
         if (this.text.prev) {
-          this.$router.push(this.resourceLink(this.query, this.text.prev))
+          this.$router.push(this.resourceLink(this.query, this.text.prev));
         }
       } else if (e.key === 'ArrowRight') {
         if (this.text.next) {
-          this.$router.push(this.resourceLink(this.query, this.text.next))
+          this.$router.push(this.resourceLink(this.query, this.text.next));
         }
       }
     },
-    handleWordSelect (word) {
-      this.$emit('word-select', word)
-      this.$emit('word-select2', word)
-    }
+    handleWordSelect(word) {
+      this.$emit('word-select', word);
+      this.$emit('word-select2', word);
+    },
   },
   components: {
     Pagination,
@@ -121,9 +133,9 @@ export default {
     WordInfo,
     WordInfoList,
     BookInfo,
-    Morpheus
-  }
-}
+    Morpheus,
+  },
+};
 </script>
 
 <style lang="scss">

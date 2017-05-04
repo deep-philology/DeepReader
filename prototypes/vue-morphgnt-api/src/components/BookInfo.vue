@@ -4,23 +4,23 @@
     <span slot="summary">{{ $parent.book.name }}</span>
     <div slot="body">
       <b>{{ $parent.book.name }}</b>:
-      <nuxt-link :to="$parent.resourceLink($parent.query, $parent.book.first_paragraph)">first paragraph</nuxt-link>
+      <router-link :to="$parent.resourceLink($parent.query, $parent.book.first_paragraph)">first paragraph</router-link>
       &bull;
-      <nuxt-link :to="$parent.resourceLink($parent.query, $parent.book.first_sentence)">first sentence</nuxt-link>
+      <router-link :to="$parent.resourceLink($parent.query, $parent.book.first_sentence)">first sentence</router-link>
       &bull;
-      <nuxt-link :to="$parent.resourceLink($parent.query, $parent.book.first_verse)">first verse</nuxt-link>
+      <router-link :to="$parent.resourceLink($parent.query, $parent.book.first_verse)">first verse</router-link>
     </div>
   </widget>
 </template>
 
 <script>
-  import Widget from '~components/Widget.vue'
+  import Widget from '@/components/Widget';
 
   export default {
     components: {
-      Widget
-    }
-  }
+      Widget,
+    },
+  };
 </script>
 
 <style lang="scss" scoped>

@@ -13,14 +13,14 @@
 <script>
   export default {
     props: [
-      'word'
+      'word',
     ],
     methods: {
-      handleNormSelect (word) {
-        this.$parent.$parent.$parent.$emit('word-select', word)
-      }
-    }
-  }
+      handleNormSelect(word) {
+        this.$parent.$parent.$parent.$emit('word-select', word);
+      },
+    },
+  };
 </script>
 
 <style lang="scss" scoped>
