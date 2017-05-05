@@ -9,7 +9,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import morphgnt from '@/morphgnt';
   import Widget from '@/components/Widget';
 
   export default {
@@ -27,15 +27,14 @@
         }
       },
       fetchVerse() {
-        const url = `http://localhost:8000/v0/verse-lookup/?${this.verse}`;
-        axios.get(url, { validateStatus: null }).then((response) => {
-          if (response.status === 400) {
-            this.error = response.data.message;
-          } else {
+        morphgnt.verseLookup(this.verse)
+          .then((verseId) => {
             this.verse = '';
-            this.$router.push(this.$parent.passageLink(this.$parent.query, response.data.verse_id));
-          }
-        });
+            this.$router.push(this.$parent.passageLink(this.$parent.query, verseId));
+          })
+          .catch((err) => {
+            this.error = err;
+          });
       },
     },
     components: {

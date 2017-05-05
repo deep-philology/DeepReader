@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import axios from 'axios';
 import { mapGetters } from 'vuex';
+import morphgnt from '@/morphgnt';
 import Pagination from '@/components/Pagination';
 import BookSelect from '@/components/BookSelect';
 import WordInfo from '@/components/WordInfo';
@@ -45,19 +45,6 @@ import BookInfo from '@/components/BookInfo';
 import Morpheus from '@/components/Morpheus';
 import BookmarkList from '@/components/BookmarkList';
 import VerseLookup from '@/components/VerseLookup';
-
-const morphgnt = {
-  // apiRoot: 'https://api.morphgnt.org',
-  apiRoot: 'http://localhost:8000',
-  async resource(path) {
-    const { data: resource } = await axios.get(`${this.apiRoot}${path}`);
-    return resource;
-  },
-  async books() {
-    const { books } = await this.resource('/v0/root.json');
-    return books;
-  },
-};
 
 export default {
   name: 'reader',
