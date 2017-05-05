@@ -7,6 +7,7 @@
       <div class="left">
         <book-select :books="books"></book-select>
         <book-info v-if="book"></book-info>
+        <verse-lookup></verse-lookup>
         <bookmark-list v-if="user"></bookmark-list>
       </div>
 
@@ -43,6 +44,7 @@ import WordInfoList from '@/components/WordInfoList';
 import BookInfo from '@/components/BookInfo';
 import Morpheus from '@/components/Morpheus';
 import BookmarkList from '@/components/BookmarkList';
+import VerseLookup from '@/components/VerseLookup';
 
 const morphgnt = {
   // apiRoot: 'https://api.morphgnt.org',
@@ -142,6 +144,7 @@ export default {
     BookInfo,
     Morpheus,
     BookmarkList,
+    VerseLookup,
   },
 };
 </script>
