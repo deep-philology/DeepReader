@@ -7,18 +7,19 @@
       <div class="left">
         <book-select :books="books"></book-select>
         <book-info v-if="book"></book-info>
+        <bookmark-list v-if="user"></bookmark-list>
       </div>
 
       <div class="main">
         <template v-if="book">
 
-          <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="book.name"></pagination>
+          <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
           <div id="text">
-            <p><span class="word" v-for="word in text.words" @click="handleWordSelect(word)">{{ word.text }} </span></p>
+            <p><span class="word" v-for="word in passage.words" @click="handleWordSelect(word)">{{ word.text }} </span></p>
           </div>
 
-          <pagination :prev="resourceLink(query, text.prev)" :next="resourceLink(query, text.next)" :title="book.name"></pagination>
+          <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
         </template>
 
@@ -34,15 +35,18 @@
 
 <script>
 import axios from 'axios';
+import { mapGetters } from 'vuex';
 import Pagination from '@/components/Pagination';
 import BookSelect from '@/components/BookSelect';
 import WordInfo from '@/components/WordInfo';
 import WordInfoList from '@/components/WordInfoList';
 import BookInfo from '@/components/BookInfo';
 import Morpheus from '@/components/Morpheus';
+import BookmarkList from '@/components/BookmarkList';
 
 const morphgnt = {
-  apiRoot: 'https://api.morphgnt.org',
+  // apiRoot: 'https://api.morphgnt.org',
+  apiRoot: 'http://localhost:8000',
   async resource(path) {
     const { data: resource } = await axios.get(`${this.apiRoot}${path}`);
     return resource;
@@ -69,56 +73,59 @@ export default {
       query: {},
       books: [],
       book: null,
-      text: {},
+      passage: null,
     };
   },
+  computed: mapGetters(['user']),
   watch: {
     $route: 'fetchData',
   },
   methods: {
     fetchData() {
-      this.asyncData({ query: this.$route.query }).then(({ query, books, book, text }) => {
+      this.asyncData({ query: this.$route.query }).then(({ query, books, book, passage }) => {
+        if (book && !passage) {
+          this.$router.push(this.passageLink(query, book.first_paragraph));
+        }
         this.query = query;
         this.books = books;
         this.book = book;
-        this.text = text;
+        this.passage = passage;
       });
     },
     async asyncData({ query }) {
-      let text = {};
+      let book = null;
+      let passage = null;
       const books = await morphgnt.books();
-      if (query.book) {
-        const book = await morphgnt.resource(query.book);
-        if (query.resource) {
-          text = await morphgnt.resource(query.resource);
-        } else {
-          text = await morphgnt.resource(book.first_paragraph);
-        }
-        return { query, books, book, text };
+      if (query.passage) {
+        passage = await morphgnt.resource(query.passage);
+        book = await morphgnt.resource(passage.book);
+      } else if (query.book) {
+        book = await morphgnt.resource(query.book);
       }
-      return { query, books, text };
+      return { query, books, book, passage };
     },
-    renderText(path) {
+    renderPassage(path) {
       morphgnt.resource(path).then((resource) => {
-        this.text = resource;
+        this.passage = resource;
       });
     },
-    resourceLink(query, resource) {
-      if (resource) {
+    passageLink(query, passage) {
+      if (passage) {
+        delete query.book;
         return {
-          query: Object.assign({}, query, { resource }),
+          query: Object.assign({}, query, { passage }),
         };
       }
       return {};
     },
     handleKeyUp(e) {
       if (e.key === 'ArrowLeft') {
-        if (this.text.prev) {
-          this.$router.push(this.resourceLink(this.query, this.text.prev));
+        if (this.passage.prev) {
+          this.$router.push(this.passageLink(this.query, this.passage.prev));
         }
       } else if (e.key === 'ArrowRight') {
-        if (this.text.next) {
-          this.$router.push(this.resourceLink(this.query, this.text.next));
+        if (this.passage.next) {
+          this.$router.push(this.passageLink(this.query, this.passage.next));
         }
       }
     },
@@ -134,6 +141,7 @@ export default {
     WordInfoList,
     BookInfo,
     Morpheus,
+    BookmarkList,
   },
 };
 </script>
@@ -148,7 +156,7 @@ export default {
   /* hover opacity */
 
   .widget, .root > header, .page-nav-1 {
-    opacity: 0;
+    opacity: 1;
     transition: opacity 0.5s ease-in-out;
   }
 

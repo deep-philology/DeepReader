@@ -4,11 +4,11 @@
     <span slot="summary">{{ $parent.book.name }}</span>
     <div slot="body">
       <b>{{ $parent.book.name }}</b>:
-      <router-link :to="$parent.resourceLink($parent.query, $parent.book.first_paragraph)">first paragraph</router-link>
+      <router-link :to="$parent.passageLink($parent.query, $parent.book.first_paragraph)">first paragraph</router-link>
       &bull;
-      <router-link :to="$parent.resourceLink($parent.query, $parent.book.first_sentence)">first sentence</router-link>
+      <router-link :to="$parent.passageLink($parent.query, $parent.book.first_sentence)">first sentence</router-link>
       &bull;
-      <router-link :to="$parent.resourceLink($parent.query, $parent.book.first_verse)">first verse</router-link>
+      <router-link :to="$parent.passageLink($parent.query, $parent.book.first_verse)">first verse</router-link>
     </div>
   </widget>
 </template>
