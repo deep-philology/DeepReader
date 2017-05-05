@@ -116,7 +116,7 @@ export default {
           query: Object.assign({}, query, { passage }),
         };
       }
-      return {};
+      return null;
     },
     handleKeyUp(e) {
       if (e.key === 'ArrowLeft') {
