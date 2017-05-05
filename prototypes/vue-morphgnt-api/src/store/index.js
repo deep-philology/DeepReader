@@ -24,13 +24,18 @@ export default new Vuex.Store({
   },
   state: {
     user: null,
+    textSize: '20pt',
   },
   getters: {
     user: state => state.user,
+    textSize: state => state.textSize,
   },
   mutations: {
     setUser(state, user) {
       state.user = user;
+    },
+    setTextSize(state, size) {
+      state.textSize = size;
     },
     ...firebaseMutations,
   },

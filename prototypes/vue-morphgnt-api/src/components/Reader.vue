@@ -16,7 +16,7 @@
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
-          <div id="text">
+          <div id="text" :style="{fontSize: this.textSize}">
             <p><span class="word" v-for="word in passage.words" @click="handleWordSelect(word)"><span class="verse-num" v-if="word['@id'].slice(-8, -5) == '001'">{{ parseInt(word['@id'].slice(-11, -8)) }}&nbsp;</span>{{ word.text }} </span></p>
           </div>
 
@@ -26,6 +26,7 @@
 
       </div>
       <div class="right">
+        <text-formatting></text-formatting>
         <word-info></word-info>
         <word-info-list></word-info-list>
         <morpheus></morpheus>
@@ -45,6 +46,7 @@ import BookInfo from '@/components/BookInfo';
 import Morpheus from '@/components/Morpheus';
 import BookmarkList from '@/components/BookmarkList';
 import VerseLookup from '@/components/VerseLookup';
+import TextFormatting from '@/components/TextFormatting';
 
 export default {
   name: 'reader',
@@ -65,7 +67,7 @@ export default {
       passage: null,
     };
   },
-  computed: mapGetters(['user']),
+  computed: mapGetters(['user', 'textSize']),
   watch: {
     $route: 'fetchData',
   },
@@ -132,6 +134,7 @@ export default {
     Morpheus,
     BookmarkList,
     VerseLookup,
+    TextFormatting,
   },
 };
 </script>
@@ -197,7 +200,6 @@ export default {
 
   #text {
     clear: both;
-    font-size: 20pt;
     line-height: 1.6;
     word-spacing: 0.3em;
     color: #333;
