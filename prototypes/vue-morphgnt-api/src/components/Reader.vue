@@ -146,7 +146,7 @@ export default {
   /* hover opacity */
 
   .widget, .root > header, .page-nav-1 {
-    opacity: 1;
+    opacity: 0;
     transition: opacity 0.5s ease-in-out;
   }
 
