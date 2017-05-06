@@ -16,7 +16,7 @@
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
-          <div id="text" :style="{fontSize: this.textSize}">
+          <div id="text" :class="'textSize-' + this.textSize">
             <p><span class="word" v-for="word in passage.words" @click="handleWordSelect(word)"><span class="verse-num" v-if="word['@id'].slice(-8, -5) == '001'">{{ parseInt(word['@id'].slice(-11, -8)) }}&nbsp;</span>{{ word.text }} </span></p>
           </div>
 
@@ -210,6 +210,15 @@ export default {
         font-family: $widget-font-family;
         font-size: 60%;
       }
+    }
+    &.textSize-small {
+      font-size: 14pt;
+    }
+    &.textSize-normal {
+      font-size: 16pt;
+    }
+    &.textSize-large {
+      font-size: 20pt;
     }
   }
 

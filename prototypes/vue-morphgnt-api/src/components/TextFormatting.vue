@@ -15,13 +15,13 @@
   export default {
     methods: {
       smallerText() {
-        this.$store.commit('setTextSize', '14pt');
+        this.$store.commit('setTextSize', 'small');
       },
       normalText() {
-        this.$store.commit('setTextSize', '16pt');
+        this.$store.commit('setTextSize', 'normal');
       },
       largerText() {
-        this.$store.commit('setTextSize', '20pt');
+        this.$store.commit('setTextSize', 'large');
       },
     },
     components: {

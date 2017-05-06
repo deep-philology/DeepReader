@@ -24,7 +24,7 @@ export default new Vuex.Store({
   },
   state: {
     user: null,
-    textSize: '20pt',
+    textSize: 'normal',
   },
   getters: {
     user: state => state.user,
