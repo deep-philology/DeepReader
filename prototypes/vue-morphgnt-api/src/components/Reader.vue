@@ -39,7 +39,6 @@
         <text-colouring></text-colouring>
         <interlinear></interlinear>
         <word-info></word-info>
-        <word-info-list></word-info-list>
         <morpheus></morpheus>
       </div>
     </div>
@@ -52,7 +51,6 @@ import morphgnt from '@/morphgnt';
 import Pagination from '@/components/Pagination';
 import BookSelect from '@/components/BookSelect';
 import WordInfo from '@/components/WordInfo';
-import WordInfoList from '@/components/WordInfoList';
 import BookInfo from '@/components/BookInfo';
 import Morpheus from '@/components/Morpheus';
 import BookmarkList from '@/components/BookmarkList';
@@ -142,7 +140,6 @@ export default {
     Pagination,
     BookSelect,
     WordInfo,
-    WordInfoList,
     BookInfo,
     Morpheus,
     BookmarkList,
