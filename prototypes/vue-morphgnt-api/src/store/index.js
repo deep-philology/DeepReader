@@ -26,11 +26,13 @@ export default new Vuex.Store({
     user: null,
     textSize: 'normal',
     interlinear: false,
+    colour: null,
   },
   getters: {
     user: state => state.user,
     textSize: state => state.textSize,
     interlinear: state => state.interlinear,
+    colour: state => state.colour,
   },
   mutations: {
     setUser(state, user) {
@@ -41,6 +43,9 @@ export default new Vuex.Store({
     },
     toggleInterlinear(state) {
       state.interlinear = !state.interlinear;
+    },
+    setColour(state, scheme) {
+      state.colour = scheme;
     },
     ...firebaseMutations,
   },

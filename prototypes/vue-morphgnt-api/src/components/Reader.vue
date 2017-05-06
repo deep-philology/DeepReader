@@ -16,11 +16,11 @@
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
-          <div id="text" :class="'textSize-' + this.textSize">
+          <div id="text" :class="'textSize-' + this.textSize + (this.colour ? ' colour-' + this.colour : '')">
             <p>
               <div class="word unit" v-for="word in passage.words" @click="handleWordSelect(word)">
                 <span class="verse-num" v-if="word['@id'].slice(-8, -5) == '001'">{{ parseInt(word['@id'].slice(-11, -8)) }}</span>
-                <span class="txt">{{ word.text }}</span>
+                <span :class="'txt pos-' + word.pos + ' case-' + word.case">{{ word.text }}</span>
                 <br><template v-if="interlinear"><span class="gls">
                   <span class="pos">{{ word.pos }}</span><span v-if="word.mood">.{{ word.tense }}{{ word.voice }}{{ word.mood }}</span><span v-if="word.number">.{{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}</span>
                   <br>{{ word.lemma }}
@@ -36,6 +36,7 @@
       </div>
       <div class="right">
         <text-formatting></text-formatting>
+        <text-colouring></text-colouring>
         <interlinear></interlinear>
         <word-info></word-info>
         <word-info-list></word-info-list>
@@ -58,6 +59,7 @@ import BookmarkList from '@/components/BookmarkList';
 import VerseLookup from '@/components/VerseLookup';
 import TextFormatting from '@/components/TextFormatting';
 import Interlinear from '@/components/Interlinear';
+import TextColouring from '@/components/TextColouring';
 
 export default {
   name: 'reader',
@@ -78,7 +80,7 @@ export default {
       passage: null,
     };
   },
-  computed: mapGetters(['user', 'textSize', 'interlinear']),
+  computed: mapGetters(['user', 'textSize', 'interlinear', 'colour']),
   watch: {
     $route: 'fetchData',
   },
@@ -147,6 +149,7 @@ export default {
     VerseLookup,
     TextFormatting,
     Interlinear,
+    TextColouring,
   },
 };
 </script>
@@ -243,6 +246,32 @@ export default {
       display: inline-block;
       font-size: 75%;
       color: gray;
+    }
+
+    &.colour-pos {
+      .pos-N, .pos-A {
+        color: #C00;
+      }
+      .pos-RA, .pos-RD, .pos-RI, .pos-RP, .pos-RR {
+        color: #C50;
+      }
+      .pos-V {
+        color: #00C;
+      }
+    }
+    &.colour-case {
+      .case-N {
+        color: #C00;
+      }
+      .case-G {
+        color: #9C6;
+      }
+      .case-D {
+        color: #6CC;
+      }
+      .case-A {
+        color: #FC0;
+      }
     }
   }
 
