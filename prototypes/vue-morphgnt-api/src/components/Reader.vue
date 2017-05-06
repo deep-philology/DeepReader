@@ -270,6 +270,18 @@ export default {
         margin: 0;
         padding: 0;
       }
+      .textSize-small {
+        font-family: $main-font-family;
+        font-size: 14pt;
+      }
+      .textSize-normal {
+        font-family: $main-font-family;
+        font-size: 16pt;
+      }
+      .textSize-large {
+        font-family: $main-font-family;
+        font-size: 20pt;
+      }
     }
     &:hover {
       color: #000;

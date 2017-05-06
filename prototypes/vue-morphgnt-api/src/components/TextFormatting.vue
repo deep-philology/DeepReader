@@ -2,9 +2,10 @@
   <widget>
     <span slot="header">Text Formatting</span>
     <div slot="body">
-      <div class="click" @click="smallerText">Smaller Text</div>
-      <div class="click" @click="normalText">Normal Text</div>
-      <div class="click" @click="largerText">Larger Text</div>
+      Size:
+      <span class="click textSize-small" @click="smallerText">αβ</span>
+      <span class="click textSize-normal" @click="normalText">αβ</span>
+      <span class="click textSize-large" @click="largerText">αβ</span>
     </div>
   </widget>
 </template>
@@ -31,7 +32,7 @@
 </script>
 
 <style lang="scss" scoped>
-  div.click {
+  .click {
     color: inherit;
     text-decoration: none;
     cursor: pointer;
