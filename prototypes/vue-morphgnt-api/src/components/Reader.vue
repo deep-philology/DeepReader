@@ -50,9 +50,13 @@
             the appearance of the passage.
           </p>
           <p>
+            You can expand or collapse any widget by clicking on its title. You
+            can use the arrow keys on your keyboard to pagination between passages
+            in a work.
+          <p>
             Each widget is a separate Vue.js component. We are working to make it
             as simple as possible to develop new widgets that interact and engage
-            with the passage, optionally calling out to external APIs.
+            with the current passage, optionally calling out to external APIs.
           </p>
           <p>
             We are also experimenting with Firebase for persistence. Offline use
