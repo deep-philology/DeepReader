@@ -56,11 +56,14 @@
     text-decoration: none;
     padding: 2px 5px;
     &:hover {
-      background: #DDD;
+      color: #666;
     }
   }
+  button {
+    margin-bottom: 0.5em;
+  }
   .bookmark {
-    padding: 2px 5px 2px 0;
+    padding: 2px 0;
     .remove {
       color: transparent;
       float: right;
