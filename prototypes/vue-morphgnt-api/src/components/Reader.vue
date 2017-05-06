@@ -186,7 +186,7 @@ export default {
   /* header */
 
   .root > header {
-    background: #DDD;
+    background: #F7F7F7;
     padding: 10px 20px;
     > h1 {
       font-size: 24pt;
