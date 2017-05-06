@@ -1,7 +1,7 @@
 <template>
   <div class="root">
     <header>
-      <h1>Learner’s Online Reader Environment</h1>
+      <h1><b>LORE</b>: Learner’s Online Reading Environment</h1>
     </header>
     <div class="grid-wrapper">
       <div class="left">
