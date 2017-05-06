@@ -5,7 +5,7 @@
       <word-analysis :word="word"></word-analysis>
     </span>
     <div slot="body">
-      <div class="word-info-body">
+      <div class="word-info-body" v-if="word.norm">
         <word-analysis :word="word"></word-analysis>
       </div>
       <div class="word-info-list-body" v-if="words.length > 0">
