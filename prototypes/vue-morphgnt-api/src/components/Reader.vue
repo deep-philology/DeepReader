@@ -32,6 +32,33 @@
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
         </template>
+        <template v-else>
+          <p>Welcome to LORE, the Learner’s Online Reading Environment.</p>
+          <p>
+            LORE is a highly modular reading environment designed for
+            language learning. This is an early prototype using the MorphGNT API.
+            But we are working on support for CTS and other text APIs.
+          </p>
+          <p>
+            LORE is built on Vue.js.
+          </p>
+          <p>
+            If you hover over the page, you'll see various pluggable widgets on
+            the left and right. Those on the left are used to choose what passage
+            to read, and those on the right are used to present additional
+            information about the passage and its individual words, and to control
+            the appearance of the passage.
+          </p>
+          <p>
+            Each widget is a separate Vue.js component. We are working to make it
+            as simple as possible to develop new widgets that interact and engage
+            with the passage, optionally calling out to external APIs.
+          </p>
+          <p>
+            We are also experimenting with Firebase for persistence. Offline use
+            is also planned as is packaging LORE up as an app for mobile use.
+          </p>
+        </template>
 
       </div>
       <div class="right">
