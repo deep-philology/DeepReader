@@ -25,10 +25,12 @@ export default new Vuex.Store({
   state: {
     user: null,
     textSize: 'normal',
+    interlinear: false,
   },
   getters: {
     user: state => state.user,
     textSize: state => state.textSize,
+    interlinear: state => state.interlinear,
   },
   mutations: {
     setUser(state, user) {
@@ -36,6 +38,9 @@ export default new Vuex.Store({
     },
     setTextSize(state, size) {
       state.textSize = size;
+    },
+    toggleInterlinear(state) {
+      state.interlinear = !state.interlinear;
     },
     ...firebaseMutations,
   },

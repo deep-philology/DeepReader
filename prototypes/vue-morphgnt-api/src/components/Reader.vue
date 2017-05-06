@@ -17,7 +17,13 @@
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
           <div id="text" :class="'textSize-' + this.textSize">
-            <p><span class="word" v-for="word in passage.words" @click="handleWordSelect(word)"><span class="verse-num" v-if="word['@id'].slice(-8, -5) == '001'">{{ parseInt(word['@id'].slice(-11, -8)) }}&nbsp;</span>{{ word.text }} </span></p>
+            <p>
+              <div class="word unit" v-for="word in passage.words" @click="handleWordSelect(word)">
+                <span class="verse-num" v-if="word['@id'].slice(-8, -5) == '001'">{{ parseInt(word['@id'].slice(-11, -8)) }}</span>
+                <span class="txt">{{ word.text }}</span>
+                <br><template v-if="interlinear"><span class="gls">{{ word.lemma }}</span></template>
+              </div>
+            </p>
           </div>
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
@@ -27,6 +33,7 @@
       </div>
       <div class="right">
         <text-formatting></text-formatting>
+        <interlinear></interlinear>
         <word-info></word-info>
         <word-info-list></word-info-list>
         <morpheus></morpheus>
@@ -47,6 +54,7 @@ import Morpheus from '@/components/Morpheus';
 import BookmarkList from '@/components/BookmarkList';
 import VerseLookup from '@/components/VerseLookup';
 import TextFormatting from '@/components/TextFormatting';
+import Interlinear from '@/components/Interlinear';
 
 export default {
   name: 'reader',
@@ -67,7 +75,7 @@ export default {
       passage: null,
     };
   },
-  computed: mapGetters(['user', 'textSize']),
+  computed: mapGetters(['user', 'textSize', 'interlinear']),
   watch: {
     $route: 'fetchData',
   },
@@ -135,6 +143,7 @@ export default {
     BookmarkList,
     VerseLookup,
     TextFormatting,
+    Interlinear,
   },
 };
 </script>
@@ -200,7 +209,6 @@ export default {
 
   #text {
     clear: both;
-    line-height: 1.6;
     word-spacing: 0.3em;
     color: #333;
     .word {
@@ -219,6 +227,19 @@ export default {
     }
     &.textSize-large {
       font-size: 20pt;
+    }
+
+    div.unit {
+      display: inline-block;
+      margin-bottom: 0.5em;
+    }
+    .txt {
+      display: inline-block;
+    }
+    .gls {
+      display: inline-block;
+      font-size: 75%;
+      color: gray;
     }
   }
 
