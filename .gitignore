@@ -2,3 +2,4 @@
 __pycache__/
 .tox/
 *.egg-info
+node_modules/
