@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 export default {
-  apiRoot: 'https://api.morphgnt.org',
+  // apiRoot: 'https://api.morphgnt.org',
+  apiRoot: 'http://localhost:8000',
   async resource(path) {
     const { data: resource } = await axios.get(`${this.apiRoot}${path}`);
     return resource;
@@ -18,5 +19,10 @@ export default {
     } else {
       return response.data.verse_id;
     }
+  },
+  async frequency(input) {
+    const url = `${this.apiRoot}/v0/frequency/`;
+    const response = await axios.post(url, { input }, { validateStatus: null });
+    return response.data.output;
   },
 };

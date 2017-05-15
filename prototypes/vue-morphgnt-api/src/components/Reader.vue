@@ -12,15 +12,15 @@
       </div>
 
       <div class="main">
-        <template v-if="book">
+        <template v-if="passage">
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
           <div id="text" :class="'textSize-' + this.textSize + (this.colour ? ' colour-' + this.colour : '')">
             <p>
-              <div class="word unit" v-for="word in passage.words" @click="handleWordSelect(word)">
+              <div class="word unit" v-for="(word, index) in passage.words" @click="handleWordSelect(word)">
                 <span class="verse-num" v-if="word['@id'].slice(-8, -5) == '001'">{{ parseInt(word['@id'].slice(-11, -8)) }}</span>
-                <span :class="'txt pos-' + word.pos + ' case-' + word.case">{{ word.text }}</span>
+                <span :id="'w' + index" :class="'txt pos-' + word.pos + ' case-' + word.case">{{ word.text }}</span>
                 <br><template v-if="interlinear"><span class="gls">
                   <span class="pos">{{ word.pos }}</span><span v-if="word.mood">.{{ word.tense }}{{ word.voice }}{{ word.mood }}</span><span v-if="word.number">.{{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}</span>
                   <br>{{ word.lemma }}
@@ -69,6 +69,7 @@
         <text-formatting></text-formatting>
         <text-colouring></text-colouring>
         <interlinear></interlinear>
+        <frequency></frequency>
         <word-info></word-info>
         <morpheus></morpheus>
       </div>
@@ -89,6 +90,7 @@ import VerseLookup from '@/components/VerseLookup';
 import TextFormatting from '@/components/TextFormatting';
 import Interlinear from '@/components/Interlinear';
 import TextColouring from '@/components/TextColouring';
+import Frequency from '@/components/Frequency';
 
 export default {
   name: 'reader',
@@ -105,11 +107,9 @@ export default {
     return {
       query: {},
       books: [],
-      book: null,
-      passage: null,
     };
   },
-  computed: mapGetters(['user', 'textSize', 'interlinear', 'colour']),
+  computed: mapGetters(['user', 'book', 'passage', 'textSize', 'interlinear', 'colour']),
   watch: {
     $route: 'fetchData',
   },
@@ -118,11 +118,11 @@ export default {
       this.asyncData({ query: this.$route.query }).then(({ query, books, book, passage }) => {
         if (book && !passage) {
           this.$router.push(this.passageLink(query, book.first_paragraph));
+        } else {
+          this.query = query;
+          this.books = books;
+          this.$store.commit('setReader', { book, passage });
         }
-        this.query = query;
-        this.books = books;
-        this.book = book;
-        this.passage = passage;
       });
     },
     async asyncData({ query }) {
@@ -136,11 +136,6 @@ export default {
         book = await morphgnt.resource(query.book);
       }
       return { query, books, book, passage };
-    },
-    renderPassage(path) {
-      morphgnt.resource(path).then((resource) => {
-        this.passage = resource;
-      });
     },
     passageLink(query, passage) {
       if (passage) {
@@ -178,6 +173,7 @@ export default {
     TextFormatting,
     Interlinear,
     TextColouring,
+    Frequency,
   },
 };
 </script>
@@ -300,6 +296,40 @@ export default {
       .case-A {
         color: #FC0;
       }
+    }
+
+    .freq-0 {
+      background: #fff;
+    }
+    .freq-1 {
+      background: #ffe;
+    }
+    .freq-2 {
+      background: #ffd;
+    }
+    .freq-3 {
+      background: #ffc;
+    }
+    .freq-4 {
+      background: #ffb;
+    }
+    .freq-5 {
+      background: #ffa;
+    }
+    .freq-6 {
+      background: #ff9;
+    }
+    .freq-7 {
+      background: #ff8;
+    }
+    .freq-8 {
+      background: #ff7;
+    }
+    .freq-9 {
+      background: #ff6;
+    }
+    .freq-10 {
+      background: #ff5;
     }
   }
 

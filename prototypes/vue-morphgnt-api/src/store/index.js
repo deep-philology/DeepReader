@@ -24,12 +24,16 @@ export default new Vuex.Store({
   },
   state: {
     user: null,
+    book: null,
+    passage: null,
     textSize: 'normal',
     interlinear: false,
     colour: null,
   },
   getters: {
     user: state => state.user,
+    book: state => state.book,
+    passage: state => state.passage,
     textSize: state => state.textSize,
     interlinear: state => state.interlinear,
     colour: state => state.colour,
@@ -37,6 +41,10 @@ export default new Vuex.Store({
   mutations: {
     setUser(state, user) {
       state.user = user;
+    },
+    setReader(state, { book, passage }) {
+      state.book = book;
+      state.passage = passage;
     },
     setTextSize(state, size) {
       state.textSize = size;
