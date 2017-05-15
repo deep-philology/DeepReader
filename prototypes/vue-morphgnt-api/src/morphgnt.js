@@ -19,4 +19,9 @@ export default {
       return response.data.verse_id;
     }
   },
+  async frequency(input) {
+    const url = `${this.apiRoot}/v0/frequency/`;
+    const response = await axios.post(url, { input }, { validateStatus: null });
+    return response.data.output;
+  },
 };
