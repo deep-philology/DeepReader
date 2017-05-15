@@ -1,8 +1,7 @@
 import axios from 'axios';
 
 export default {
-  // apiRoot: 'https://api.morphgnt.org',
-  apiRoot: 'http://localhost:8000',
+  apiRoot: 'https://api.morphgnt.org',
   async resource(path) {
     const { data: resource } = await axios.get(`${this.apiRoot}${path}`);
     return resource;
