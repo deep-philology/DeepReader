@@ -12,7 +12,13 @@
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
-          <div id="text" :class="'textSize-' + this.textSize"></div>
+          <div id="text" :class="'textSize-' + this.textSize">
+            <p>
+              <div class="word txt" v-for="(word, index) in passage.words" @click="handleWordSelect(word)">
+                <span>{{ word.text }}</span>
+              </div>
+            </p>
+          </div>
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
@@ -56,7 +62,6 @@ export default {
   computed: mapGetters(['user', 'passage', 'textSize']),
   watch: {
     $route: 'fetchData',
-    passage: 'updateReader',
   },
   methods: {
     updateReader() {
@@ -86,8 +91,13 @@ export default {
 </xsl:stylesheet>`, 'text/xml');
       xsltProcessor.importStylesheet(xslDoc);
       const select = xpath.useNamespaces({ cts: 'http://chs.harvard.edu/xmlns/cts' });
+      const fragment = xsltProcessor.transformToFragment(xmlDoc, document);
+      const words = [];
+      fragment.textContent.split(' ').forEach((w) => {
+        words.push({ text: w });
+      });
       const passage = {
-        fragment: xsltProcessor.transformToFragment(xmlDoc, document),
+        words,
         next: select('//cts:prevnext/cts:next/cts:urn', xmlDoc)[0].textContent,
         prev: select('//cts:prevnext/cts:prev/cts:urn', xmlDoc)[0].textContent,
       };
@@ -111,6 +121,10 @@ export default {
           this.$router.push(this.passageLink(this.query, this.passage.next));
         }
       }
+    },
+    handleWordSelect(word) {
+      this.$emit('word-select', word);
+      this.$emit('word-select2', word);
     },
   },
   components: {
@@ -190,6 +204,9 @@ export default {
         font-family: $widget-font-family;
         font-size: 60%;
       }
+    }
+    .txt {
+      display: inline-block;
     }
     &.textSize-small {
       font-size: 14pt;
