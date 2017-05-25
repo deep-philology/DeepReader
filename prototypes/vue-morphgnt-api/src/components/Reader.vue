@@ -72,6 +72,7 @@
         <frequency></frequency>
         <word-info></word-info>
         <morpheus></morpheus>
+        <kwic></kwic>
       </div>
     </div>
   </div>
@@ -91,6 +92,7 @@ import TextFormatting from '@/components/TextFormatting';
 import Interlinear from '@/components/Interlinear';
 import TextColouring from '@/components/TextColouring';
 import Frequency from '@/components/Frequency';
+import Kwic from '@/components/Kwic';
 
 export default {
   name: 'reader',
@@ -174,6 +176,7 @@ export default {
     Interlinear,
     TextColouring,
     Frequency,
+    Kwic,
   },
 };
 </script>
