@@ -5,6 +5,9 @@
     </header>
     <div class="grid-wrapper">
       <div class="left">
+        <text-inventory></text-inventory>
+        <text-group v-if="ctsTextGroup"></text-group>
+        <work v-if="ctsWork"></work>
       </div>
 
       <div class="main">
@@ -14,9 +17,9 @@
 
           <div id="text" :class="'textSize-' + this.textSize">
             <p>
-              <div class="word txt" v-for="(word, index) in passage.words" @click="handleWordSelect(word)">
-                <span>{{ word.text }}</span>
-              </div>
+              <span v-for="(word, index) in passage.words" @click="handleWordSelect(word)">
+                {{ word.text }}
+              </span>
             </p>
           </div>
 
@@ -42,11 +45,14 @@ import xpath from 'xpath';
 import fetch from 'universal-fetch';
 import Pagination from '@/components/Pagination';
 import TextFormatting from '@/components/TextFormatting';
+import TextInventory from '@/components/TextInventory';
+import TextGroup from '@/components/TextGroup';
+import Work from '@/components/Work';
 
 export default {
   name: 'reader',
   created() {
-    this.fetchData();
+    // this.fetchData();
   },
   mounted() {
     window.addEventListener('keyup', this.handleKeyUp);
@@ -59,7 +65,7 @@ export default {
       query: null,
     };
   },
-  computed: mapGetters(['user', 'passage', 'textSize']),
+  computed: mapGetters(['user', 'passage', 'textSize', 'ctsTextGroup', 'ctsWork']),
   watch: {
     $route: 'fetchData',
   },
@@ -130,6 +136,9 @@ export default {
   components: {
     Pagination,
     TextFormatting,
+    TextInventory,
+    TextGroup,
+    Work,
   },
 };
 </script>

@@ -16,7 +16,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
   @font-face {
     font-family: "Skolar";
     src: url("https://jktauber.com/site_media/static/fonts/SkolarPEWeb-Regular.woff") format("woff");
@@ -43,5 +43,14 @@ export default {
     margin: 0;
     -webkit-font-smoothing: antialiased;
     font-feature-settings: "ccmp";
+  }
+
+  .click {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
+    &:hover {
+      color: #666;
+    }
   }
 </style>

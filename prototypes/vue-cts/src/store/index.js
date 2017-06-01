@@ -24,17 +24,29 @@ export default new Vuex.Store({
   },
   state: {
     user: null,
+    ctsURL: 'http://cts.perseids.org/api/cts/',
+    ctsTextGroup: '',
+    ctsWork: '',
     passage: null,
     textSize: 'normal',
   },
   getters: {
     user: state => state.user,
+    ctsURL: state => state.ctsURL,
+    ctsTextGroup: state => state.ctsTextGroup,
+    ctsWork: state => state.ctsWork,
     passage: state => state.passage,
     textSize: state => state.textSize,
   },
   mutations: {
     setUser(state, user) {
       state.user = user;
+    },
+    setCtsTextGroup(state, textGroup) {
+      state.ctsTextGroup = textGroup;
+    },
+    setCtsWork(state, work) {
+      state.ctsWork = work;
     },
     setReader(state, { passage }) {
       state.passage = passage;
