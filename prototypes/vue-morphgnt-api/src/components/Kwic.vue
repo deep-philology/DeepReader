@@ -17,17 +17,16 @@
 </template>
 
 <script>
-import axios from 'axios';
 import Widget from '@/components/Widget';
 import JsonObject from '@/components/JsonObject';
+import morphgnt from '@/morphgnt';
 
 export default {
   mounted() {
     this.$parent.$on('word-select', (word) => {
       this.word = word;
-      const url = `http://localhost:8000/v0/kwic/?${word.word}`;
-      axios.get(url).then((response) => {
-        this.results = response.data.results;
+      morphgnt.kwic(word.word).then((results) => {
+        this.results = results;
       });
     });
   },
