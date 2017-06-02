@@ -14,6 +14,7 @@
   import fetch from 'universal-fetch';
   import xpath from 'xpath';
   import Widget from '@/components/Widget';
+  import { sortBy } from '@/utils';
 
   export default {
     created() {
@@ -42,15 +43,7 @@
           const groupName = select('cts:groupname', textGroup)[0].textContent;
           textGroups.push({ urn, groupName });
         });
-        textGroups.sort((a, b) => {
-          if (a.groupName < b.groupName) {
-            return -1;
-          }
-          if (a.groupName > b.groupName) {
-            return 1;
-          }
-          return 0;
-        });
+        textGroups.sort(sortBy('groupName', true, x => x.toUpperCase()));
         return textGroups;
       },
       handleTextGroupClick(textGroup) {

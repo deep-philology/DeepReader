@@ -14,6 +14,7 @@
   import fetch from 'universal-fetch';
   import xpath from 'xpath';
   import Widget from '@/components/Widget';
+  import { sortBy } from '@/utils';
 
   export default {
     created() {
@@ -50,15 +51,7 @@
           const title = select('cts:title', work)[0].textContent;
           works.push({ urn, title });
         });
-        works.sort((a, b) => {
-          if (a.title < b.title) {
-            return -1;
-          }
-          if (a.title > b.title) {
-            return 1;
-          }
-          return 0;
-        });
+        works.sort(sortBy('title', true, x => x.toUpperCase()));
         return works;
       },
       handleWorkClick(work) {
