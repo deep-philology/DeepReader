@@ -205,18 +205,8 @@ export default {
   #text {
     clear: both;
     word-spacing: 0.3em;
+    line-height: 1.6;
     color: #333;
-    .word {
-      cursor: pointer;
-      .verse-num {
-        color: #999;
-        font-family: $widget-font-family;
-        font-size: 60%;
-      }
-    }
-    .txt {
-      display: inline-block;
-    }
     &.textSize-small {
       font-size: 14pt;
     }
