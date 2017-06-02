@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "axios": "^0.16.1",
+    "raw-loader": "^0.5.1",
     "universal-fetch": "^1.0.0",
     "vue": "^2.3.0",
     "vue-router": "^2.5.2",
