@@ -15,13 +15,7 @@
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
-          <div id="text" :class="'textSize-' + this.textSize">
-            <p>
-              <span v-for="(word, index) in passage.words" @click="handleWordSelect(word)">
-                {{ word.text }}
-              </span>
-            </p>
-          </div>
+          <div id="text" :class="'textSize-' + this.textSize"></div>
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
@@ -52,7 +46,7 @@ import Work from '@/components/Work';
 export default {
   name: 'reader',
   created() {
-    // this.fetchData();
+    this.fetchData();
   },
   mounted() {
     window.addEventListener('keyup', this.handleKeyUp);
@@ -68,6 +62,7 @@ export default {
   computed: mapGetters(['user', 'passage', 'textSize', 'ctsTextGroup', 'ctsWork']),
   watch: {
     $route: 'fetchData',
+    passage: 'updateReader',
   },
   methods: {
     updateReader() {
@@ -96,12 +91,16 @@ export default {
     <xsl:apply-templates select="//tei:TEI" />
   </xsl:template>
 
+  <xsl:template match="tei:div">
+    <div><xsl:apply-templates /></div>
+  </xsl:template>
+
   <xsl:template match="tei:p">
     <p><xsl:apply-templates /></p>
   </xsl:template>
 
   <xsl:template match="tei:l">
-    <div><xsl:apply-templates /></div>
+    <div><xsl:apply-templates /> {<xsl:value-of select="@n"/>}</div>
   </xsl:template>
 
   <xsl:template match="*">
@@ -117,12 +116,8 @@ export default {
       xsltProcessor.importStylesheet(xslDoc);
       const select = xpath.useNamespaces({ cts: 'http://chs.harvard.edu/xmlns/cts' });
       const fragment = xsltProcessor.transformToFragment(xmlDoc, document);
-      const words = [];
-      fragment.textContent.split(' ').forEach((w) => {
-        words.push({ text: w });
-      });
       const passage = {
-        words,
+        fragment,
         next: select('//cts:prevnext/cts:next/cts:urn', xmlDoc)[0].textContent,
         prev: select('//cts:prevnext/cts:prev/cts:urn', xmlDoc)[0].textContent,
       };
