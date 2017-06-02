@@ -2,7 +2,8 @@
   <widget>
     <span slot="header">Text Groups</span>
     <div slot="body">
-      <ul>
+      <sync-loader v-if="loading" color="#000" size="5px" margin="3px" radius="100%"></sync-loader>
+      <ul v-else>
         <li class="click" v-for="textGroup in textGroups" @click="handleTextGroupClick(textGroup)">{{ textGroup.groupName }}</a></li>
       </ul>
     </div>
@@ -13,6 +14,7 @@
   import { mapGetters } from 'vuex';
   import fetch from 'universal-fetch';
   import xpath from 'xpath';
+  import SyncLoader from 'vue-spinner/src/SyncLoader';
   import Widget from '@/components/Widget';
   import { sortBy } from '@/utils';
 
@@ -25,11 +27,13 @@
     computed: mapGetters(['ctsURL']),
     data() {
       return {
+        loading: false,
         textGroups: null,
       };
     },
     methods: {
       async fetchData() {
+        this.loading = true;
         const url = `${this.ctsURL}?request=GetCapabilities&urn=urn:cts:greekLit`;
         const response = await fetch(url);
         const text = await response.text();
@@ -44,6 +48,7 @@
           textGroups.push({ urn, groupName });
         });
         textGroups.sort(sortBy('groupName', true, x => x.toUpperCase()));
+        this.loading = false;
         return textGroups;
       },
       handleTextGroupClick(textGroup) {
@@ -53,6 +58,7 @@
     },
     components: {
       Widget,
+      SyncLoader,
     },
   };
 </script>
@@ -61,5 +67,8 @@
 li {
   text-indent: -1em;
   margin-left: 1em;
+}
+.v-spinner {
+  text-align: center;
 }
 </style>

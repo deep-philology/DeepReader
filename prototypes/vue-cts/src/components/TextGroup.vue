@@ -2,7 +2,8 @@
   <widget>
     <span slot="header">{{ textGroup.groupName }}</span>
     <div slot="body">
-      <ul>
+      <sync-loader v-if="loading" color="#000" size="5px" margin="3px" radius="100%"></sync-loader>
+      <ul v-else>
         <li class="click" v-for="work in works" @click="handleWorkClick(work)">{{ work.title }}</a></li>
       </ul>
     </div>
@@ -13,6 +14,7 @@
   import { mapGetters } from 'vuex';
   import fetch from 'universal-fetch';
   import xpath from 'xpath';
+  import SyncLoader from 'vue-spinner/src/SyncLoader';
   import Widget from '@/components/Widget';
   import { sortBy } from '@/utils';
 
@@ -29,13 +31,16 @@
     },
     data() {
       return {
+        loading: false,
         works: null,
       };
     },
     methods: {
       fetchData() {
+        this.loading = true;
         this.fetchTextGroup().then((works) => {
           this.works = works;
+          this.loading = false;
         });
       },
       async fetchTextGroup() {
@@ -60,6 +65,7 @@
     },
     components: {
       Widget,
+      SyncLoader,
     },
   };
 </script>

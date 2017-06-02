@@ -15,6 +15,7 @@
     "universal-fetch": "^1.0.0",
     "vue": "^2.3.0",
     "vue-router": "^2.5.2",
+    "vue-spinner": "^1.0.2",
     "vuex": "^2.3.1",
     "xmldom": "^0.1.27",
     "xpath": "^0.0.24"

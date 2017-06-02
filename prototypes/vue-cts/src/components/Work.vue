@@ -2,7 +2,8 @@
   <widget>
     <span slot="header">Work: {{ work.title }}</span>
     <div slot="body">
-      <ul>
+      <sync-loader v-if="loading" color="#000" size="5px" margin="3px" radius="100%"></sync-loader>
+      <ul v-else>
         <li class="click" v-for="edition in editions" @click="handleEditionClick(edition)">{{ edition.label }}</a></li>
       </ul>
     </div>
@@ -13,6 +14,7 @@
   import { mapGetters } from 'vuex';
   import fetch from 'universal-fetch';
   import xpath from 'xpath';
+  import SyncLoader from 'vue-spinner/src/SyncLoader';
   import Widget from '@/components/Widget';
 
   export default {
@@ -28,13 +30,16 @@
     },
     data() {
       return {
+        loading: false,
         editions: null,
       };
     },
     methods: {
       fetchData() {
+        this.loading = true;
         this.fetchEditions().then((editions) => {
           this.editions = editions;
+          this.loading = false;
         });
       },
       async fetchEditions() {
@@ -69,6 +74,7 @@
     },
     components: {
       Widget,
+      SyncLoader,
     },
   };
 </script>
