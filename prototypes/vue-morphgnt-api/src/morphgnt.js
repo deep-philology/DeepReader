@@ -24,4 +24,9 @@ export default {
     const response = await axios.post(url, { input }, { validateStatus: null });
     return response.data.output;
   },
+  async kwic(word) {
+    const url = `${this.apiRoot}/v0/kwic/?${word}`;
+    const response = await axios.get(url);
+    return response.data.results;
+  },
 };
