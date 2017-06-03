@@ -206,6 +206,25 @@ export default {
     }
   }
 
+  /* TEI */
+
+  .TEI {
+    .milestone {
+      color: #999;
+      font-family: $widget-font-family;
+      font-size: 60%;
+    }
+    .said {
+      .label {
+        font-weight: bold;
+      }
+    }
+    .l .n {
+      color: #999;
+      font-family: $widget-font-family;
+      font-size: 60%;
+    }
+  }
   /* widgets */
 
   .widget {
