@@ -1,6 +1,13 @@
 <template>
   <div class="root">
     <header>
+      <div class="reader-nav">
+        <a href="/#/cts/">CTS API (Perseids)</a>
+        &bull;
+        <a href="/#/cite-services/">cite-services</a>
+        &bull;
+        <a href="/#/morphgnt/">MorphGNT API</a>
+      </div>
       <h1><b>LORE</b>: Learner’s Online Reading Environment (CTS)</h1>
     </header>
     <div class="grid-wrapper">
@@ -174,6 +181,19 @@ export default {
       margin: 0;
       font-weight: normal;
       color: #444;
+    }
+    .reader-nav {
+      float: right;
+      font-family: $widget-font-family;
+      color: #999;
+      a {
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        &:hover {
+          color: #000;
+        }
+      }
     }
   }
 
