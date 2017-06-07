@@ -5,6 +5,7 @@
     </header>
     <div class="grid-wrapper">
       <div class="left">
+        <CtsUrn></CtsUrn>
       </div>
 
       <div class="main">
@@ -38,6 +39,7 @@ import fetch from 'universal-fetch';
 
 import Pagination from '@/components/Pagination';
 import TextFormatting from '@/components/TextFormatting';
+import CtsUrn from '@/cite-services/components/CtsUrn';
 
 export default {
   name: 'reader',
@@ -105,6 +107,7 @@ export default {
   components: {
     Pagination,
     TextFormatting,
+    CtsUrn,
   },
 };
 </script>
