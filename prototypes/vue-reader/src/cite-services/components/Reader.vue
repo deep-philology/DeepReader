@@ -8,13 +8,11 @@
         &bull;
         <a href="/#/morphgnt/">MorphGNT API</a>
       </div>
-      <h1><b>LORE</b>: Learner’s Online Reading Environment (CTS)</h1>
+      <h1><b>LORE</b>: Learner’s Online Reading Environment (cite-services)</h1>
     </header>
     <div class="grid-wrapper">
       <div class="left">
-        <text-inventory></text-inventory>
-        <text-group v-if="ctsTextGroup"></text-group>
-        <work v-if="ctsWork"></work>
+        <CtsUrn></CtsUrn>
       </div>
 
       <div class="main">
@@ -22,7 +20,11 @@
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
-          <div id="text" :class="'textSize-' + this.textSize"></div>
+          <div id="text" :class="'textSize-' + this.textSize">
+            <div v-for="node in passage.text.Nodes">
+              {{ node.text }}
+            </div>
+          </div>
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
@@ -30,8 +32,6 @@
         <div v-else>
           Nothing here yet.
         </div>
-
-
       </div>
       <div class="right">
         <text-formatting></text-formatting>
@@ -42,16 +42,11 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import xpath from 'xpath';
 import fetch from 'universal-fetch';
+
 import Pagination from '@/components/Pagination';
 import TextFormatting from '@/components/TextFormatting';
-
-import TextInventory from '@/cts/components/TextInventory';
-import TextGroup from '@/cts/components/TextGroup';
-import Work from '@/cts/components/Work';
-import teiXSL from '@/cts/tei.xsl';
-
+import CtsUrn from '@/cite-services/components/CtsUrn';
 
 export default {
   name: 'reader',
@@ -69,16 +64,11 @@ export default {
       query: null,
     };
   },
-  computed: mapGetters(['user', 'passage', 'textSize', 'ctsTextGroup', 'ctsWork']),
+  computed: mapGetters(['user', 'passage', 'textSize']),
   watch: {
     $route: 'fetchData',
-    passage: 'updateReader',
   },
   methods: {
-    updateReader() {
-      document.getElementById('text').innerHTML = '';
-      document.getElementById('text').appendChild(this.passage.fragment);
-    },
     fetchData() {
       this.asyncData({ query: this.$route.query }).then(({ query, passage }) => {
         this.query = query;
@@ -87,20 +77,13 @@ export default {
     },
     async asyncData({ query }) {
       const urn = query.urn;
-      const url = `http://cts.perseids.org/api/cts/?request=GetPassagePlus&urn=${urn}`;
+      const url = `http://localhost:8080/million/texts/${urn}`;
       const response = await fetch(url);
-      const text = await response.text();
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(text, 'text/xml');
-      const xsltProcessor = new XSLTProcessor();
-      const xslDoc = parser.parseFromString(teiXSL, 'text/xml');
-      xsltProcessor.importStylesheet(xslDoc);
-      const select = xpath.useNamespaces({ cts: 'http://chs.harvard.edu/xmlns/cts' });
-      const fragment = xsltProcessor.transformToFragment(xmlDoc, document);
+      const text = await response.json();
       const passage = {
-        fragment,
-        next: select('//cts:prevnext/cts:next/cts:urn', xmlDoc)[0].textContent,
-        prev: select('//cts:prevnext/cts:prev/cts:urn', xmlDoc)[0].textContent,
+        text,
+        next: text.Nodes[0].next,
+        prev: text.Nodes[0].previous,
       };
       return { query, passage };
     },
@@ -131,9 +114,7 @@ export default {
   components: {
     Pagination,
     TextFormatting,
-    TextInventory,
-    TextGroup,
-    Work,
+    CtsUrn,
   },
 };
 </script>
@@ -213,7 +194,6 @@ export default {
   #text {
     clear: both;
     word-spacing: 0.3em;
-    line-height: 1.6;
     color: #333;
     &.textSize-small {
       font-size: 14pt;
@@ -226,25 +206,6 @@ export default {
     }
   }
 
-  /* TEI */
-
-  .TEI {
-    .milestone {
-      color: #999;
-      font-family: $widget-font-family;
-      font-size: 60%;
-    }
-    .said {
-      .label {
-        font-weight: bold;
-      }
-    }
-    .l .n {
-      color: #999;
-      font-family: $widget-font-family;
-      font-size: 60%;
-    }
-  }
   /* widgets */
 
   .widget {
