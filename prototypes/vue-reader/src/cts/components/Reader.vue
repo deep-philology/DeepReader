@@ -82,7 +82,7 @@ export default {
     fetchData() {
       this.asyncData({ query: this.$route.query }).then(({ query, passage }) => {
         this.query = query;
-        this.$store.commit('setReader', { passage });
+        this.$store.commit('setCTSReader', { passage });
       });
     },
     async asyncData({ query }) {

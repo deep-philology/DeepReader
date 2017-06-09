@@ -58,6 +58,10 @@ export default new Vuex.Store({
       state.book = book;
       state.passage = passage;
     },
+    setCTSReader(state, { passage }) {
+      state.book = null;
+      state.passage = passage;
+    },
     setTextSize(state, size) {
       state.textSize = size;
     },
