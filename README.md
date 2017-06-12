@@ -13,8 +13,8 @@ DeepReader takes a modular approach, relying on microservices for most of the fu
 
 To run DeepReader in development mode:
 
-  npm install
-  npm run dev
+    npm install
+    npm run dev
 
 Presently, there are two readers accesible at these paths:
 
