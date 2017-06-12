@@ -8,7 +8,7 @@
         &bull;
         <a href="/#/morphgnt/">MorphGNT API</a>
       </div>
-      <h1><b>LORE</b>: Learner’s Online Reading Environment</h1>
+      <h1>DeepReader</h1>
     </header>
     <div class="grid-wrapper">
       <div class="left">
