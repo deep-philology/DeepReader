@@ -8,3 +8,15 @@ DeepReader takes a modular approach, relying on microservices for most of the fu
 
 
 * [A Reference Model for Capabilities of Online Readers](https://github.com/deep-reader/DeepReader/wiki/A-Reference-Model-for-Capabilities-of-Online-Readers)
+
+## Setup
+
+To run DeepReader in development mode:
+
+  npm install
+  npm run dev
+
+Presently, there are two readers accesible at these paths:
+
+* CTS: http://localhost:5066/#/cts
+* MorphGNT: http://localhost:5066/#/morphgnt
