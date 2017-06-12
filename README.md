@@ -1,21 +1,7 @@
-# vue-me
+# DeepReader
 
-> A Vue.js project
+DeepReader is a vue.js-based online reading environment designed for deep reading of texts with integrated learning tools.
 
-## Build Setup
+It is particulary intended for the study of classical languages such as Ancient Greek but could be applied to any texts with rich annotations.
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+DeepReader takes a modular approach, relying on microservices for most of the functionality.
