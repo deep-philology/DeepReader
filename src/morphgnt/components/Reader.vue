@@ -8,7 +8,7 @@
         &bull;
         <a href="/#/morphgnt/">MorphGNT API</a>
       </div>
-      <h1>DeepReader</h1>
+      <h1>DeepReader (MorphGNT)</h1>
     </header>
     <div class="grid-wrapper">
       <div class="left">
