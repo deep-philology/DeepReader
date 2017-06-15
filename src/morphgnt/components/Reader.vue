@@ -27,7 +27,7 @@
             <p>
               <div class="word unit" v-for="(word, index) in passage.words" @click="handleWordSelect(word)">
                 <span class="verse-num" v-if="word['@id'].slice(-8, -5) == '001'">{{ parseInt(word['@id'].slice(-11, -8)) }}</span>
-                <span :id="'w' + index" :class="'txt pos-' + word.pos + ' case-' + word.case">{{ word.text }}</span>
+                <span :key="word['@id']" :id="'w' + index" :class="'txt pos-' + word.pos + ' case-' + word.case">{{ word.text }}</span>
                 <br><template v-if="interlinear"><span class="gls">
                   <span class="pos">{{ word.pos }}</span><span v-if="word.mood">.{{ word.tense }}{{ word.voice }}{{ word.mood }}</span><span v-if="word.number">.{{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}</span>
                   <br>{{ word.lemma }}
