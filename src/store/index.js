@@ -26,12 +26,11 @@ export default new Vuex.Store({
     user: null,
     book: null,
     interlinear: false,
-    colour: null,
     ctsURL: 'http://cts.perseids.org/api/cts/',
     ctsTextGroup: '',
     ctsWork: '',
     passage: null,
-    textSize: 'normal',
+    textClasses: {},
   },
   getters: {
     user: state => state.user,
@@ -40,9 +39,18 @@ export default new Vuex.Store({
     ctsTextGroup: state => state.ctsTextGroup,
     ctsWork: state => state.ctsWork,
     passage: state => state.passage,
-    textSize: state => state.textSize,
     interlinear: state => state.interlinear,
-    colour: state => state.colour,
+    textClasses(state) {
+      return Object.entries(state.textClasses).reduce(
+        (o, [k, v]) => {
+          if (typeof v === 'boolean') {
+            return Object.assign(o, { [k]: v });
+          }
+          return Object.assign(o, { [`${k}-${v}`]: true });
+        },
+        {},
+      );
+    },
   },
   mutations: {
     setUser(state, user) {
@@ -62,14 +70,11 @@ export default new Vuex.Store({
       state.book = null;
       state.passage = passage;
     },
-    setTextSize(state, size) {
-      state.textSize = size;
-    },
     toggleInterlinear(state) {
       state.interlinear = !state.interlinear;
     },
-    setColour(state, scheme) {
-      state.colour = scheme;
+    setTextClass(state, classes) {
+      state.textClasses = { ...state.textClasses, ...classes };
     },
     ...firebaseMutations,
   },

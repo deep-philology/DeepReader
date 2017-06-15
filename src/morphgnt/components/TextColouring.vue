@@ -16,13 +16,13 @@
   export default {
     methods: {
       noColour() {
-        this.$store.commit('setColour', null);
+        this.$store.commit('setTextClass', { colour: false });
       },
       posColour() {
-        this.$store.commit('setColour', 'pos');
+        this.$store.commit('setTextClass', { colour: 'pos' });
       },
       caseColour() {
-        this.$store.commit('setColour', 'case');
+        this.$store.commit('setTextClass', { colour: 'case' });
       },
     },
     components: {
@@ -38,6 +38,36 @@
     cursor: pointer;
     &:hover {
       color: #666;
+    }
+  }
+</style>
+
+<style lang="scss">
+  #text {
+    &.colour-pos {
+      .pos-N, .pos-A {
+        color: #C00;
+      }
+      .pos-RA, .pos-RD, .pos-RI, .pos-RP, .pos-RR {
+        color: #C50;
+      }
+      .pos-V {
+        color: #00C;
+      }
+    }
+    &.colour-case {
+      .case-N {
+        color: #C00;
+      }
+      .case-G {
+        color: #9C6;
+      }
+      .case-D {
+        color: #6CC;
+      }
+      .case-A {
+        color: #FC0;
+      }
     }
   }
 </style>

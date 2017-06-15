@@ -23,7 +23,7 @@
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
-          <div id="text" :class="'textSize-' + this.textSize + (this.colour ? ' colour-' + this.colour : '')">
+          <div id="text" :class="textClasses">
             <p>
               <div class="word unit" v-for="(word, index) in passage.words" @click="handleWordSelect(word)">
                 <span class="verse-num" v-if="word['@id'].slice(-8, -5) == '001'">{{ parseInt(word['@id'].slice(-11, -8)) }}</span>
@@ -129,7 +129,7 @@ export default {
       books: [],
     };
   },
-  computed: mapGetters(['user', 'book', 'passage', 'textSize', 'interlinear', 'colour']),
+  computed: mapGetters(['user', 'book', 'passage', 'textClasses', 'interlinear']),
   watch: {
     $route: 'fetchData',
   },
@@ -202,9 +202,7 @@ export default {
 <style lang="scss">
 
   /* variables */
-
-  $main-font-family: "Skolar";
-  $widget-font-family: "PT Sans", $main-font-family;
+  @import "../../styles/common.scss";
 
   /* hover opacity */
 
@@ -283,15 +281,6 @@ export default {
         font-size: 60%;
       }
     }
-    &.textSize-small {
-      font-size: 14pt;
-    }
-    &.textSize-normal {
-      font-size: 16pt;
-    }
-    &.textSize-large {
-      font-size: 20pt;
-    }
 
     div.unit {
       display: inline-block;
@@ -304,32 +293,6 @@ export default {
       display: inline-block;
       font-size: 75%;
       color: gray;
-    }
-
-    &.colour-pos {
-      .pos-N, .pos-A {
-        color: #C00;
-      }
-      .pos-RA, .pos-RD, .pos-RI, .pos-RP, .pos-RR {
-        color: #C50;
-      }
-      .pos-V {
-        color: #00C;
-      }
-    }
-    &.colour-case {
-      .case-N {
-        color: #C00;
-      }
-      .case-G {
-        color: #9C6;
-      }
-      .case-D {
-        color: #6CC;
-      }
-      .case-A {
-        color: #FC0;
-      }
     }
 
     .freq-0 {
@@ -393,18 +356,6 @@ export default {
         list-style-type: none;
         margin: 0;
         padding: 0;
-      }
-      .textSize-small {
-        font-family: $main-font-family;
-        font-size: 14pt;
-      }
-      .textSize-normal {
-        font-family: $main-font-family;
-        font-size: 16pt;
-      }
-      .textSize-large {
-        font-family: $main-font-family;
-        font-size: 20pt;
       }
     }
     &:hover {
