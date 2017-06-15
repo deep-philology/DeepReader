@@ -20,7 +20,7 @@
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
-          <div id="text" :class="'textSize-' + this.textSize">
+          <div id="text" :class="textClasses">
             <div v-for="node in passage.text.Nodes">
               {{ node.text }}
             </div>
@@ -103,7 +103,7 @@ export default {
       query: null,
     };
   },
-  computed: mapGetters(['user', 'passage', 'textSize']),
+  computed: mapGetters(['user', 'passage', 'textClasses']),
   watch: {
     $route: 'fetchData',
   },
@@ -234,15 +234,6 @@ export default {
     clear: both;
     word-spacing: 0.3em;
     color: #333;
-    &.textSize-small {
-      font-size: 14pt;
-    }
-    &.textSize-normal {
-      font-size: 16pt;
-    }
-    &.textSize-large {
-      font-size: 20pt;
-    }
   }
 
   /* widgets */
@@ -271,18 +262,6 @@ export default {
         list-style-type: none;
         margin: 0;
         padding: 0;
-      }
-      .textSize-small {
-        font-family: $main-font-family;
-        font-size: 14pt;
-      }
-      .textSize-normal {
-        font-family: $main-font-family;
-        font-size: 16pt;
-      }
-      .textSize-large {
-        font-family: $main-font-family;
-        font-size: 20pt;
       }
     }
     &:hover {

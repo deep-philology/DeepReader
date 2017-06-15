@@ -22,7 +22,7 @@
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
-          <div id="text" :class="'textSize-' + this.textSize"></div>
+          <div id="text" :class="textClasses"></div>
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
@@ -106,7 +106,7 @@ export default {
       query: null,
     };
   },
-  computed: mapGetters(['user', 'passage', 'textSize', 'ctsTextGroup', 'ctsWork']),
+  computed: mapGetters(['user', 'passage', 'textSize', 'ctsTextGroup', 'ctsWork', 'textClasses']),
   watch: {
     $route: 'fetchData',
     passage: 'updateReader',
@@ -252,15 +252,6 @@ export default {
     word-spacing: 0.3em;
     line-height: 1.6;
     color: #333;
-    &.textSize-small {
-      font-size: 14pt;
-    }
-    &.textSize-normal {
-      font-size: 16pt;
-    }
-    &.textSize-large {
-      font-size: 20pt;
-    }
   }
 
   /* TEI */
@@ -308,18 +299,6 @@ export default {
         list-style-type: none;
         margin: 0;
         padding: 0;
-      }
-      .textSize-small {
-        font-family: $main-font-family;
-        font-size: 14pt;
-      }
-      .textSize-normal {
-        font-family: $main-font-family;
-        font-size: 16pt;
-      }
-      .textSize-large {
-        font-family: $main-font-family;
-        font-size: 20pt;
       }
     }
     &:hover {

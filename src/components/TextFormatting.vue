@@ -14,15 +14,18 @@
   import Widget from '@/components/Widget';
 
   export default {
+    created() {
+      this.normalText();
+    },
     methods: {
       smallerText() {
-        this.$store.commit('setTextSize', 'small');
+        this.$store.commit('setTextClass', { textSize: 'small' });
       },
       normalText() {
-        this.$store.commit('setTextSize', 'normal');
+        this.$store.commit('setTextClass', { textSize: 'normal' });
       },
       largerText() {
-        this.$store.commit('setTextSize', 'large');
+        this.$store.commit('setTextClass', { textSize: 'large' });
       },
     },
     components: {
@@ -32,12 +35,39 @@
 </script>
 
 <style lang="scss" scoped>
+  @import "../styles/common.scss";
   .click {
     color: inherit;
     text-decoration: none;
     cursor: pointer;
     &:hover {
       color: #666;
+    }
+  }
+  .textSize-small {
+    font-family: $main-font-family;
+    font-size: 14pt;
+  }
+  .textSize-normal {
+    font-family: $main-font-family;
+    font-size: 16pt;
+  }
+  .textSize-large {
+    font-family: $main-font-family;
+    font-size: 20pt;
+  }
+</style>
+
+<style lang="scss">
+  #text {
+    &.textSize-small {
+      font-size: 14pt;
+    }
+    &.textSize-normal {
+      font-size: 16pt;
+    }
+    &.textSize-large {
+      font-size: 20pt;
     }
   }
 </style>
