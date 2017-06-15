@@ -27,7 +27,7 @@
         morphgnt.frequency(input).then((output) => {
           output.forEach((item) => {
             const c = `freq-${Math.round(Math.log(item.count))}`;
-            document.getElementById(item.id).classList.add(c);
+            document.getElementById(item.id).classList.toggle(c);
           });
         });
       },
