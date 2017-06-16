@@ -115,6 +115,7 @@ import Kwic from '@/morphgnt/components/Kwic';
 export default {
   name: 'reader',
   created() {
+    this.$store.commit('setReader', { book: null, passage: null });
     this.fetchData();
   },
   mounted() {
