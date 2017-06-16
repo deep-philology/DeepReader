@@ -54,9 +54,12 @@
 </script>
 
 <style lang="scss">
+  /* variables */
+  @import "../../styles/common.scss";
+
   .word-info-summary {
     .norm, .lemma {
-      font-family: "Skolar";
+      font-family: $main-font-family;
       font-size: 120%;
     }
     .norm, .lemma, .analysis {
@@ -66,13 +69,13 @@
   }
   .word-info-body {
     .norm {
-      font-family: "Skolar";
+      font-family: $main-font-family;
       font-size: 150%;
       font-weight: bold;
     }
     .lemma {
       font-size: 120%;
-      font-family: "Skolar";
+      font-family: $main-font-family;
     }
   }
   .word-info-list-body {
@@ -97,7 +100,7 @@
       }
     }
     .norm, .lemma {
-      font-family: "Skolar";
+      font-family: $main-font-family;
       font-size: 120%;
     }
     .norm, .lemma, .analysis {
