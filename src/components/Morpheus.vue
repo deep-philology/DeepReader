@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import axios from 'axios';
+  import fetch from 'universal-fetch';
   import Widget from '@/components/Widget';
   import JsonObject from '@/components/JsonObject';
 
@@ -20,8 +20,13 @@
       this.$parent.$on('word-select', (word) => {
         this.word = word;
         const url = `http://services.perseids.org/bsp/morphologyservice/analysis/word?word=${word.word}&lang=grc&engine=morpheusgrc`;
-        axios.get(url).then((response) => {
-          this.morphBody = response.data.RDF.Annotation.Body;
+        const headers = new Headers({
+          Accept: 'application/json',
+        });
+        fetch(url, { method: 'GET', headers }).then((resp) => {
+          resp.json().then((data) => {
+            this.morphBody = data.RDF.Annotation.Body;
+          });
         });
       });
     },
