@@ -178,11 +178,8 @@ export default {
 </script>
 
 <style lang="scss">
-
   /* variables */
-
-  $main-font-family: "Skolar";
-  $widget-font-family: "PT Sans", $main-font-family;
+  @import "../../styles/common.scss";
 
   /* hover opacity */
 
