@@ -18,7 +18,7 @@ We are also experimenting with Firebase for persistence. Offline use is also pla
 
 ## Setup
 
-To run DeepReader in development mode:
+To run DeepReader in development mode, clone this repo then:
 
     npm install
     npm run dev
