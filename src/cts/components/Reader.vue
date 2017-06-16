@@ -332,7 +332,7 @@ export default {
         float: right;
         text-align: right;
       }
-      line-height: 20pt;
+      line-height: 21pt;
     }
 
     .title {
