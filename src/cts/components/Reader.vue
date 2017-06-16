@@ -93,6 +93,7 @@ import teiXSL from '@/cts/tei.xsl';
 export default {
   name: 'reader',
   created() {
+    this.$store.commit('setCTSReader', { passage: null });
     this.fetchData();
   },
   mounted() {
