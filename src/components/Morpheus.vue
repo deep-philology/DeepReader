@@ -1,7 +1,7 @@
 <template>
   <widget>
     <span slot="header">Morpheus (Raw Response)</span>
-    <span slot="summary">
+    <span slot="summary" v-if="word">
       {{ word.word }}
     </span>
     <div slot="body" v-if="morphBody">
@@ -16,9 +16,22 @@
   import JsonObject from '@/components/JsonObject';
 
   export default {
-    mounted() {
-      this.$parent.$on('word-select', (word) => {
-        this.word = word;
+    computed: {
+      word() {
+        return this.$store.state.selectedWord;
+      },
+    },
+    data() {
+      return {
+        morphBody: null,
+      };
+    },
+    watch: {
+      word: 'fetchData',
+    },
+    methods: {
+      fetchData() {
+        const word = this.word;
         const url = `http://services.perseids.org/bsp/morphologyservice/analysis/word?word=${word.word}&lang=grc&engine=morpheusgrc`;
         const headers = new Headers({
           Accept: 'application/json',
@@ -28,13 +41,7 @@
             this.morphBody = data.RDF.Annotation.Body;
           });
         });
-      });
-    },
-    data() {
-      return {
-        word: '',
-        morphBody: null,
-      };
+      },
     },
     components: {
       Widget,

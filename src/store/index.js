@@ -31,6 +31,7 @@ export default new Vuex.Store({
     ctsWork: '',
     passage: null,
     textClasses: {},
+    selectedWord: null,
   },
   getters: {
     textClasses(state) {
@@ -68,6 +69,9 @@ export default new Vuex.Store({
     },
     setTextClass(state, classes) {
       state.textClasses = { ...state.textClasses, ...classes };
+    },
+    setSelectedWord(state, word) {
+      state.selectedWord = word;
     },
     ...firebaseMutations,
   },

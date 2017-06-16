@@ -1,7 +1,7 @@
 <template>
   <widget>
     <span slot="header">KWIC</span>
-    <span slot="summary">
+    <span slot="summary" v-if="word">
       {{ word.word }}
     </span>
     <div slot="body" v-if="results">
@@ -22,19 +22,25 @@ import JsonObject from '@/components/JsonObject';
 import morphgnt from '@/morphgnt';
 
 export default {
-  mounted() {
-    this.$parent.$on('word-select', (word) => {
-      this.word = word;
-      morphgnt.kwic(word.word).then((results) => {
-        this.results = results;
-      });
-    });
+  computed: {
+    word() {
+      return this.$store.state.selectedWord;
+    },
   },
   data() {
     return {
-      word: '',
       results: null,
     };
+  },
+  watch: {
+    word: 'fetchData',
+  },
+  methods: {
+    fetchData() {
+      morphgnt.kwic(this.word.word).then((results) => {
+        this.results = results;
+      });
+    },
   },
   components: {
     Widget,

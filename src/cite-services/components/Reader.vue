@@ -149,8 +149,7 @@ export default {
       }
     },
     handleWordSelect(word) {
-      this.$emit('word-select', word);
-      this.$emit('word-select2', word);
+      this.$store.commit('setSelectedWord', word);
     },
   },
   components: {
