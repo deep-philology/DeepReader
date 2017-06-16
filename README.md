@@ -16,8 +16,6 @@ Each widget is a separate Vue.js component. We are working to make it as simple 
 
 We are also experimenting with Firebase for persistence. Offline use is also planned as is packaging DeepReader up as an app for mobile use.
 
-* [A Reference Model for Capabilities of Online Readers](https://github.com/deep-reader/DeepReader/wiki/A-Reference-Model-for-Capabilities-of-Online-Readers)
-
 ## Setup
 
 To run DeepReader in development mode, clone this repo then:
@@ -34,3 +32,8 @@ If you hover over the reader, you'll see various pluggable widgets on the left a
 
 You can expand or collapse any widget by clicking on its title. You can use the arrow keys on your keyboard to pagination between passages in a work.
 
+## More Background
+
+* [Short Term Plans](https://github.com/deep-reader/DeepReader/wiki/Short-Term-Plans)
+* [A Reference Model for Capabilities of Online Readers](https://github.com/deep-reader/DeepReader/wiki/A-Reference-Model-for-Capabilities-of-Online-Readers)
+* [Widget Framework](https://github.com/deep-reader/DeepReader/wiki/Widget-Framework)
