@@ -54,9 +54,6 @@
 </script>
 
 <style lang="scss">
-  /* variables */
-  @import "../../styles/common.scss";
-
   .word-info-summary {
     .norm, .lemma {
       font-family: $main-font-family;
