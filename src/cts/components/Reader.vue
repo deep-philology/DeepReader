@@ -22,7 +22,7 @@
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
-          <div id="text" :class="textClasses"></div>
+          <div id="text" :class="textClasses" v-fragment="passage.fragment"></div>
 
           <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
 
@@ -109,13 +109,8 @@ export default {
   computed: mapGetters(['user', 'passage', 'textSize', 'ctsTextGroup', 'ctsWork', 'textClasses']),
   watch: {
     $route: 'fetchData',
-    passage: 'updateReader',
   },
   methods: {
-    updateReader() {
-      document.getElementById('text').innerHTML = '';
-      document.getElementById('text').appendChild(this.passage.fragment);
-    },
     fetchData() {
       this.asyncData({ query: this.$route.query }).then(({ query, passage }) => {
         this.query = query;
@@ -163,6 +158,14 @@ export default {
     handleWordSelect(word) {
       this.$emit('word-select', word);
       this.$emit('word-select2', word);
+    },
+  },
+  directives: {
+    fragment: {
+      update(el, binding) {
+        el.innerHTML = '';
+        el.appendChild(binding.value);
+      },
     },
   },
   components: {
