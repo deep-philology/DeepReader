@@ -15,7 +15,7 @@
     ],
     methods: {
       handleNormSelect(word) {
-        this.$parent.$parent.$parent.$emit('word-select', word);
+        this.$store.commit('setSelectedWord', word);
       },
     },
   };

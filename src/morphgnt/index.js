@@ -25,7 +25,7 @@ export default {
     const headers = new Headers({
       'Content-Type': 'application/json',
     });
-    const body = JSON.stringify(input);
+    const body = JSON.stringify({ input });
     const resp = await fetch(url, { method: 'POST', headers, body });
     const data = await resp.json();
     return data.output;

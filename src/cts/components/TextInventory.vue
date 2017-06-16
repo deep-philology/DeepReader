@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapState } from 'vuex';
   import fetch from 'universal-fetch';
   import xpath from 'xpath';
   import SyncLoader from 'vue-spinner/src/SyncLoader';
@@ -24,7 +24,7 @@
         this.textGroups = textGroups;
       });
     },
-    computed: mapGetters(['ctsURL']),
+    computed: mapState(['ctsURL']),
     data() {
       return {
         loading: false,

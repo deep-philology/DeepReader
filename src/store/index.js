@@ -31,15 +31,9 @@ export default new Vuex.Store({
     ctsWork: '',
     passage: null,
     textClasses: {},
+    selectedWord: null,
   },
   getters: {
-    user: state => state.user,
-    book: state => state.book,
-    ctsURL: state => state.ctsURL,
-    ctsTextGroup: state => state.ctsTextGroup,
-    ctsWork: state => state.ctsWork,
-    passage: state => state.passage,
-    interlinear: state => state.interlinear,
     textClasses(state) {
       return Object.entries(state.textClasses).reduce(
         (o, [k, v]) => {
@@ -75,6 +69,9 @@ export default new Vuex.Store({
     },
     setTextClass(state, classes) {
       state.textClasses = { ...state.textClasses, ...classes };
+    },
+    setSelectedWord(state, word) {
+      state.selectedWord = word;
     },
     ...firebaseMutations,
   },

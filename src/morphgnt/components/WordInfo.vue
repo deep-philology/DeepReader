@@ -2,18 +2,20 @@
   <widget>
     <span slot="header">Word Info</span>
     <span slot="summary" class="word-info-summary">
-      <word-analysis :word="word"></word-analysis>
+      <word-analysis v-if="word" :word="word"></word-analysis>
     </span>
     <div slot="body">
-      <div class="word-info-body" v-if="word.norm">
-        <word-analysis :word="word"></word-analysis>
-      </div>
-      <div class="word-info-list-body" v-if="words.length > 0">
-        <div v-for="(word, index) in words" class="word">
-          <span class="remove" @click="removeWord(index)">remove</span>
+      <template v-if="word">
+        <div class="word-info-body" v-if="word.norm">
           <word-analysis :word="word"></word-analysis>
         </div>
-      </div>
+        <div class="word-info-list-body" v-if="words.length > 0">
+          <div v-for="(word, index) in words" class="word">
+            <span class="remove" @click="removeWord(index)">remove</span>
+            <word-analysis :word="word"></word-analysis>
+          </div>
+        </div>
+      </template>
     </div>
   </widget>
 </template>
@@ -23,21 +25,23 @@
   import WordAnalysis from '@/morphgnt/components/WordAnalysis';
 
   export default {
-    created() {
-      this.$parent.$on('word-select', (word) => {
-        this.word = word;
-      });
-      this.$parent.$on('word-select2', (word) => {
-        this.words.push(word);
-      });
+    computed: {
+      word() {
+        return this.$store.state.selectedWord;
+      },
     },
     data() {
       return {
-        word: {},
         words: [],
       };
     },
+    watch: {
+      word: 'addWord',
+    },
     methods: {
+      addWord() {
+        this.words.push(this.word);
+      },
       removeWord(index) {
         this.words.splice(index, 1);
       },
