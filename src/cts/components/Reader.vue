@@ -161,11 +161,9 @@ export default {
     },
   },
   directives: {
-    fragment: {
-      update(el, binding) {
-        el.innerHTML = '';
-        el.appendChild(binding.value);
-      },
+    fragment(el, binding) {
+      el.innerHTML = '';
+      el.appendChild(binding.value);
     },
   },
   components: {
