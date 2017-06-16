@@ -80,7 +80,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import fetch from 'universal-fetch';
 
 import Pagination from '@/components/Pagination';
@@ -103,7 +103,10 @@ export default {
       query: null,
     };
   },
-  computed: mapGetters(['user', 'passage', 'textClasses']),
+  computed: {
+    ...mapState(['user', 'passage']),
+    ...mapGetters(['textClasses']),
+  },
   watch: {
     $route: 'fetchData',
   },

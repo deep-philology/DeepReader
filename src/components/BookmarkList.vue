@@ -12,7 +12,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapState } from 'vuex';
   import Widget from '@/components/Widget';
   import app from '@/firebase';
 
@@ -27,7 +27,7 @@
       passage() {
         return this.$parent.passage;
       },
-      ...mapGetters(['user', 'bookmarks']),
+      ...mapState(['user', 'bookmarks']),
     },
     methods: {
       userBookmarks() {

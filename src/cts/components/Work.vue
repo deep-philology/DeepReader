@@ -11,7 +11,7 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapState } from 'vuex';
   import fetch from 'universal-fetch';
   import xpath from 'xpath';
   import SyncLoader from 'vue-spinner/src/SyncLoader';
@@ -21,7 +21,7 @@
     created() {
       this.fetchData();
     },
-    computed: mapGetters({
+    computed: mapState({
       ctsURL: 'ctsURL',
       work: 'ctsWork',
     }),

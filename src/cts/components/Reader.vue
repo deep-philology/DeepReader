@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import xpath from 'xpath';
 import fetch from 'universal-fetch';
 import Pagination from '@/components/Pagination';
@@ -107,7 +107,10 @@ export default {
       query: null,
     };
   },
-  computed: mapGetters(['user', 'passage', 'ctsTextGroup', 'ctsWork', 'textClasses']),
+  computed: {
+    ...mapState(['user', 'passage', 'ctsTextGroup', 'ctsWork']),
+    ...mapGetters(['textClasses']),
+  },
   watch: {
     $route: 'fetchData',
   },

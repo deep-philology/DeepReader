@@ -96,7 +96,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import Morpheus from '@/components/Morpheus';
 import Pagination from '@/components/Pagination';
 import TextFormatting from '@/components/TextFormatting';
@@ -130,7 +130,10 @@ export default {
       books: [],
     };
   },
-  computed: mapGetters(['user', 'book', 'passage', 'textClasses', 'interlinear']),
+  computed: {
+    ...mapState(['user', 'book', 'passage', 'interlinear']),
+    ...mapGetters(['textClasses']),
+  },
   watch: {
     $route: 'fetchData',
   },

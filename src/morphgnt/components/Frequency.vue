@@ -9,12 +9,12 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapState } from 'vuex';
   import morphgnt from '@/morphgnt';
   import Widget from '@/components/Widget';
 
   export default {
-    computed: mapGetters(['passage']),
+    computed: mapState(['passage']),
     data() {
       return { output: null };
     },

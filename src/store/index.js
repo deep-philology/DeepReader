@@ -33,13 +33,6 @@ export default new Vuex.Store({
     textClasses: {},
   },
   getters: {
-    user: state => state.user,
-    book: state => state.book,
-    ctsURL: state => state.ctsURL,
-    ctsTextGroup: state => state.ctsTextGroup,
-    ctsWork: state => state.ctsWork,
-    passage: state => state.passage,
-    interlinear: state => state.interlinear,
     textClasses(state) {
       return Object.entries(state.textClasses).reduce(
         (o, [k, v]) => {
