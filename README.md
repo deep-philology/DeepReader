@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/deep-reader/DeepReader/c5eb937526738250ce980da3b490412d137d4d9a/static/deep-reader-512.png" height=64 width=64> 
+
 # DeepReader
 
 [![Join the chat at https://gitter.im/deep-reader/DeepReader](https://badges.gitter.im/deep-reader/DeepReader.svg)](https://gitter.im/deep-reader/DeepReader?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
