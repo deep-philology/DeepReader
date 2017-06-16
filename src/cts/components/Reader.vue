@@ -107,7 +107,7 @@ export default {
       query: null,
     };
   },
-  computed: mapGetters(['user', 'passage', 'textSize', 'ctsTextGroup', 'ctsWork', 'textClasses']),
+  computed: mapGetters(['user', 'passage', 'ctsTextGroup', 'ctsWork', 'textClasses']),
   watch: {
     $route: 'fetchData',
   },
