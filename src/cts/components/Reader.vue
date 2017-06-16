@@ -180,9 +180,6 @@ export default {
 </script>
 
 <style lang="scss">
-  /* variables */
-  @import "../../styles/common.scss";
-
   /* hover opacity */
 
   .widget, .root > header, .page-nav-1 {

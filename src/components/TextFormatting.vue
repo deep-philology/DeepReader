@@ -35,7 +35,6 @@
 </script>
 
 <style lang="scss" scoped>
-  @import "../styles/common.scss";
   .click {
     color: inherit;
     text-decoration: none;
