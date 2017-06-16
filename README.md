@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/deep-reader/DeepReader/c5eb937526738250ce980da3b490412d137d4d9a/static/deep-reader-512.png" height=64 width=64> 
+<img src="https://raw.githubusercontent.com/deep-reader/DeepReader/master/static/deep-reader-512.png" height=64 width=64> 
 
 # DeepReader
 
