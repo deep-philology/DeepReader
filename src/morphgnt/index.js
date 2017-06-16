@@ -1,10 +1,10 @@
-import axios from 'axios';
+import fetch from 'universal-fetch';
 
 export default {
   apiRoot: 'https://api.morphgnt.org',
   async resource(path) {
-    const { data: resource } = await axios.get(`${this.apiRoot}${path}`);
-    return resource;
+    const resp = await fetch(`${this.apiRoot}${path}`);
+    return resp.json();
   },
   async books() {
     const { books } = await this.resource('/v0/root.json');
@@ -12,21 +12,28 @@ export default {
   },
   async verseLookup(verse) {
     const url = `${this.apiRoot}/v0/verse-lookup/?${verse}`;
-    const response = await axios.get(url, { validateStatus: null });
-    if (response.status === 400) {
-      throw response.data.message;
+    const resp = await fetch(url);
+    const data = await resp.json();
+    if (resp.status === 400) {
+      throw data.message;
     } else {
-      return response.data.verse_id;
+      return data.verse_id;
     }
   },
   async frequency(input) {
     const url = `${this.apiRoot}/v0/frequency/`;
-    const response = await axios.post(url, { input }, { validateStatus: null });
-    return response.data.output;
+    const headers = new Headers({
+      'Content-Type': 'application/json',
+    });
+    const body = JSON.stringify(input);
+    const resp = await fetch(url, { method: 'POST', headers, body });
+    const data = await resp.json();
+    return data.output;
   },
   async kwic(word) {
     const url = `${this.apiRoot}/v0/kwic/?${word}`;
-    const response = await axios.get(url);
-    return response.data.results;
+    const resp = await fetch(url);
+    const data = await resp.json();
+    return data.results;
   },
 };
