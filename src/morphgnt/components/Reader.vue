@@ -90,12 +90,14 @@ export default {
         const {
           prev,
           next,
+          title,
           words,
           ...p
         } = await morphgnt.resource(query.passage);
         passage = {
           prev,
           next,
+          title,
           words: words.map(word => ({
             id: word['@id'],
             classes: [
