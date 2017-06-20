@@ -148,7 +148,7 @@ export default {
   .freq-0, .freq-1, .freq-2, .freq-3, .freq-4, .freq-5, .freq-6, .freq-7,
   .freq-8, .freq-9, .freq-10 {
     padding: 0.2em 0.3em;
-    margin: -0.2em -0.3em;
+    margin: -0.2em 0.2em 0.25em -0.3em;
   }
   .freq-0 {
     background: #6ff;
