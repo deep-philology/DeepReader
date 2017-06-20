@@ -19,69 +19,9 @@
       </div>
 
       <div class="main">
-        <template v-if="passage">
-
-          <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
-
-          <div id="text" :class="textClasses">
-            <p>
-              <div class="word unit" v-for="(word, index) in passage.words" @click="handleWordSelect(word)">
-                <span class="verse-num" v-if="word['@id'].slice(-8, -5) == '001'">{{ parseInt(word['@id'].slice(-11, -8)) }}</span>
-                <span :key="word['@id']" :id="'w' + index" :class="'txt pos-' + word.pos + ' case-' + word.case">{{ word.text }}</span>
-                <br><template v-if="interlinear"><span class="gls">
-                  <span class="pos">{{ word.pos }}</span><span v-if="word.mood">.{{ word.tense }}{{ word.voice }}{{ word.mood }}</span><span v-if="word.number">.{{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}</span>
-                  <br>{{ word.lemma }}
-                </span></template>
-              </div>
-            </p>
-          </div>
-
-          <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
-
-        </template>
-        <template v-else>
-          <p>
-            DeepReader is a highly modular, Vue.js-based online reading
-            environment designed for deep reading of texts with integrated
-            learning tools.
-          </p>
-
-          <p>
-            It is particulary intended for the study of classical languages
-            such as Ancient Greek but could be applied to any texts with rich
-            annotations. What is here is an early prototype using the MorphGNT
-            API and the CTS protocol but we plan to support other text services
-            as well.
-          </p>
-
-          <p>
-            If you hover over the reader, you'll see various pluggable widgets
-            on the left and right. Those on the left are used to choose what
-            passage to read, and those on the right are used to present
-            additional information about the passage and its individual words,
-            and to control the appearance of the passage.
-          </p>
-
-          <p>
-            You can expand or collapse any widget by clicking on its title. You
-            can use the arrow keys on your keyboard to pagination between
-            passages in a work.
-          </p>
-
-          <p>
-            Each widget is a separate Vue.js component. We are working to make
-            it as simple as possible to develop new widgets that interact and
-            engage with the current passage, optionally calling out to external
-            APIs.
-          </p>
-
-          <p>
-            We are also experimenting with Firebase for persistence. Offline
-            use is also planned as is packaging DeepReader up as an app for
-            mobile use.
-          </p>
-        </template>
+        <passage :linker="passageLink"></passage>
       </div>
+
       <div class="right">
         <text-formatting></text-formatting>
         <text-colouring></text-colouring>
@@ -96,9 +36,9 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState } from 'vuex';
+import Passage from '@/components/Passage';
 import Morpheus from '@/components/Morpheus';
-import Pagination from '@/components/Pagination';
 import TextFormatting from '@/components/TextFormatting';
 import BookmarkList from '@/components/BookmarkList';
 
@@ -118,12 +58,6 @@ export default {
     this.$store.commit('setReader', { book: null, passage: null });
     this.fetchData();
   },
-  mounted() {
-    window.addEventListener('keyup', this.handleKeyUp);
-  },
-  beforeDestroy() {
-    window.removeEventListener('keyup', this.handleKeyUp);
-  },
   data() {
     return {
       query: {},
@@ -131,8 +65,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(['user', 'book', 'passage', 'interlinear']),
-    ...mapGetters(['textClasses']),
+    ...mapState(['user', 'book']),
   },
   watch: {
     $route: 'fetchData',
@@ -141,7 +74,7 @@ export default {
     fetchData() {
       this.asyncData({ query: this.$route.query }).then(({ query, books, book, passage }) => {
         if (book && !passage) {
-          this.$router.push(this.passageLink(query, book.first_paragraph));
+          this.$router.push(this.passageLink(book.first_paragraph));
         } else {
           this.query = query;
           this.books = books;
@@ -154,14 +87,43 @@ export default {
       let passage = null;
       const books = await morphgnt.books();
       if (query.passage) {
-        passage = await morphgnt.resource(query.passage);
-        book = await morphgnt.resource(passage.book);
+        const {
+          prev,
+          next,
+          words,
+          ...p
+        } = await morphgnt.resource(query.passage);
+        passage = {
+          prev,
+          next,
+          words: words.map(word => ({
+            id: word['@id'],
+            classes: [
+              `pos-${word.pos}`,
+              `case-${word.case}`,
+            ],
+            text: word.text,
+            // @@@ move to annotations API
+            norm: word.norm,
+            lemma: word.lemma,
+            mood: word.mood,
+            tense: word.tense,
+            voice: word.voice,
+            number: word.number,
+            person: word.person,
+            pos: word.pos,
+            case: word.case,
+            word: word.word,
+          })),
+        };
+        book = await morphgnt.resource(p.book);
       } else if (query.book) {
         book = await morphgnt.resource(query.book);
       }
       return { query, books, book, passage };
     },
-    passageLink(query, passage) {
+    passageLink(passage) {
+      const { query } = this;
       if (passage) {
         delete query.book;
         return {
@@ -170,29 +132,15 @@ export default {
       }
       return null;
     },
-    handleKeyUp(e) {
-      if (e.key === 'ArrowLeft') {
-        if (this.passage.prev) {
-          this.$router.push(this.passageLink(this.query, this.passage.prev));
-        }
-      } else if (e.key === 'ArrowRight') {
-        if (this.passage.next) {
-          this.$router.push(this.passageLink(this.query, this.passage.next));
-        }
-      }
-    },
-    handleWordSelect(word) {
-      this.$store.commit('setSelectedWord', word);
-    },
   },
   components: {
-    Pagination,
     BookSelect,
     WordInfo,
     BookInfo,
     Morpheus,
     BookmarkList,
     VerseLookup,
+    Passage,
     TextFormatting,
     Interlinear,
     TextColouring,
@@ -269,21 +217,10 @@ export default {
   /* text */
 
   #text {
-    clear: both;
-    word-spacing: 0.3em;
-    color: #333;
-    .word {
-      cursor: pointer;
-      .verse-num {
-        color: #999;
-        font-family: $widget-font-family;
-        font-size: 60%;
-      }
-    }
-
-    div.unit {
-      display: inline-block;
-      margin-bottom: 0.5em;
+    .verse-num {
+      color: #999;
+      font-family: $widget-font-family;
+      font-size: 60%;
     }
     .txt {
       display: inline-block;
