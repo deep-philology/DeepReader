@@ -171,10 +171,8 @@ export default {
   /* text */
 
   #text {
-    clear: both;
     word-spacing: 0.3em;
     line-height: 1.6;
-    color: #333;
   }
 
   /* TEI */
