@@ -45,28 +45,28 @@
   }
   .textSize-small {
     font-family: $main-font-family;
-    font-size: 14pt;
+    font-size: 12pt;
   }
   .textSize-normal {
     font-family: $main-font-family;
-    font-size: 16pt;
+    font-size: 15pt;
   }
   .textSize-large {
     font-family: $main-font-family;
-    font-size: 20pt;
+    font-size: 18pt;
   }
 </style>
 
 <style lang="scss">
   #text {
     &.textSize-small {
-      font-size: 14pt;
+      font-size: 12pt;
     }
     &.textSize-normal {
-      font-size: 16pt;
+      font-size: 15pt;
     }
     &.textSize-large {
-      font-size: 20pt;
+      font-size: 18pt;
     }
   }
 </style>
