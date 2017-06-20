@@ -4,9 +4,9 @@
 
 [![Join the chat at https://gitter.im/deep-reader/DeepReader](https://badges.gitter.im/deep-reader/DeepReader.svg)](https://gitter.im/deep-reader/DeepReader?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-DeepReader is a highly modular, Vue.js-based framework designed for building online reading environments for deep reading of texts with integrated elaboration and learning tools.
+DeepReader is a highly modular, Vue.js-based framework designed for building online reading environments for deep reading of texts with rich annotations and integrated learning tools.
 
-It is particulary intended for the study of classical languages such as Ancient Greek but could be applied to any texts with rich annotations. What is here is an early prototype using the MorphGNT API and the CTS protocol but we plan to support other text services as well.
+It is particulary intended for the study of classical languages such as Ancient Greek but could be applied to any texts with rich annotations. What is here is an early prototype using the MorphGNT API and the CTS protocol but we plan to support other text services as well including EPUB.
 
 Reading environments built with the DeepReader framework could be as simple as Kindle-like apps but the real intention is to support deep reading with integrated dictionaries, linguistic annotations, and commentaries, as well as learning tools such as vocabulary flashcards and parsing drills.
 
