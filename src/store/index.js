@@ -32,6 +32,10 @@ export default new Vuex.Store({
     passage: null,
     textClasses: {},
     selectedWord: null,
+    annotations: {
+      source_1: { id_1: { lemma: 'foo', text: 'Foo' } },
+      source_2: { id_1: { frequency: 5 } },
+    },
   },
   getters: {
     textClasses(state) {
@@ -41,6 +45,18 @@ export default new Vuex.Store({
             return Object.assign(o, { [k]: v });
           }
           return Object.assign(o, { [`${k}-${v}`]: true });
+        },
+        {},
+      );
+    },
+    annotations(state) {
+      const annotations = state.annotations;
+      return Object.keys(annotations).reduce(
+        (o, k) => {
+          Object.entries(annotations[k]).forEach(([id, a]) => {
+            o[id] = Object.assign({}, o[id], a);
+          });
+          return o;
         },
         {},
       );
