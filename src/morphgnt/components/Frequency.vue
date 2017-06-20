@@ -21,8 +21,8 @@
     methods: {
       toggleFrequency() {
         const input = [];
-        this.passage.words.forEach((word, index) => {
-          input.push({ id: `w${index}`, lemma: word.lemma });
+        this.passage.words.forEach((word) => {
+          input.push({ id: word.id, lemma: word.lemma });
         });
         morphgnt.frequency(input).then((output) => {
           output.forEach((item) => {
