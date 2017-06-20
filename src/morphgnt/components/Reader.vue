@@ -294,35 +294,40 @@ export default {
       color: gray;
     }
 
+    .freq-0, .freq-1, .freq-2, .freq-3, .freq-4, .freq-5, .freq-6, .freq-7,
+    .freq-8, .freq-9, .freq-10 {
+      padding: 0.2em 0.3em;
+      margin: -0.2em -0.3em;
+    }
     .freq-0 {
-      background: #fff;
+      background: #6ff;
     }
     .freq-1 {
-      background: #ffe;
+      background: #6fe;
     }
     .freq-2 {
-      background: #ffd;
+      background: #7fd;
     }
     .freq-3 {
-      background: #ffc;
+      background: #8fc;
     }
     .freq-4 {
-      background: #ffb;
+      background: #9fb;
     }
     .freq-5 {
-      background: #ffa;
+      background: #afa;
     }
     .freq-6 {
-      background: #ff9;
+      background: #bf9;
     }
     .freq-7 {
-      background: #ff8;
+      background: #cf8;
     }
     .freq-8 {
-      background: #ff7;
+      background: #df7;
     }
     .freq-9 {
-      background: #ff6;
+      background: #ef6;
     }
     .freq-10 {
       background: #ff5;
