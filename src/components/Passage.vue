@@ -19,9 +19,7 @@
             <template v-if="interlinear">
               <br>
               <span class="gls">
-                <span class="pos">{{ word.pos }}</span>
-                <span v-if="word.mood">.{{ word.tense }}{{ word.voice }}{{ word.mood }}</span>
-                <span v-if="word.number">.{{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}</span>
+                <span class="pos">{{ word.pos }}</span><span v-if="word.mood">.{{ word.tense }}{{ word.voice }}{{ word.mood }}</span><span v-if="word.number">.{{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}</span>
                 <br>
                 {{ word.lemma }}
               </span>

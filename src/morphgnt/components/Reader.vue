@@ -116,6 +116,7 @@ export default {
             pos: word.pos,
             case: word.case,
             word: word.word,
+            gender: word.gender,
           })),
         };
         book = await morphgnt.resource(p.book);
