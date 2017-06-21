@@ -8,23 +8,18 @@
       </pagination>
       <div id="text" :class="textClasses" v-fragment="passage.fragment">
         <p>
-          <span
-            v-for="word in passage.words"
-            :key="word.id" :id="word.id"
-            :class="['word', ...word.classes]"
-            @click="handleWordSelect(word)"
-          >
-            <span class="verse-num" v-if="word.id.slice(-8, -5) == '001'">{{ parseInt(word.id.slice(-11, -8)) }}</span>
-            {{ word.text }}
+          <div v-for="word in passage.words" class="word unit">
+            <span class="verse-num" v-if="word.id.slice(8, 11) == '001'">{{ parseInt(word.id.slice(5, 8)) }}</span><!--
+            --><span :key="word.id" :id="word.id" :class="['txt', ...word.classes]" @click="handleWordSelect(word)">{{ word.text }}</span><br>
             <template v-if="interlinear">
-              <br>
               <span class="gls">
-                <span class="pos">{{ word.pos }}</span><span v-if="word.mood">.{{ word.tense }}{{ word.voice }}{{ word.mood }}</span><span v-if="word.number">.{{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}</span>
-                <br>
-                {{ word.lemma }}
+                <span class="pos">{{ word.pos }}</span><!--
+                --><span v-if="word.mood">.{{ word.tense }}{{ word.voice }}{{ word.mood }}</span><!--
+                --><span v-if="word.number">.{{ word.person }}{{ word.case }}{{ word.number }}{{ word.gender }}</span><!--
+                --><br>{{ word.lemma }}<br>
               </span>
             </template>
-          </span>
+          </div>
         </p>
       </div>
       <pagination
@@ -125,18 +120,24 @@ export default {
 <style lang="scss" scoped>
 #text {
   clear: both;
-  word-spacing: 0.3em;
   color: #333;
   .word {
-    display: inline-block;
-    margin-right: 0.5em;
-    margin-bottom: 0.5em;
     cursor: pointer;
+    .verse-num {
+      color: #999;
+      font-family: $widget-font-family;
+      font-size: 60%;
+      margin-right: 0.5em;
+    }
   }
-  .verse-num {
-    color: #999;
-    font-family: $widget-font-family;
-    font-size: 60%;
+  .unit {
+    display: inline-block;
+    margin-bottom: 0.5em;
+    margin-right: 0.5em;
+    user-select: text;
+  }
+  .txt {
+    display: inline-block;
   }
   .gls {
     display: inline-block;

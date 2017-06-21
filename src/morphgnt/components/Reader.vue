@@ -99,7 +99,7 @@ export default {
           next,
           title,
           words: words.map(word => ({
-            id: word['@id'],
+            id: word['@id'].slice(-16, -5),
             classes: [
               `pos-${word.pos}`,
               `case-${word.case}`,
