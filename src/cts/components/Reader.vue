@@ -18,58 +18,9 @@
       </div>
 
       <div class="main">
-        <template v-if="passage">
-
-          <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
-
-          <div id="text" :class="textClasses" v-fragment="passage.fragment"></div>
-
-          <pagination :prev="passageLink(query, passage.prev)" :next="passageLink(query, passage.next)" :title="passage.title"></pagination>
-
-        </template>
-        <div v-else>
-          <p>
-            DeepReader is a highly modular, Vue.js-based online reading
-            environment designed for deep reading of texts with integrated
-            learning tools.
-          </p>
-
-          <p>
-            It is particulary intended for the study of classical languages
-            such as Ancient Greek but could be applied to any texts with rich
-            annotations. What is here is an early prototype using the MorphGNT
-            API and the CTS protocol but we plan to support other text services
-            as well.
-          </p>
-
-          <p>
-            If you hover over the reader, you'll see various pluggable widgets
-            on the left and right. Those on the left are used to choose what
-            passage to read, and those on the right are used to present
-            additional information about the passage and its individual words,
-            and to control the appearance of the passage.
-          </p>
-
-          <p>
-            You can expand or collapse any widget by clicking on its title. You
-            can use the arrow keys on your keyboard to pagination between
-            passages in a work.
-          </p>
-
-          <p>
-            Each widget is a separate Vue.js component. We are working to make
-            it as simple as possible to develop new widgets that interact and
-            engage with the current passage, optionally calling out to external
-            APIs.
-          </p>
-
-          <p>
-            We are also experimenting with Firebase for persistence. Offline
-            use is also planned as is packaging DeepReader up as an app for
-            mobile use.
-          </p>
-        </div>
+        <passage :linker="passageLink"></passage>
       </div>
+
       <div class="right">
         <text-formatting></text-formatting>
       </div>
@@ -78,10 +29,10 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 import xpath from 'xpath';
 import fetch from 'universal-fetch';
-import Pagination from '@/components/Pagination';
+import Passage from '@/components/Passage';
 import TextFormatting from '@/components/TextFormatting';
 
 import TextInventory from '@/cts/components/TextInventory';
@@ -96,20 +47,13 @@ export default {
     this.$store.commit('setCTSReader', { passage: null });
     this.fetchData();
   },
-  mounted() {
-    window.addEventListener('keyup', this.handleKeyUp);
-  },
-  beforeDestroy() {
-    window.removeEventListener('keyup', this.handleKeyUp);
-  },
   data() {
     return {
       query: null,
     };
   },
   computed: {
-    ...mapState(['user', 'passage', 'ctsTextGroup', 'ctsWork']),
-    ...mapGetters(['textClasses']),
+    ...mapState(['user', 'ctsTextGroup', 'ctsWork']),
   },
   watch: {
     $route: 'fetchData',
@@ -140,7 +84,8 @@ export default {
       };
       return { query, passage };
     },
-    passageLink(query, urn) {
+    passageLink(urn) {
+      const { query } = this;
       if (urn) {
         return {
           query: Object.assign({}, query, { urn }),
@@ -148,29 +93,9 @@ export default {
       }
       return null;
     },
-    handleKeyUp(e) {
-      if (e.key === 'ArrowLeft') {
-        if (this.passage.prev) {
-          this.$router.push(this.passageLink(this.query, this.passage.prev));
-        }
-      } else if (e.key === 'ArrowRight') {
-        if (this.passage.next) {
-          this.$router.push(this.passageLink(this.query, this.passage.next));
-        }
-      }
-    },
-    handleWordSelect(word) {
-      this.$store.commit('setSelectedWord', word);
-    },
-  },
-  directives: {
-    fragment(el, binding) {
-      el.innerHTML = '';
-      el.appendChild(binding.value);
-    },
   },
   components: {
-    Pagination,
+    Passage,
     TextFormatting,
     TextInventory,
     TextGroup,
@@ -246,10 +171,8 @@ export default {
   /* text */
 
   #text {
-    clear: both;
     word-spacing: 0.3em;
     line-height: 1.6;
-    color: #333;
   }
 
   /* TEI */

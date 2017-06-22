@@ -5,7 +5,7 @@
       <button v-if="passage" @click="saveBookmark">save</button>
       <div v-for="bookmark in bookmarks" class="bookmark">
         <span class="remove" @click="removeBookmark(bookmark)">remove</span>
-        <router-link :to="$parent.passageLink($parent.query, bookmark.resource)">{{ bookmark.title }}</router-link>
+        <router-link :to="$parent.passageLink(bookmark.resource)">{{ bookmark.title }}</router-link>
       </div>
     </div>
   </widget>
@@ -24,10 +24,7 @@
       this.$store.dispatch('setBookmarksRef', this.userBookmarks());
     },
     computed: {
-      passage() {
-        return this.$parent.passage;
-      },
-      ...mapState(['user', 'bookmarks']),
+      ...mapState(['user', 'passage', 'bookmarks']),
     },
     methods: {
       userBookmarks() {
@@ -35,7 +32,7 @@
       },
       saveBookmark() {
         this.userBookmarks().push({
-          resource: this.passage['@id'],
+          resource: this.passage.id,
           title: this.passage.title,
         });
       },
