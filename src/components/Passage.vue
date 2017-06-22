@@ -108,9 +108,10 @@ export default {
   },
   directives: {
     fragment(el, binding) {
-      if (binding.value) {
+      const fragment = binding.value;
+      if (fragment.childElementCount > 0) {
         el.innerHTML = '';
-        el.appendChild(binding.value);
+        el.appendChild(fragment);
       }
     },
   },
