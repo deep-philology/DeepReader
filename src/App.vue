@@ -30,4 +30,8 @@ export default {
       color: #666;
     }
   }
+  li.hanging {
+    text-indent: -1em;
+    margin-left: 1em;
+  }
 </style>
