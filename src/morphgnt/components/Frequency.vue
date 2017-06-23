@@ -37,14 +37,3 @@
     },
   };
 </script>
-
-<style lang="scss" scoped>
-  div.click {
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-    &:hover {
-      color: #666;
-    }
-  }
-</style>
