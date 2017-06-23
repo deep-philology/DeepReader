@@ -143,47 +143,4 @@ export default {
       }
     }
   }
-
-  /* pagination */
-
-  div.page-nav-1 {
-
-    display: flex;
-    justify-content: space-between;
-
-    overflow: auto;
-
-    font-family: $widget-font-family;
-
-    > div {
-      &.prev {
-        width: 30px;  // fix width so takes up space even without link
-        float: left;
-        text-align: left;
-      }
-      &.next {
-        width: 30px;  // fix width so takes up space even without link
-        float: right;
-        text-align: right;
-      }
-      line-height: 21pt;
-    }
-
-    .title {
-      text-align: center;
-    }
-
-    a {
-      font-weight: bold;
-      font-size: 20pt;
-      text-decoration: none;
-      color: #999;
-      cursor: pointer;
-    }
-
-    a:hover {
-      color: #000;
-    }
-  }
-
 </style>
