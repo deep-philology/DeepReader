@@ -64,7 +64,7 @@
 </script>
 
 <style lang="scss" scoped>
-.v-spinner {
-  text-align: center;
-}
+  .v-spinner {
+    text-align: center;
+  }
 </style>

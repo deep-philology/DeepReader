@@ -26,10 +26,10 @@
 </script>
 
 <style lang="scss" scoped>
-div.widget {
-  section {
-    max-height: 250px;
-    overflow: auto;
+  div.widget {
+    section {
+      max-height: 250px;
+      overflow: auto;
+    }
   }
-}
 </style>

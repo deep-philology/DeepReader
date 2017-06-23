@@ -119,29 +119,29 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-#text {
-  .word {
-    cursor: pointer;
-    .verse-num {
-      color: #999;
-      font-family: $widget-font-family;
-      font-size: 60%;
+  #text {
+    .word {
+      cursor: pointer;
+      .verse-num {
+        color: #999;
+        font-family: $widget-font-family;
+        font-size: 60%;
+        margin-right: 0.5em;
+      }
+    }
+    .unit {
+      display: inline-block;
+      margin-bottom: 0.5em;
       margin-right: 0.5em;
+      user-select: text;
+    }
+    .txt {
+      display: inline-block;
+    }
+    .gls {
+      display: inline-block;
+      font-size: 75%;
+      color: gray;
     }
   }
-  .unit {
-    display: inline-block;
-    margin-bottom: 0.5em;
-    margin-right: 0.5em;
-    user-select: text;
-  }
-  .txt {
-    display: inline-block;
-  }
-  .gls {
-    display: inline-block;
-    font-size: 75%;
-    color: gray;
-  }
-}
 </style>
