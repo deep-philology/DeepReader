@@ -127,6 +127,8 @@ export default {
       }
     }
     > section {
+      max-height: 250px;
+      overflow: auto;
       padding: 10px 10px;
       ul {
         list-style-type: none;
@@ -183,5 +185,5 @@ export default {
       color: #000;
     }
   }
-  
+
 </style>
