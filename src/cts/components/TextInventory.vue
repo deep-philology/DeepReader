@@ -4,7 +4,7 @@
     <div slot="body">
       <sync-loader v-if="loading" color="#000" size="5px" margin="3px" radius="100%"></sync-loader>
       <ul v-else>
-        <li class="click" v-for="textGroup in textGroups" @click="handleTextGroupClick(textGroup)">{{ textGroup.groupName }}</a></li>
+        <li class="click hanging" v-for="textGroup in textGroups" @click="handleTextGroupClick(textGroup)">{{ textGroup.groupName }}</a></li>
       </ul>
     </div>
   </widget>
@@ -64,11 +64,7 @@
 </script>
 
 <style lang="scss" scoped>
-li {
-  text-indent: -1em;
-  margin-left: 1em;
-}
-.v-spinner {
-  text-align: center;
-}
+  .v-spinner {
+    text-align: center;
+  }
 </style>

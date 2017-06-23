@@ -4,7 +4,7 @@
     <div slot="body">
       <sync-loader v-if="loading" color="#000" size="5px" margin="3px" radius="100%"></sync-loader>
       <ul v-else>
-        <li class="click" v-for="work in works" @click="handleWorkClick(work)">{{ work.title }}</a></li>
+        <li class="click hanging" v-for="work in works" @click="handleWorkClick(work)">{{ work.title }}</a></li>
       </ul>
     </div>
   </widget>
@@ -69,10 +69,3 @@
     },
   };
 </script>
-
-<style lang="scss" scoped>
-li {
-  text-indent: -1em;
-  margin-left: 1em;
-}
-</style>

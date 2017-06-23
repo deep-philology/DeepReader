@@ -47,15 +47,6 @@
 </script>
 
 <style lang="scss" scoped>
-  a {
-    display: block;
-    color: inherit;
-    text-decoration: none;
-    padding: 2px 5px;
-    &:hover {
-      color: #666;
-    }
-  }
   button {
     margin-bottom: 0.5em;
   }

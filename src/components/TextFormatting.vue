@@ -35,14 +35,6 @@
 </script>
 
 <style lang="scss" scoped>
-  .click {
-    color: inherit;
-    text-decoration: none;
-    cursor: pointer;
-    &:hover {
-      color: #666;
-    }
-  }
   .textSize-small {
     font-family: $main-font-family;
     font-size: 12pt;
