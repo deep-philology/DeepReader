@@ -2,11 +2,11 @@
   <div class="root">
     <header>
       <div class="reader-nav">
-        <a href="/#/cts/">CTS API (Perseids)</a>
+        <router-link to="cts">CTS API (Perseids)</router-link>
         &bull;
-        <a href="/#/cite-services/">cite-services</a>
+        <router-link to="cite-services">cite-services</router-link>
         &bull;
-        <a href="/#/morphgnt/">MorphGNT API</a>
+        <router-link to="morphgnt">MorphGNT API</router-link>
       </div>
       <h1>DeepReader (cite-services)</h1>
     </header>
