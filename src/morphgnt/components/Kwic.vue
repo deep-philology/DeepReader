@@ -54,6 +54,7 @@ export default {
     width: 100%;
     .pre {
       text-align: right;
+      white-space: nowrap;
     }
     .keyword {
       white-space: nowrap;
@@ -62,6 +63,7 @@ export default {
     }
     .post {
       text-align: left;
+      white-space: nowrap;
     }
   }
 </style>
