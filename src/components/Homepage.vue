@@ -66,6 +66,9 @@ export default {
       query: null,
     };
   },
+  mounted() {
+    this.$log.log('Homepage mounted');
+  },
 };
 </script>
 
