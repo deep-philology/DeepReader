@@ -1,2 +1,12 @@
-$main-font-family: "Noto Serif", serif;
-$widget-font-family: "Noto Sans", sans-serif;
+.click {
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+  &:hover {
+    color: #666;
+  }
+}
+li.hanging {
+  text-indent: -1em;
+  margin-left: 1em;
+}

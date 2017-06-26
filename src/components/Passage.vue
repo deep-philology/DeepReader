@@ -120,6 +120,9 @@ export default {
 
 <style lang="scss" scoped>
   #text {
+    clear: both;
+    color: #333;
+
     .word {
       cursor: pointer;
       .verse-num {
