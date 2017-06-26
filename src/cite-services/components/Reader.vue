@@ -84,8 +84,8 @@ import { mapState, mapGetters } from 'vuex';
 import fetch from 'universal-fetch';
 
 import Pagination from '@/components/Pagination';
-import TextFormatting from '@/components/TextFormatting';
-import CtsUrn from '@/cite-services/components/CtsUrn';
+import TextFormatting from '@/widgets/TextFormatting';
+import CtsUrn from '@/cite-services/widgets/CtsUrn';
 
 export default {
   name: 'reader',
