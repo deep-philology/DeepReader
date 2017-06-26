@@ -4,6 +4,7 @@ import CTSReader from '@/cts/components/Reader';
 import MorphGNTReader from '@/morphgnt/components/Reader';
 import CiteServicesReader from '@/cite-services/components/Reader';
 import Homepage from '@/components/Homepage';
+import GithubReader from '@/Github/components/Reader';
 
 Vue.use(Router);
 
@@ -28,6 +29,11 @@ export default new Router({
       path: '/cite-services',
       name: 'CiteServicesReader',
       component: CiteServicesReader,
+    },
+    {
+      path: '/Github',
+      name: 'Github',
+      component: GithubReader,
     },
   ],
 });
