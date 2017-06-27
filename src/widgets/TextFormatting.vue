@@ -37,28 +37,28 @@
 <style lang="scss" scoped>
   .textSize-small {
     font-family: $main-font-family;
-    font-size: 12pt;
+    font-size: $main-text-small-size;
   }
   .textSize-normal {
     font-family: $main-font-family;
-    font-size: 15pt;
+    font-size: $main-text-normal-size;
   }
   .textSize-large {
     font-family: $main-font-family;
-    font-size: 18pt;
+    font-size: $main-text-large-size;
   }
 </style>
 
 <style lang="scss">
   #text {
     &.textSize-small {
-      font-size: 12pt;
+      font-size: $main-text-small-size;
     }
     &.textSize-normal {
-      font-size: 15pt;
+      font-size: $main-text-normal-size;
     }
     &.textSize-large {
-      font-size: 18pt;
+      font-size: $main-text-large-size;
     }
   }
 </style>

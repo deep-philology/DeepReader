@@ -31,25 +31,25 @@ body:hover {
 /* header */
 
 .root > header {
-  background: #F7F7F7;
+  background: $header-background;
   padding: 10px 20px;
   > h1 {
     font-size: 24pt;
     font-family: $main-font-family;
     margin: 0;
     font-weight: normal;
-    color: #444;
+    color: $header-color;
   }
   .reader-nav {
     float: right;
     font-family: $widget-font-family;
-    color: #999;
+    color: $header-nav-color;
     a {
       text-decoration: none;
       color: inherit;
       cursor: pointer;
       &:hover {
-        color: #000;
+        color: $header-nav-hover-color;
       }
     }
   }

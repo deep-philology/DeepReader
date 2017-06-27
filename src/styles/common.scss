@@ -3,7 +3,7 @@
   text-decoration: none;
   cursor: pointer;
   &:hover {
-    color: #666;
+    color: $click-hover-color;
   }
 }
 li.hanging {
