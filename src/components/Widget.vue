@@ -29,13 +29,13 @@
   .widget {
     margin-bottom: 10px;
     font-family: $widget-font-family;
-    color: #666;
+    color: $widget-color;
     transition: color 0.2s ease-in-out, opacity 0.5s ease-in-out;
-    background: #F7F7F7;
+    background: $widget-background;
     font-size: 9pt;
     > header {
       cursor: pointer;
-      background: #EEE;
+      background: $widget-header-background;
       transition: background 0.2s ease-in-out, opacity 0.5s ease-in-out;
       padding: 5px 10px;
       font-weight: bold;
@@ -55,9 +55,9 @@
       }
     }
     &:hover {
-      color: #000;
+      color: $widget-hover-color;
       > header {
-        background: #DDD;
+        background: $widget-header-hover-background;
       }
     }
   }

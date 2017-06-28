@@ -110,7 +110,7 @@ export default {
 
   .TEI {
     .milestone {
-      color: #999;
+      color: $text-milestone-color;
       font-family: $widget-font-family;
       font-size: 60%;
     }
@@ -120,7 +120,7 @@ export default {
       }
     }
     .l .n {
-      color: #999;
+      color: $text-milestone-color;
       font-family: $widget-font-family;
       font-size: 60%;
     }
