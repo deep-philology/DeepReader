@@ -33,11 +33,11 @@ import { mapState } from 'vuex';
 import xpath from 'xpath';
 import fetch from 'universal-fetch';
 import Passage from '@/components/Passage';
-import TextFormatting from '@/components/TextFormatting';
+import TextFormatting from '@/widgets/TextFormatting';
 
-import TextInventory from '@/cts/components/TextInventory';
-import TextGroup from '@/cts/components/TextGroup';
-import Work from '@/cts/components/Work';
+import TextInventory from '@/cts/widgets/TextInventory';
+import TextGroup from '@/cts/widgets/TextGroup';
+import Work from '@/cts/widgets/Work';
 import teiXSL from '@/cts/tei.xsl';
 
 
@@ -110,7 +110,7 @@ export default {
 
   .TEI {
     .milestone {
-      color: #999;
+      color: $text-milestone-color;
       font-family: $widget-font-family;
       font-size: 60%;
     }
@@ -120,7 +120,7 @@ export default {
       }
     }
     .l .n {
-      color: #999;
+      color: $text-milestone-color;
       font-family: $widget-font-family;
       font-size: 60%;
     }
