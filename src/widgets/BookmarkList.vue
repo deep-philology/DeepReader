@@ -62,7 +62,7 @@
         transition: color 0.2s ease-in-out;
         color: inherit;
         &:hover {
-          color: #C00;
+          color: $widget-remove;
         }
       }
     }

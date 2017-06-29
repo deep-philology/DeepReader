@@ -38,19 +38,19 @@
 <script>
 import { mapState } from 'vuex';
 import Passage from '@/components/Passage';
-import Morpheus from '@/components/Morpheus';
-import TextFormatting from '@/components/TextFormatting';
-import BookmarkList from '@/components/BookmarkList';
+import Morpheus from '@/widgets/Morpheus';
+import TextFormatting from '@/widgets/TextFormatting';
+import BookmarkList from '@/widgets/BookmarkList';
 
 import morphgnt from '@/morphgnt';
-import BookSelect from '@/morphgnt/components/BookSelect';
-import WordInfo from '@/morphgnt/components/WordInfo';
-import BookInfo from '@/morphgnt/components/BookInfo';
-import VerseLookup from '@/morphgnt/components/VerseLookup';
-import Interlinear from '@/morphgnt/components/Interlinear';
-import TextColouring from '@/morphgnt/components/TextColouring';
-import Frequency from '@/morphgnt/components/Frequency';
-import Kwic from '@/morphgnt/components/Kwic';
+import BookSelect from '@/morphgnt/widgets/BookSelect';
+import WordInfo from '@/morphgnt/widgets/WordInfo';
+import BookInfo from '@/morphgnt/widgets/BookInfo';
+import VerseLookup from '@/morphgnt/widgets/VerseLookup';
+import Interlinear from '@/morphgnt/widgets/Interlinear';
+import TextColouring from '@/morphgnt/widgets/TextColouring';
+import Frequency from '@/morphgnt/widgets/Frequency';
+import Kwic from '@/morphgnt/widgets/Kwic';
 
 export default {
   name: 'reader',
