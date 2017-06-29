@@ -11,6 +11,7 @@ export default {
   name: 'app',
   store,
   created() {
+    this.$log.log('App.vue created');
     this.$store.dispatch('authenticate');
   },
 };
