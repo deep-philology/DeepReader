@@ -76,7 +76,7 @@
     }
   }
   .word-info-list-body {
-    border-top: 1px solid #CCC;
+    border-top: 1px solid $widget-rule;
     margin-top: 10px;
     padding-top: 5px;
     .word {
@@ -91,7 +91,7 @@
           transition: color 0.2s ease-in-out;
           color: inherit;
           &:hover {
-            color: #C00;
+            color: $widget-remove;
           }
         }
       }

@@ -48,12 +48,12 @@
       font-weight: bold;
       font-size: 20pt;
       text-decoration: none;
-      color: #999;
+      color: $page-arrow-color;
       cursor: pointer;
     }
 
     a:hover {
-      color: #000;
+      color: $page-arrow-hover-color;
     }
   }
 </style>

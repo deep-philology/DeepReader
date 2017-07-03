@@ -120,10 +120,13 @@ export default {
 
 <style lang="scss" scoped>
   #text {
+    clear: both;
+    color: $main-text-color;
+
     .word {
       cursor: pointer;
       .verse-num {
-        color: #999;
+        color: $text-milestone-color;
         font-family: $widget-font-family;
         font-size: 60%;
         margin-right: 0.5em;
@@ -141,7 +144,7 @@ export default {
     .gls {
       display: inline-block;
       font-size: 75%;
-      color: gray;
+      color: $interlinear-color;
     }
   }
 </style>
