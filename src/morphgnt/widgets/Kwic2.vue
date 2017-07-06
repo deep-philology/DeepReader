@@ -1,10 +1,7 @@
 <template>
-  <widget>
-    <span slot="header">KWIC</span>
-    <span slot="summary" v-if="word">
-      {{ word.word }}
-    </span>
-    <div slot="body" v-if="results">
+  <div>
+    <h2>KWIC {{ word.word }}</h2>
+    <div>
       <table>
         <tr v-for="result in results">
           <td class="pre">{{ result.pre }}</td>
@@ -13,7 +10,7 @@
         </tr>
       </table>
     </div>
-  </widget>
+  </div>
 </template>
 
 <script>
@@ -23,7 +20,7 @@ import morphgnt from '@/morphgnt';
 export default {
   data() {
     return {
-      word: { word: 'ἀνθρώπου' },
+      word: { word: 'ἀφεθήσεται' },
       results: null,
     };
   },
@@ -56,7 +53,7 @@ export default {
     .keyword {
       white-space: nowrap;
       font-weight: bold;
-      text-align: center;
+      text-align: left;
     }
     .post {
       text-align: left;
