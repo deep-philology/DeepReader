@@ -7,6 +7,7 @@
           <td class="pre">{{ result.pre }}</td>
           <td class="keyword">{{ result.keyword }}</td>
           <td class="post">{{ result.post }}</td>
+          <td class="ref"> {{ result.title }}</td>
         </tr>
       </table>
     </div>
@@ -58,6 +59,14 @@ export default {
     .post {
       text-align: left;
       white-space: nowrap;
+    }
+    .ref {
+      white-space: nowrap;
+      text-align: left;
+      color: $text-milestone-color;
+      font-family: $widget-font-family;
+      font-size: 70%;
+      padding-left: 2em;
     }
   }
 </style>
