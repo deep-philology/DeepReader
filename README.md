@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/deep-reader/DeepReader/master/static/deep-reader-512.png" height=64 width=64> 
+<img src="https://raw.githubusercontent.com/deep-reader/DeepReader/master/static/deep-reader-512.png" height=64 width=64>
 
 # DeepReader
 
@@ -15,6 +15,10 @@ Reading environments built with the DeepReader framework could be as simple as K
 Each widget is a separate Vue.js component. We are working to make it as simple as possible to develop new widgets that interact and engage with the current passage, optionally calling out to external APIs.
 
 We are also experimenting with Firebase for persistence. Offline use is also planned as is packaging DeepReader up as an app for mobile use.
+
+## Dependencies
+
+DeepReader requires Node 8.
 
 ## Setup
 
