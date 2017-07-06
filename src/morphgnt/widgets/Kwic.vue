@@ -18,7 +18,6 @@
 
 <script>
 import Widget from '@/components/Widget';
-import JsonObject from '@/components/JsonObject';
 import morphgnt from '@/morphgnt';
 
 export default {
@@ -44,7 +43,6 @@ export default {
   },
   components: {
     Widget,
-    JsonObject,
   },
 };
 </script>
@@ -59,7 +57,7 @@ export default {
     .keyword {
       white-space: nowrap;
       font-weight: bold;
-      text-align: center;
+      text-align: left;
     }
     .post {
       text-align: left;
