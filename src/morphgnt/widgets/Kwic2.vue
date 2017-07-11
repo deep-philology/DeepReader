@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>KWIC {{ word.word }}</h2>
+    <h2>KWIC {{ word }}</h2>
     <div>
       <table>
         <tr v-for="result in results">
@@ -25,11 +25,12 @@ import morphgnt from '@/morphgnt';
 export default {
   data() {
     return {
-      word: { word: 'ἀφεθήσεται' },
+      word: null,
       results: null,
     };
   },
   created() {
+    this.word = this.$route.query.word;
     this.fetchData();
   },
   watch: {
@@ -37,7 +38,7 @@ export default {
   },
   methods: {
     fetchData() {
-      morphgnt.kwic(this.word.word).then((results) => {
+      morphgnt.kwic(this.word).then((results) => {
         this.results = results;
       });
     },
