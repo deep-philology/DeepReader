@@ -7,7 +7,11 @@
           <td class="pre">{{ result.pre }}</td>
           <td class="keyword">{{ result.keyword }}</td>
           <td class="post">{{ result.post }}</td>
-          <td class="ref"> {{ result.title }}</td>
+          <td class="ref">
+            <router-link class="click"
+              :to="{ name: 'MorphGNTReader', query: { passage: result.verse_id } }"
+            >{{ result.title }}</router-link>
+          </td>
         </tr>
       </table>
     </div>
