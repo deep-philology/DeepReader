@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h2>KWIC {{ word }}</h2>
+    <h2>
+      Keyword in Context
+      <input class="keyword-input" v-model.trim.lazy="word">
+    </h2>
     <div>
       <table>
         <tr v-for="result in results">
@@ -40,6 +43,7 @@ export default {
     fetchData() {
       morphgnt.kwic(this.word).then((results) => {
         this.results = results;
+        this.$router.push({ query: { word: this.word } });
       });
     },
   },
@@ -50,6 +54,11 @@ export default {
 </script>
 
 <style lang="scss">
+  .keyword-input {
+    float: right;
+    font-size: 18px;
+    font-family: $main-font-family;
+  }
   table {
     width: 100%;
     .pre {
