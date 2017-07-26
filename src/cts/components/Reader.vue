@@ -12,17 +12,20 @@
     </header>
     <div class="grid-wrapper">
       <div class="left">
-        <text-inventory></text-inventory>
-        <text-group v-if="ctsTextGroup"></text-group>
-        <work v-if="ctsWork"></work>
+        <text-inventory v-if="textGroup"></text-inventory>
+        <text-group v-if="work"></text-group>
+        <work v-if="passage"></work>
       </div>
 
       <div class="main">
-        <passage :linker="passageLink"></passage>
+        <text-inventory v-if="!textGroup"></text-inventory>
+        <text-group v-if="textGroup && !work"></text-group>
+        <work v-if="work && !passage"></work>
+        <passage v-if="passage" :linker="passageLink"></passage>
       </div>
 
       <div class="right">
-        <text-formatting></text-formatting>
+        <text-formatting v-if="passage"></text-formatting>
       </div>
     </div>
   </div>
@@ -30,15 +33,14 @@
 
 <script>
 import { mapState } from 'vuex';
-import xpath from 'xpath';
-import fetch from 'universal-fetch';
+import * as URN from 'urn-lib';
 import Passage from '@/components/Passage';
 import TextFormatting from '@/widgets/TextFormatting';
 
 import TextInventory from '@/cts/widgets/TextInventory';
 import TextGroup from '@/cts/widgets/TextGroup';
 import Work from '@/cts/widgets/Work';
-import teiXSL from '@/cts/tei.xsl';
+import cts from '@/cts';
 
 
 export default {
@@ -53,36 +55,39 @@ export default {
     };
   },
   computed: {
-    ...mapState(['user', 'ctsTextGroup', 'ctsWork']),
+    ...mapState({
+      textGroup: state => state.cts.textGroup,
+      work: state => state.cts.work,
+    }),
+    ...mapState(['user', 'passage']),
   },
   watch: {
     $route: 'fetchData',
   },
   methods: {
     fetchData() {
-      this.asyncData({ query: this.$route.query }).then(({ query, passage }) => {
-        this.query = query;
-        this.$store.commit('setCTSReader', { passage });
-      });
-    },
-    async asyncData({ query }) {
-      const urn = query.urn;
-      const url = `http://cts.perseids.org/api/cts/?request=GetPassagePlus&urn=${urn}`;
-      const response = await fetch(url);
-      const text = await response.text();
-      const parser = new DOMParser();
-      const xmlDoc = parser.parseFromString(text, 'text/xml');
-      const xsltProcessor = new XSLTProcessor();
-      const xslDoc = parser.parseFromString(teiXSL, 'text/xml');
-      xsltProcessor.importStylesheet(xslDoc);
-      const select = xpath.useNamespaces({ cts: 'http://chs.harvard.edu/xmlns/cts' });
-      const fragment = xsltProcessor.transformToFragment(xmlDoc, document);
-      const passage = {
-        fragment,
-        next: select('//cts:prevnext/cts:next/cts:urn', xmlDoc)[0].textContent,
-        prev: select('//cts:prevnext/cts:prev/cts:urn', xmlDoc)[0].textContent,
-      };
-      return { query, passage };
+      const urn = this.$route.query.urn;
+      if (urn === undefined) {
+        this.$store.dispatch('cts/loadTextGroups', 'urn:cts:greekLit');
+      } else {
+        const parsed = URN.RFC2141.parse(urn);
+        const [segNS, segWork, segPassage] = parsed.nss.split(':');
+        this.$store.dispatch('cts/loadTextGroups', `urn:cts:${segNS}`);
+        if (segWork) {
+          const [textGroupID, textGroupWorkID] = segWork.split('.');
+          this.$store.dispatch('cts/loadTextGroup', `urn:cts:${segNS}:${textGroupID}`);
+          if (textGroupWorkID) {
+            this.$store.dispatch('cts/loadWork', `urn:cts:${segNS}:${textGroupID}.${textGroupWorkID}`);
+          }
+        }
+        if (segPassage) {
+          // passage urn
+          cts.passage(`urn:cts:${segNS}:${segWork}:${segPassage}`).then((passage) => {
+            this.query = this.$route.query; // @@@ do we need this?
+            this.$store.commit('setCTSReader', { passage });
+          });
+        }
+      }
     },
     passageLink(urn) {
       const { query } = this;

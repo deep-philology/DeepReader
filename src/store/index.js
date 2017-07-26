@@ -2,6 +2,7 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import { firebaseMutations, firebaseAction } from 'vuexfire';
 import app from '@/firebase';
+import cts from '@/store/cts';
 
 Vue.use(Vuex);
 
@@ -21,14 +22,12 @@ export default new Vuex.Store({
         }),
       },
     },
+    cts,
   },
   state: {
     user: null,
     book: null,
     interlinear: false,
-    ctsURL: 'http://cts.perseids.org/api/cts/',
-    ctsTextGroup: '',
-    ctsWork: '',
     passage: null,
     textClasses: {},
     selectedWord: null,
@@ -49,12 +48,6 @@ export default new Vuex.Store({
   mutations: {
     setUser(state, user) {
       state.user = user;
-    },
-    setCtsTextGroup(state, textGroup) {
-      state.ctsTextGroup = textGroup;
-    },
-    setCtsWork(state, work) {
-      state.ctsWork = work;
     },
     setReader(state, { book, passage }) {
       state.book = book;
