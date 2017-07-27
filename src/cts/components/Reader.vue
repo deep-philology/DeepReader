@@ -18,8 +18,8 @@
       </div>
 
       <div class="main">
-        <text-inventory v-if="!textGroup"></text-inventory>
-        <text-group v-if="textGroup && !work"></text-group>
+        <text-inventory v-if="!textGroup && !work && !passage"></text-inventory>
+        <text-group v-if="textGroup && !work && !passage"></text-group>
         <work v-if="work && !passage"></work>
         <passage v-if="passage" :linker="passageLink"></passage>
       </div>
@@ -67,6 +67,11 @@ export default {
   methods: {
     fetchData() {
       const urn = this.$route.query.urn;
+      this.$store.commit('cts/setTextGroups', null);
+      this.$store.commit('cts/setTextGroup', null);
+      this.$store.commit('cts/setWorks', null);
+      this.$store.commit('cts/setWork', null);
+      this.$store.commit('setCTSReader', { passage: null });
       if (urn === undefined) {
         this.$store.dispatch('cts/loadTextGroups', 'urn:cts:greekLit');
       } else {
@@ -74,10 +79,15 @@ export default {
         const [segNS, segWork, segPassage] = parsed.nss.split(':');
         this.$store.dispatch('cts/loadTextGroups', `urn:cts:${segNS}`);
         if (segWork) {
-          const [textGroupID, textGroupWorkID] = segWork.split('.');
+          const [textGroupID, textGroupWorkID, editionID] = segWork.split('.');
           this.$store.dispatch('cts/loadTextGroup', `urn:cts:${segNS}:${textGroupID}`);
           if (textGroupWorkID) {
             this.$store.dispatch('cts/loadWork', `urn:cts:${segNS}:${textGroupID}.${textGroupWorkID}`);
+          }
+          if (!segPassage && editionID) {
+            this.$store.dispatch('cts/loadEdition', `urn:cts:${segNS}:${textGroupID}.${textGroupWorkID}.${editionID}`).then((edition) => {
+              this.$router.push({ query: { urn: edition.firstPassageURN } });
+            });
           }
         }
         if (segPassage) {

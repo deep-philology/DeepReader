@@ -8,6 +8,7 @@ const state = {
 
   textGroup: null,
   work: null,
+  edition: null,
 
   textGroupsLoading: false,
   textGroupLoading: false,
@@ -24,16 +25,24 @@ const actions = {
   },
   loadTextGroup({ commit, state }, urn) {
     state.textGroupLoading = true;
-    cts.textGroup(urn).then((works) => {
+    cts.textGroup(urn).then(({ textGroup, works }) => {
+      commit('setTextGroup', textGroup);
       commit('setWorks', works);
       state.textGroupLoading = false;
     });
   },
   loadWork({ commit, state }, urn) {
     state.workLoading = true;
-    cts.work(urn).then((editions) => {
+    cts.work(urn).then(({ work, editions }) => {
+      commit('setWork', work);
       commit('setEditions', editions);
       state.workLoading = false;
+    });
+  },
+  loadEdition({ commit, state }, urn) {
+    return cts.edition(urn).then((edition) => {
+      commit('setEdition', edition);
+      return edition;
     });
   },
 };
@@ -53,6 +62,9 @@ const mutations = {
   },
   setWork(state, work) {
     state.work = work;
+  },
+  setEdition(state, edition) {
+    state.edition = edition;
   },
 };
 

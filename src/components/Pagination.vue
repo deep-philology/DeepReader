@@ -37,7 +37,7 @@
         float: right;
         text-align: right;
       }
-      line-height: 21pt;
+      line-height: 25pt;
     }
 
     .title {

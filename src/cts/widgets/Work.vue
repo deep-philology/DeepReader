@@ -4,7 +4,7 @@
     <div slot="body">
       <sync-loader v-if="loading" color="#000" size="5px" margin="3px" radius="100%"></sync-loader>
       <ul v-else>
-        <li class="click hanging" v-for="edition in editions" @click="handleEditionClick(edition)">{{ edition.label }}</a></li>
+        <li class="click hanging" v-for="edition in editions" @click="handleEditionClick(edition)">{{ edition.label }}</a><br>{{ edition.description }}</li>
       </ul>
     </div>
   </widget>
@@ -23,9 +23,8 @@
     }),
     methods: {
       handleEditionClick(edition) {
-        this.fetchEdition(edition).then((urn) => {
-          this.$router.push({ query: { urn } });
-        });
+        this.$store.commit('cts/setEdition', edition);
+        this.$router.push({ query: { urn: edition.firstPassageURN } });
       },
     },
     components: {

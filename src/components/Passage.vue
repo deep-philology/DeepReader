@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="passage">
     <pagination
       :prev="linker(passage.prev)"
       :next="linker(passage.next)"
@@ -80,6 +80,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  #passage {
+    margin: 20px 50px;
+  }
   #text {
     clear: both;
     color: $main-text-color;
