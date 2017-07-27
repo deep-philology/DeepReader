@@ -23,7 +23,7 @@
     }),
     methods: {
       handleWorkClick(work) {
-        this.$store.commit('setWork', work);
+        this.$store.commit('cts/setWork', work);
         this.$router.push({ query: { urn: work.urn } });
       },
     },
