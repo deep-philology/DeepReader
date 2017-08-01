@@ -5,13 +5,13 @@ body {
 
 /* hover opacity */
 
-.widget, .root > header, .page-nav-1 {
+.left .widget, .right .widget, .root > header, .page-nav-1 {
   opacity: 0;
   transition: opacity 0.5s ease-in-out;
 }
 
 body:hover {
-  .widget, .root > header, .page-nav-1 {
+  .left .widget, .right .widget, .root > header, .page-nav-1 {
     opacity: 1;
   }
 }
@@ -60,7 +60,6 @@ body:hover {
 .main {
   font-family: $main-font-family;
   height: 500px;
-  margin: 20px 50px;
   > p:first-of-type {
     margin-top: 0;
   }

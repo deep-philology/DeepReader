@@ -13,6 +13,7 @@
   "dependencies": {
     "raw-loader": "^0.5.1",
     "universal-fetch": "^1.0.0",
+    "urn-lib": "^1.1.2",
     "vue": "^2.3.0",
     "vue-router": "^2.5.2",
     "vue-spinner": "^1.0.2",

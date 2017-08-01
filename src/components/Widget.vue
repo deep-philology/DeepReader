@@ -45,7 +45,6 @@
       }
     }
     > section {
-      max-height: 250px;
       overflow: auto;
       padding: 10px 10px;
       ul {
@@ -59,6 +58,11 @@
       > header {
         background: $widget-header-hover-background;
       }
+    }
+  }
+  .left .widget, .right .widget {
+    > section {
+      max-height: 250px;
     }
   }
 </style>
