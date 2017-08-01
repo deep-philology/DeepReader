@@ -1,7 +1,7 @@
 {
-  "name": "vue-me",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
+  "name": "deep-reader",
+  "version": "0.0.1",
+  "description": "a highly modular, Vue.js-based framework designed for building online reading environments for deep reading of texts with rich annotations and integrated learning tools",
   "author": "Brian Rosner <brian@brosner.com>",
   "private": true,
   "scripts": {
@@ -69,8 +69,8 @@
     "webpack-merge": "^4.1.0"
   },
   "engines": {
-    "node": ">= 4.0.0",
-    "npm": ">= 3.0.0"
+    "node": ">= 8.0.0",
+    "npm": ">= 5.0.0"
   },
   "browserslist": [
     "> 1%",
