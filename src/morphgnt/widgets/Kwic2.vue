@@ -28,13 +28,16 @@ import morphgnt from '@/morphgnt';
 export default {
   data() {
     return {
-      word: null,
       results: null,
     };
   },
   created() {
-    this.word = this.$route.query.word;
     this.fetchData();
+  },
+  computed: {
+    word() {
+      return this.$route.query.word;
+    },
   },
   watch: {
     word: 'fetchData',
@@ -43,7 +46,6 @@ export default {
     fetchData() {
       morphgnt.kwic(this.word).then((results) => {
         this.results = results;
-        this.$router.push({ query: { word: this.word } });
       });
     },
   },

@@ -4,12 +4,12 @@
     <span slot="summary" v-if="word">
       {{ word.word }}
       <router-link class="click"
-        :to="{ name: 'KwicDemo', query: { word: word.word } }"
+        :to="{ query: { word: word.word } }"
       >focus</router-link>
     </span>
     <div slot="body" v-if="results">
       <router-link class="click"
-        :to="{ name: 'KwicDemo', query: { word: word.word } }"
+        :to="{ query: { word: word.word } }"
       >focus</router-link>
       <table>
         <tr v-for="result in results">

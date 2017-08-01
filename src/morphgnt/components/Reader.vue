@@ -19,7 +19,8 @@
       </div>
 
       <div class="main">
-        <passage :linker="passageLink"></passage>
+        <passage v-if="!word" :linker="passageLink"></passage>
+        <kwic2 v-if="word"></kwic2>
       </div>
 
       <div class="right">
@@ -51,6 +52,7 @@ import Interlinear from '@/morphgnt/widgets/Interlinear';
 import TextColouring from '@/morphgnt/widgets/TextColouring';
 import Frequency from '@/morphgnt/widgets/Frequency';
 import Kwic from '@/morphgnt/widgets/Kwic';
+import Kwic2 from '@/morphgnt/widgets/Kwic2';
 
 export default {
   name: 'reader',
@@ -60,23 +62,24 @@ export default {
   },
   data() {
     return {
-      query: {},
       books: [],
     };
   },
   computed: {
     ...mapState(['user', 'book']),
+    word() {
+      return this.$route.query.word;
+    },
   },
   watch: {
     $route: 'fetchData',
   },
   methods: {
     fetchData() {
-      this.asyncData({ query: this.$route.query }).then(({ query, books, book, passage }) => {
+      this.asyncData({ query: this.$route.query }).then(({ books, book, passage }) => {
         if (book && !passage) {
           this.$router.push(this.passageLink(book.first_paragraph));
         } else {
-          this.query = query;
           this.books = books;
           this.$store.commit('setReader', { book, passage });
         }
@@ -123,10 +126,11 @@ export default {
       } else if (query.book) {
         book = await morphgnt.resource(query.book);
       }
-      return { query, books, book, passage };
+      return { books, book, passage };
     },
     passageLink(passage) {
-      const { query } = this;
+      let { query } = this.$route;
+      query = Object.assign({}, query);
       if (passage) {
         delete query.book;
         return {
@@ -149,6 +153,7 @@ export default {
     TextColouring,
     Frequency,
     Kwic,
+    Kwic2,
   },
 };
 </script>
